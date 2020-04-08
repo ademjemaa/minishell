@@ -17,6 +17,8 @@ FLAGS = -Wall -Wextra -Werror
 NAME = minishell
 
 SRCS =	minishell.c\
+		parser.c\
+		params.c\
 		get_next_line/get_next_line.c \
 		get_next_line/get_next_line_utils.c
 
@@ -54,6 +56,7 @@ SRC =		libft/ft_memset.c\
 		libft/ft_putstr_fd.c\
 		libft/ft_putendl_fd.c\
 		libft/ft_putnbr_fd.c\
+		libft/ft_strjoinfree.c\
 
 
 

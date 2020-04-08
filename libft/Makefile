@@ -39,6 +39,7 @@ SRCS =	ft_memset.c\
 	ft_strlcpy.c\
 	ft_strnstr.c\
 	ft_atoi.c\
+	ft_strjoinfree.c\
 	ft_calloc.c\
 	ft_substr.c\
 	ft_strjoin.c\
