@@ -79,12 +79,10 @@ t_cmd   *params(char *line, int i, char **envp)
                 j++;
         j++;
     }
+    //lehi ysegfaulti lehna 5ater j-2 ki tabda el j a9al men 2
     tmp->sep =  sep_parser(&line[j - 2]);
     tmp->path = path_parser(&line[j], envp);
     tmp->args = args_parser(tmp->path, &line[j]);
-    j = -1;
-    while (tmp->args[++j] != NULL)
-        printf("#%s\n", tmp->args[j]);
     return (tmp);
 }
 

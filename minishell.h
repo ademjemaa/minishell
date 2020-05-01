@@ -34,5 +34,6 @@ int		get_next_line(int fd, char **line);
 t_cmd 	**parser(char *line, char **envp);
 int     sep_parser(char *str);
 char    **args_parser(char *path, char *str);
+void 	exec(t_cmd ** tab, char **envp);
 
 #endif

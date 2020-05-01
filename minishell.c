@@ -2,8 +2,9 @@
 
 int	main(int argc, char **argv, char **envp)
 {
-	char	*line;
-	int		ret;
+	char		*line;
+	int			ret;
+	t_cmd **	tab;
 
 	argc = argc;
 	argv =argv ;
@@ -22,8 +23,9 @@ int	main(int argc, char **argv, char **envp)
 				free(line);
 				exit(0);
 			}
-			parser(line, envp);
-			write(1,"kembyalet$",11);
+			tab = parser(line, envp);
+			exec(tab, envp);
+	    	write(1,"kembyalet$",11);
 			free(line);
 		}
 		else

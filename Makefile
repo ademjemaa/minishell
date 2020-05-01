@@ -19,6 +19,7 @@ NAME = minishell
 SRCS =	minishell.c\
 		parser.c\
 		params.c\
+		execution.c\
 		get_next_line/get_next_line.c \
 		get_next_line/get_next_line_utils.c
 
