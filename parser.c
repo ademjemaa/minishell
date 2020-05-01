@@ -29,7 +29,7 @@ char    *cmd_name(char *line)
     while (line[i] && line[i] != ' ')
         i++;
     str = malloc(sizeof(char) * (i - j + 1));
-    str[i] = '\0';
+    str[i - j] = '\0';
     i = 0;
     while (line[j] != ' ' && line[j])
         str[i++] = line[j++];
@@ -81,7 +81,10 @@ t_cmd   *params(char *line, int i, char **envp)
     }
     //lehi ysegfaulti lehna 5ater j-2 ki tabda el j a9al men 2
     tmp->sep =  sep_parser(&line[j - 2]);
+    // printf("pointeur line : %p\n", line);
+    // printf("i=%d, j=%d ,sep = %d\n", i, j,tmp->sep);
     tmp->path = path_parser(&line[j], envp);
+    // printf("path : %s \n", tmp->path);
     tmp->args = args_parser(tmp->path, &line[j]);
     return (tmp);
 }
@@ -94,11 +97,12 @@ t_cmd **parser(char *line, char **envp)
 
     i = 0;
     total = counter(line);
-	tab = (t_cmd**)malloc(sizeof(t_cmd**) * total);
+	tab = (t_cmd**)malloc(sizeof(t_cmd**) * (total + 1));//lahna zedet el + 1 lazem yofa b null
     while (i < total)
     {
         tab[i] = params(line, i, envp);
         i++;
     }
+    tab[i] = NULL;// w lahna hattet el null
     return (tab);
 }

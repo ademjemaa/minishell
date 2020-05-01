@@ -26,6 +26,12 @@ char    **args_parser(char *path, char *str)
     tmp = str_find(str);
     args = ft_split(tmp, ' ');
     free (tmp);
+    //lahna el 8alta ta3 el segfault fel ls || cat 5ater ki yabda famma zoz paypouet ma3naha commande far8a lazem traja3 kol chay null
+    if (!args[0])
+    {
+        free(args);
+        return (NULL);
+    }
     i = -1;
     tmp = args[0];
     args[0] = ft_strdup(path);
