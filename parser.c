@@ -80,11 +80,13 @@ t_cmd   *params(char *line, int i, char **envp)
         j++;
     }
     //lehi ysegfaulti lehna 5ater j-2 ki tabda el j a9al men 2
-    tmp->sep =  sep_parser(&line[j - 2]);
-    // printf("pointeur line : %p\n", line);
-    // printf("i=%d, j=%d ,sep = %d\n", i, j,tmp->sep);
+    if (j > 1)
+        tmp->sep =  sep_parser(&line[j - 2]);
+    else
+    {
+        tmp->sep = -1;
+    }
     tmp->path = path_parser(&line[j], envp);
-    // printf("path : %s \n", tmp->path);
     tmp->args = args_parser(tmp->path, &line[j]);
     return (tmp);
 }

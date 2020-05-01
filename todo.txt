@@ -1,0 +1,6 @@
+1- lazmek ta3mel fazet el commandouet (echo, cd, export, unset, env, exit)
+ki tabda wa7da fihom el path ywalli kan esm el commande wel argumonet 3adi t7othom kel 3ada wel sep kifkif
+2- tzid fonction t3aweth ay haja fel line 9bal kol chay awel 7aja tnadeha fel parser : t3aweth kol $X bel valeur
+mta3ha fel les variables d'env w kan ma fammach t5alleha kima hia bel dolar b kol chay w kan famma tna7i el dolar
+wel esm w t3awathha mathalan : x=abcd ... kan nexec "echo $x" el line twalli "echo abcd"
+3- 5ammem f caractère a5er 8er el "$" n7ottouh fel prompt 5ater el echo -e talla3 dolarat fel linux
