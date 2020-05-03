@@ -54,7 +54,6 @@ int    exec_pipe(t_cmd **tab, int *i, char **envp)
 void    exec(t_cmd **tab, char **envp)
 {
     int     i;
-    int     id;
     char    c;
     int     pip[2];
     int     output;
@@ -67,15 +66,7 @@ void    exec(t_cmd **tab, char **envp)
         else
         {
             pipe(pip);
-            id = fork();
-            if (id == 0)
-            {
-                close(pip[0]);
-                dup2(pip[1], 1);
-                execve(tab[i]->path, tab[i]->args, envp);
-                close(pip[1]);
-                exit(0);
-            }
+            exec_prog(0, pip[1], tab[i], envp);
             close(pip[1]);
             output = pip[0];
             i++;
