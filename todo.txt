@@ -4,3 +4,8 @@ ki tabda wa7da fihom el path ywalli kan esm el commande wel argumonet 3adi t7oth
 mta3ha fel les variables d'env w kan ma fammach t5alleha kima hia bel dolar b kol chay w kan famma tna7i el dolar
 wel esm w t3awathha mathalan : x=abcd ... kan nexec "echo $x" el line twalli "echo abcd"
 3- 5ammem f caractère a5er 8er el "$" n7ottouh fel prompt 5ater el echo -e talla3 dolarat fel linux
+4-zid des variable fel struct : - is_builtin_cmd (aka el echo wel cd wel export ...)
+                                - is_redirect
+                                - is_double_redirect
+                                - redirect_filename
+                                - is_inverse_redirect 
