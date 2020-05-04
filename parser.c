@@ -8,9 +8,8 @@ int counter(char *line)
     total = 1;
     while(line[i])
     {
-        if (line[i] == '|' || line[i] == '>' || line[i] == '<' || line[i] == ';' )
-            if (total++ && line[i + 1] == '>' && line[i] == '>')
-                i++;
+        if (line[i] == '|' ||  line[i] == ';' )
+            total++;
         i++;
     }
     return (total);
@@ -44,6 +43,8 @@ char    *path_parser(char *line, char **envp)
 
 
     i = 0;
+    if (check_name(line))
+        return (cmd_name(line));
     while (ft_strncmp(envp[i], "PATH=", 5))
         i++;
     str = ft_split(envp[i], ':');
@@ -62,32 +63,24 @@ char    *path_parser(char *line, char **envp)
     return (str[i]);
 }
 
-t_cmd   *params(char *line, int i, char **envp)
+t_cmd   *params(char *line, char **envp)
 {
-    int j;
-    int c;
     t_cmd *tmp;
 
-    c = 0;
-    j = 0;
     envp = envp;
     tmp = (t_cmd*)malloc(sizeof(t_cmd));
-    while (c < i && line[j])
-    {
-        if (line[j] == '|' || line[j] == '>' || line[j] == '<' || line[j] == ';' )
-            if (++c && line[j + 1] == '>' && line[j] == '>')
-                j++;
-        j++;
-    }
     //lehi ysegfaulti lehna 5ater j-2 ki tabda el j a9al men 2
-    if (j > 1)
-        tmp->sep =  sep_parser(&line[j - 2]);
-    else
+    tmp->sep =  sep_parser(line, tmp);
+    tmp->path = path_parser(line, envp);
+    tmp->args = args_parser(tmp->path, line);
+    int i;
+    i = 0;
+    while (tmp->args[i] != NULL)
     {
-        tmp->sep = -1;
+        printf("%s\n", tmp->args[i]);
+        i++;
     }
-    tmp->path = path_parser(&line[j], envp);
-    tmp->args = args_parser(tmp->path, &line[j]);
+    printf("%s %s %d\n", tmp->path, tmp->file, tmp->sep);
     return (tmp);
 }
 
@@ -96,14 +89,18 @@ t_cmd **parser(char *line, char **envp)
     int total;
     t_cmd **tab;
     int i;
+    int j;
 
     i = 0;
     total = counter(line);
+    j = 0;
 	tab = (t_cmd**)malloc(sizeof(t_cmd**) * (total + 1));//lahna zedet el + 1 lazem yofa b null
-    while (i < total)
+    while (line[j])
     {
-        tab[i] = params(line, i, envp);
+        tab[i] = params(line, envp);
         i++;
+        while (line[j] && line[i] != '|' && line[j] != ';')
+            j++;
     }
     tab[i] = NULL;// w lahna hattet el null
     return (tab);

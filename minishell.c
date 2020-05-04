@@ -15,6 +15,7 @@ int	main(int argc, char **argv, char **envp)
 	while(1)
 	{
 		//get_next_line fih segfault, jarab ikteb b "ls || cat" fil ./a.out
+		//adem : testi cat libft/*, i9olik error ema normalment ti5dem, mahouch 9a3ed ichouf fil *, normal ?
 		ret = get_next_line(0, &line);
 		if(line && ret > 0)
 		{

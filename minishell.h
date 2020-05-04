@@ -26,14 +26,17 @@ typedef struct s_cmd
 	char 	*path;
 	//stat
 	int		sep;
+	char	*file;
 	char	**args;
 	//path0, options,1, null,3
 }		t_cmd;
 
 int		get_next_line(int fd, char **line);
 t_cmd 	**parser(char *line, char **envp);
-int     sep_parser(char *str);
+int     sep_parser(char *str, t_cmd *tmp);
 char    **args_parser(char *path, char *str);
 void 	exec(t_cmd ** tab, char **envp);
+int 	check_name(char *line);
+char    *cmd_name(char *line);
 
 #endif

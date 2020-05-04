@@ -51,21 +51,73 @@ char    **args_parser(char *path, char *str)
     return (args);
 }
 
-int     sep_parser(char *str)
+int find_file(char *str)
 {
-    if (str[0] == '>' && str[1] == '>')
-        return (1);
-    else if (str[1] == '>')
-        return (2);
-    else if (str[1] == '|')
-        return (3);
-    else if (str[1] == '<')
-        return (4);
-    else if (str[1] == ';')
+    int i;
+
+    i = 1;
+    while (str[i] != ' ' && str[i] != 0 && str[i] != '|' && str[i] != '>'
+            && str[i] != '<' && str[i] != ';')
+        i++;
+    return (i);
+}
+
+char    *file_name(char *str)
+{
+    int i;
+    int j;
+    char *tmp;
+
+    i = 1;
+    while (str[i] == ' ')
+        i++;
+    j = 0;
+    tmp = malloc(sizeof(char) * (find_file(&str[i])));
+    tmp[find_file(&str[i]) - 1] = 0;
+    while (str[i] != ' ' && str[i] != 0 && str[i] != '|' && str[i] != '>'
+            && str[i] != '<' && str[i] != ';')
+        tmp[j++] = str[i++];
+    return (tmp);
+}
+
+int     sep_parser(char *str, t_cmd *tmp)
+{
+    int i;
+
+    i = 0;
+    while (str[i] != 0 && str[i] != '|' && str[i] != '>'
+            && str[i] != '<' && str[i] != ';')
+        i++;
+    if (str[i] == ';')
         return (5);
+    else if (str[i] == '>' || str[i] == '<')
+    {
+         tmp->file = file_name(&str[i]);
+        if (str[i + 1] == '>')
+            return (1);
+        else if (str[1] == '<')
+            return (3);
+        return (2);
+    }
+    else if (str[1] == '|')
+        return (4);
     else if (str[1] == 0)
         return (0);
     else
         return (-1);
-    
+}
+
+int check_name(char *line)
+{
+    int     ret;
+    char    *str;
+
+    ret = 0;
+    str = cmd_name(line);
+    if (!ft_strncmp(str, "echo", 4) || !ft_strncmp(str, "cd", 2) ||
+        !ft_strncmp(str, "export", 6) || !ft_strncmp(str, "unset", 5) || !ft_strncmp(str, "env", 3) ||
+        !ft_strncmp(str, "exit", 4))
+        ret = 1;
+    free(str);
+    return ret;
 }
