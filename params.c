@@ -26,7 +26,6 @@ char    **args_parser(char *path, char *str)
     tmp = str_find(str);
     args = ft_split(tmp, ' ');
     free (tmp);
-    //lahna el 8alta ta3 el segfault fel ls || cat 5ater ki yabda famma zoz paypouet ma3naha commande far8a lazem traja3 kol chay null
     if (!args[0] || !path)
     {
         free(args);
@@ -34,7 +33,7 @@ char    **args_parser(char *path, char *str)
     }
     i = -1;
     tmp = args[0];
-    args[0] = ft_strdup(path);//hani baddalt el strdup 3ala fazet el null ama ki te5dem fazet el commandouet twalli zayda el path 3omrou la ykoun null lazem
+    args[0] = ft_strdup(path);
     free (tmp);
     while (args[++i] != NULL)
     {
@@ -88,6 +87,8 @@ int     sep_parser(char *str, t_cmd *tmp)
     while (str[i] != 0 && str[i] != '|' && str[i] != '>'
             && str[i] != '<' && str[i] != ';')
         i++;
+    if (str[i] == 0)// Amine : el if hethi kanet ellota 7attetha lehna 5atrou ysegfaulti kan ma fammach sep lazem melloul yo5rej
+        return (0);
     if (str[i] == ';')
         return (5);
     else if (str[i] == '>' || str[i] == '<')
@@ -95,14 +96,12 @@ int     sep_parser(char *str, t_cmd *tmp)
          tmp->file = file_name(&str[i]);
         if (str[i + 1] == '>')
             return (1);
-        else if (str[1] == '<')
+        else if (str[i] == '<')// Amine : lehna kont 7atet str[1] raddetha str[i] logique akther
             return (3);
         return (2);
     }
-    else if (str[1] == '|')
+    else if (str[i] == '|')// Amine : kifkif lehna str[i]
         return (4);
-    else if (str[1] == 0)
-        return (0);
     else
         return (-1);
 }

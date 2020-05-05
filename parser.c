@@ -69,18 +69,9 @@ t_cmd   *params(char *line, char **envp)
 
     envp = envp;
     tmp = (t_cmd*)malloc(sizeof(t_cmd));
-    //lehi ysegfaulti lehna 5ater j-2 ki tabda el j a9al men 2
     tmp->sep =  sep_parser(line, tmp);
     tmp->path = path_parser(line, envp);
     tmp->args = args_parser(tmp->path, line);
-    int i;
-    i = 0;
-    while (tmp->args[i] != NULL)
-    {
-        printf("%s\n", tmp->args[i]);
-        i++;
-    }
-    printf("%s %s %d\n", tmp->path, tmp->file, tmp->sep);
     return (tmp);
 }
 
