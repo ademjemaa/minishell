@@ -35,7 +35,7 @@ char    *cmd_name(char *line)
     return (str);
 }
 
-char    *path_parser(char *line, char **envp)
+char    *path_parser(char *line, char **envp, t_cmd *tmp)
 {
     int i;
     char **str;
@@ -43,7 +43,7 @@ char    *path_parser(char *line, char **envp)
 
 
     i = 0;
-    if (check_name(line))
+    if (check_name(line, tmp))
         return (cmd_name(line));
     while (ft_strncmp(envp[i], "PATH=", 5))
         i++;
@@ -69,9 +69,8 @@ t_cmd   *params(char *line, char **envp)
 
     envp = envp;
     tmp = (t_cmd*)malloc(sizeof(t_cmd));
-    //lehi ysegfaulti lehna 5ater j-2 ki tabda el j a9al men 2
     tmp->sep =  sep_parser(line, tmp);
-    tmp->path = path_parser(line, envp);
+    tmp->path = path_parser(line, envp, tmp);
     tmp->args = args_parser(tmp->path, line);
     int i;
     i = 0;

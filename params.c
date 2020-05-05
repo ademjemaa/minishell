@@ -26,7 +26,6 @@ char    **args_parser(char *path, char *str)
     tmp = str_find(str);
     args = ft_split(tmp, ' ');
     free (tmp);
-    //lahna el 8alta ta3 el segfault fel ls || cat 5ater ki yabda famma zoz paypouet ma3naha commande far8a lazem traja3 kol chay null
     if (!args[0] || !path)
     {
         free(args);
@@ -34,7 +33,7 @@ char    **args_parser(char *path, char *str)
     }
     i = -1;
     tmp = args[0];
-    args[0] = ft_strdup(path);//hani baddalt el strdup 3ala fazet el null ama ki te5dem fazet el commandouet twalli zayda el path 3omrou la ykoun null lazem
+    args[0] = ft_strdup(path);
     free (tmp);
     while (args[++i] != NULL)
     {
@@ -66,7 +65,6 @@ int find_file(char *str)
         i++;
         j++;
     }
-    printf("i == %d\n", i);
     return (i);
 }
 
@@ -112,7 +110,7 @@ int     sep_parser(char *str, t_cmd *tmp)
         return (-1);
 }
 
-int check_name(char *line)
+int check_name(char *line, t_cmd *tmp)
 {
     int     ret;
     char    *str;
@@ -122,7 +120,12 @@ int check_name(char *line)
     if (!ft_strncmp(str, "echo", 4) || !ft_strncmp(str, "cd", 2) ||
         !ft_strncmp(str, "export", 6) || !ft_strncmp(str, "unset", 5) || !ft_strncmp(str, "env", 3) ||
         !ft_strncmp(str, "exit", 4))
+    {
         ret = 1;
+        tmp->built = 1;
+    }
+    else
+        tmp->built = 0;
     free(str);
     return ret;
 }

@@ -61,6 +61,8 @@ void    exec(t_cmd **tab, char **envp)
     i = 0;
     while (tab[i])
     {
+        if (!(tab[i]->path))
+            i++;
         if (tab[i + 1] && tab[i + 1]->sep == 3)
            output = exec_pipe(tab, &i, envp);
         else
