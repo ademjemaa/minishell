@@ -54,22 +54,31 @@ char    **args_parser(char *path, char *str)
 int find_file(char *str)
 {
     int i;
+    int j;
 
     i = 1;
-    while (str[i] != ' ' && str[i] != 0 && str[i] != '|' && str[i] != '>'
-            && str[i] != '<' && str[i] != ';')
+    j = 0;
+    while (str[j] && (str[j] == '>' || str[j] == ' ' || str[j] == '<'))
+        j++;
+    while (str[j] != ' ' && str[j] != 0 && str[j] != '|' && str[j] != '>'
+            && str[j] != '<' && str[j] != ';')
+    {
         i++;
+        j++;
+    }
+    printf("i == %d\n", i);
     return (i);
 }
 
-char    *file_name(char *str)
+char    *file_name(char *str, t_cmd *struc)
 {
     int i;
     int j;
     char *tmp;
 
-    i = 1;
-    while (str[i] == ' ')
+    i = 0;
+    struc->red = red_type(str);
+    while (str[i] == ' ' || str[i] == '>' || str[i] == '<')
         i++;
     j = 0;
     tmp = malloc(sizeof(char) * (find_file(&str[i])));
@@ -85,23 +94,19 @@ int     sep_parser(char *str, t_cmd *tmp)
     int i;
 
     i = 0;
+    tmp->red = -1;
     while (str[i] != 0 && str[i] != '|' && str[i] != '>'
             && str[i] != '<' && str[i] != ';')
         i++;
+    if (str[i] == '>' || str[i] == '<')
+        tmp->file = file_name(&str[i], tmp);
+    while (str[i] != 0 && str[i] != '|' && str[i] != ';')
+        i++;
     if (str[i] == ';')
         return (5);
-    else if (str[i] == '>' || str[i] == '<')
-    {
-         tmp->file = file_name(&str[i]);
-        if (str[i + 1] == '>')
-            return (1);
-        else if (str[1] == '<')
-            return (3);
-        return (2);
-    }
-    else if (str[1] == '|')
+    else if (str[i] == '|')
         return (4);
-    else if (str[1] == 0)
+    else if (str[i] == 0)
         return (0);
     else
         return (-1);

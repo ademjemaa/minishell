@@ -80,7 +80,7 @@ t_cmd   *params(char *line, char **envp)
         printf("%s\n", tmp->args[i]);
         i++;
     }
-    printf("%s %s %d\n", tmp->path, tmp->file, tmp->sep);
+    printf("%s file %s sep %d red %d\n", tmp->path, tmp->file, tmp->sep, tmp->red);
     return (tmp);
 }
 

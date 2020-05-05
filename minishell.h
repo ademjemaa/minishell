@@ -28,6 +28,7 @@ typedef struct s_cmd
 	int		sep;
 	char	*file;
 	char	**args;
+	int		red;
 	//path0, options,1, null,3
 }		t_cmd;
 
@@ -38,5 +39,7 @@ char    **args_parser(char *path, char *str);
 void 	exec(t_cmd ** tab, char **envp);
 int 	check_name(char *line);
 char    *cmd_name(char *line);
+int red_type(char *str);
+
 
 #endif
