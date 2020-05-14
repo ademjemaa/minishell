@@ -7,7 +7,7 @@ char    *str_find(char *line)
     char    *str;
 
     i = 0;
-    while (!(line[i] == '|' || line[i] == '>' || line[i] == '<' || line[i] == ';' || line[i] == '\0'))
+    while (!(line[i] == '|' || line[i] == ';' || line[i] == '\0'))
         i++;
     str = malloc(sizeof(char) * (i + 1));
     str[i] = 0;
@@ -17,37 +17,38 @@ char    *str_find(char *line)
     return (str);
 }
 
-char    **args_parser(char *path, char *str)
+void    args_parser(char *path, char *str, char **envp, t_cmd *stru)
 {
     char    **args;
     char    *tmp;
     int     i;
 
     tmp = str_find(str);
+    tmp = rearrange(tmp);
     args = ft_split(tmp, ' ');
+    stru->files = find_filelst(args);
+    stru->args = find_path(args, stru, envp);
     free (tmp);
-    if (!args[0] || !path)
+    if (!stru->args[0] || !path)
     {
-        free(args);
-        return (NULL);
+        free(stru->args);
+        return ;
     }
     i = -1;
-    tmp = args[0];
-    args[0] = ft_strdup(path);
-    free (tmp);
-    while (args[++i] != NULL)
+    while (stru->args[++i] != NULL)
     {
-        if (args[i][0] == '\"' || args[i][0] == '\'')
+        if (stru->args[i][0] == '\"' || stru->args[i][0] == '\'')
         {
-            tmp = args[i];
-            if (args[i][0] == '\"')
-                args[i] = ft_strtrim(args[i], "\"");
-            if (args[i][0] == '\'')
-                args[i] = ft_strtrim(args[i], "\'");
+            tmp = stru->args[i];
+            if (stru->args[i][0] == '\"')
+                stru->args[i] = ft_strtrim(stru->args[i], "\"");
+            if (stru->args[i][0] == '\'')
+                stru->args[i] = ft_strtrim(stru->args[i], "\'");
             free(tmp);
         }
     }
-    return (args);
+    free_all(args);
+    find_env(stru->args, envp);
 }
 
 int find_file(char *str)
@@ -71,19 +72,13 @@ int find_file(char *str)
 char    *file_name(char *str, t_cmd *struc)
 {
     int i;
-    int j;
     char *tmp;
 
     i = 0;
     struc->red = red_type(str);
-    while (str[i] == ' ' || str[i] == '>' || str[i] == '<')
+    while (struc->files && struc->files[i] != NULL)
         i++;
-    j = 0;
-    tmp = malloc(sizeof(char) * (find_file(&str[i])));
-    tmp[find_file(&str[i]) - 1] = 0;
-    while (str[i] != ' ' && str[i] != 0 && str[i] != '|' && str[i] != '>'
-            && str[i] != '<' && str[i] != ';')
-        tmp[j++] = str[i++];
+    tmp = ft_strdup(struc->files[i]);
     return (tmp);
 }
 

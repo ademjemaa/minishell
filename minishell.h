@@ -28,15 +28,22 @@ typedef struct s_cmd
 	int		sep;
 	char	*file;
 	char	**args;
+	char	**files;
 	int		red;
 	int 	built;
 	//path0, options,1, null,3
 }		t_cmd;
 
 int		get_next_line(int fd, char **line);
+char    *rearrange(char *str);
+void    free_all(char **args);
 t_cmd 	**parser(char *line, char **envp);
+char    **find_filelst(char **args);
 int     sep_parser(char *str, t_cmd *tmp);
-char    **args_parser(char *path, char *str);
+void	args_parser(char *path, char *str, char **envp, t_cmd *stru);
+void 	find_env(char **args, char **envp);
+char    **find_path(char **args, t_cmd *tmp, char **envp);
+char    *path_parser(char *line, char **envp, t_cmd *tmp);
 void 	exec(t_cmd ** tab, char **envp);
 int 	check_name(char *line, t_cmd *tmp);
 char    *cmd_name(char *linep);

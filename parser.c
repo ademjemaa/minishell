@@ -63,23 +63,35 @@ char    *path_parser(char *line, char **envp, t_cmd *tmp)
     return (str[i]);
 }
 
+void    print_structure(t_cmd *tmp)
+{
+    int i;
+
+    i = 0;
+    printf("path == %s\nfile == %s\n", tmp->path, tmp->file);
+    while (tmp->args[i] != NULL)
+    {
+        printf("args == %s\n", tmp->args[i]);
+        i++;
+    }
+    i = 0;
+    while (tmp->files[i] != NULL)
+    {
+        printf("files == %s\n", tmp->files[i]);
+        i++;
+    }
+    printf("sep == %d\nred == %d\nbuild == %d\n", tmp->sep, tmp->red, tmp->built);
+}
+
 t_cmd   *params(char *line, char **envp)
 {
     t_cmd *tmp;
 
-    envp = envp;
     tmp = (t_cmd*)malloc(sizeof(t_cmd));
-    tmp->sep =  sep_parser(line, tmp);
     tmp->path = path_parser(line, envp, tmp);
-    tmp->args = args_parser(tmp->path, line);
-    int i;
-    i = 0;
-    while (tmp->args[i] != NULL)
-    {
-        printf("%s\n", tmp->args[i]);
-        i++;
-    }
-    printf("%s file %s sep %d red %d\n", tmp->path, tmp->file, tmp->sep, tmp->red);
+    args_parser(tmp->path, line, envp, tmp);
+    tmp->sep =  sep_parser(line, tmp);
+    print_structure(tmp);
     return (tmp);
 }
 
@@ -96,7 +108,7 @@ t_cmd **parser(char *line, char **envp)
 	tab = (t_cmd**)malloc(sizeof(t_cmd**) * (total + 1));//lahna zedet el + 1 lazem yofa b null
     while (line[j])
     {
-        tab[i] = params(line, envp);
+        tab[i] = params(&line[j], envp);
         i++;
         while (line[j] && line[i] != '|' && line[j] != ';')
             j++;
