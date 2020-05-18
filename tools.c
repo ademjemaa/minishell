@@ -99,8 +99,11 @@ void    find_env(char **args, char **envp)
             j++;
             while (envp[c] != NULL && ft_strncmp(envp[c], &args[i][j], ft_strlen(&args[i][j])))
                 c++;
-            str = change_str(envp[c], args[i]);
-            args[i] = str;
+            if (envp[c] != NULL)
+            {
+                str = change_str(envp[c], args[i]);
+                args[i] = str;
+            }
         }
     }
 }

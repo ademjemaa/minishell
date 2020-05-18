@@ -78,6 +78,7 @@ char    *file_name(char *str, t_cmd *struc)
     struc->red = red_type(str);
     while (struc->files && struc->files[i] != NULL)
         i++;
+    i--;
     tmp = ft_strdup(struc->files[i]);
     return (tmp);
 }
