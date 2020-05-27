@@ -6,10 +6,8 @@ int	main(int argc, char **argv, char **envp)
 	int			ret;
 	t_cmd **	tab;
 
-	argc = argc;
-	argv =argv ;
-	envp =envp ;
 	line = NULL;
+	(void)argc;
 	write(1,"kembyalet$",11);
 	write(1, argv[1], 3);
 	while(1)

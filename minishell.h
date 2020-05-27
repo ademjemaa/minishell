@@ -6,7 +6,7 @@
 /*   By: abarbour <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/18 16:33:31 by abarbour          #+#    #+#             */
-/*   Updated: 2019/12/03 15:38:02 by abarbour         ###   ########.fr       */
+/*   Updated: 2020/05/27 17:16:59 by adjemaa          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,9 @@ typedef struct s_cmd
 	//path0, options,1, null,3
 }		t_cmd;
 
+char	*copy_clean(char *tmp, char *str);
+int		quote_status(int *one, int *two, int *i, char *str);
+char	*cleaned(char *str);
 int		get_next_line(int fd, char **line);
 char    *rearrange(char *str);
 void    free_all(char **args);

@@ -6,6 +6,7 @@ int counter(char *line)
     int i;
 
     total = 1;
+	i = 0;
     while(line[i])
     {
         if (line[i] == '|' ||  line[i] == ';' )

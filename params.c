@@ -24,6 +24,7 @@ void    args_parser(char *path, char *str, char **envp, t_cmd *stru)
     int     i;
 
     tmp = str_find(str);
+	tmp = cleaned(tmp);
     tmp = rearrange(tmp);
     args = ft_split(tmp, ' ');
     stru->files = find_filelst(args);

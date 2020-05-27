@@ -6,7 +6,7 @@
 #    By: adjemaa <marvin@42.fr>                     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/11/06 21:13:47 by adjemaa           #+#    #+#              #
-#    Updated: 2019/11/13 12:17:26 by abarbour         ###   ########.fr        #
+#    Updated: 2020/05/27 18:13:15 by adjemaa          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -19,9 +19,11 @@ NAME = minishell
 SRCS =	minishell.c\
 		parser.c\
 		params.c\
+		cleaner.c\
 		execution.c\
 		tools.c\
 		files.c\
+		quotes.c\
 		get_next_line/get_next_line.c \
 		get_next_line/get_next_line_utils.c
 
@@ -68,7 +70,7 @@ OBJECT = $(SRCS:.c=.o)
 OBJECT_B = $(SRC:.c=.o)
 
 $(NAME):
-	@$(CC) $(FLAGS) $(SRCS) libft/libft.a libft/libft.h
+	@$(CC) $(FLAGS) $(SRCS)  libft/libft.a libft/libft.h 
 
 all: $(NAME)
 

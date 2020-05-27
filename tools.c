@@ -1,14 +1,43 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   tools.c                                            :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: adjemaa <marvin@42.fr>                     +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2020/05/27 18:00:48 by adjemaa           #+#    #+#             */
+/*   Updated: 2020/05/27 18:00:50 by adjemaa          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "minishell.h"
 
 int     size_counter(char *str)
 {
     int i;
     int j;
+	char c;
 
     i = 0;
     j = 0;
     while (str[i])
     {
+		while (str[i] == '\\' && str[i + 1])
+		{
+			i = i + 2;
+			j = j + 2;
+		}
+		if (str[i] == '\'' || str[i] == '\"')
+		{
+			c = str[i];
+			i++;
+			j++;
+			while (str[i] && str[i] != c)
+			{
+				i++;
+				j++;
+			}
+		}
         if (((str[i + 1] == '>' && str[i] != '>') || (str[i + 1] == '<')) && str[i] != ' ')
             j++;
         if (!((str[i] == '>' || str[i] == '<') && str[i + 1] == ' '))
@@ -27,6 +56,7 @@ char    *rearrange(char *str)
     int i;
     int j;
     char *tmp;
+	char c;
 
     i = 0;
     j = 0;
@@ -34,6 +64,21 @@ char    *rearrange(char *str)
     tmp[size_counter(str) - 1] = 0;
     while (i < size_counter(str))
     {
+		while (str[j] == '\\' && str[j + 1])
+		{
+			tmp[i++] = str[j++];
+			tmp[i++] = str[j++];
+		}
+		if (str[j] == '\'' || str[j] == '\"')
+		{
+			c = str[j];
+			while (str[j + 1] && str[j + 1] != c)
+			{
+				tmp[i] = str[j];
+				i++;
+				j++;
+			}
+		}
         if (((str[j + 1] == '>' && str[j] != '>') || (str[j + 1] == '<')) && str[j] != ' ')
         {
             tmp[i] = str[j];
@@ -52,6 +97,7 @@ char    *rearrange(char *str)
         j++;
     }
     free(str);
+	printf("tmp == %s\n", tmp);
     return tmp;
 }
 
