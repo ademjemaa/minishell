@@ -6,7 +6,7 @@
 /*   By: adjemaa <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/25 18:49:51 by adjemaa           #+#    #+#             */
-/*   Updated: 2020/05/27 18:11:36 by adjemaa          ###   ########.fr       */
+/*   Updated: 2020/05/28 18:57:52 by adjemaa          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ int		find_len(char *str)
 	two = 0;
 	while (str[i])
 	{
-		if (str[i] == '\\' && str[i + 1])
+		if (str[i] == '\\' && str[i + 1] && one == 0)
 		{
 			i = i + 2;
 			total = total + 2;
@@ -63,7 +63,7 @@ char	*copy_clean(char *tmp, char *str)
 	two = 0;
 	while (str[i])
 	{
-		if (str[i] == '\\')
+		if (str[i] == '\\' && one == 0)
 		{
 			tmp[j] = str[i];
 			tmp[j + 1] = str[i + 1];
@@ -96,5 +96,6 @@ char	*cleaned(char *str)
 	total = find_len(str);
 	tmp = malloc(sizeof(char) * total);
 	tmp = copy_clean(tmp, str);
+	tmp = rearrange(tmp);
 	return (tmp);
 }

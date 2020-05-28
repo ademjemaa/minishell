@@ -17,37 +17,22 @@ char    *str_find(char *line)
     return (str);
 }
 
-void    args_parser(char *path, char *str, char **envp, t_cmd *stru)
+void    args_parser(char *str, char **envp, t_cmd *stru)
 {
     char    **args;
     char    *tmp;
-    int     i;
 
     tmp = str_find(str);
 	tmp = cleaned(tmp);
-    tmp = rearrange(tmp);
-    args = ft_split(tmp, ' ');
+	args = first_split(tmp);
     stru->files = find_filelst(args);
     stru->args = find_path(args, stru, envp);
-    free (tmp);
-    if (!stru->args[0] || !path)
+    if (!stru->args[0])
     {
         free(stru->args);
         return ;
     }
-    i = -1;
-    while (stru->args[++i] != NULL)
-    {
-        if (stru->args[i][0] == '\"' || stru->args[i][0] == '\'')
-        {
-            tmp = stru->args[i];
-            if (stru->args[i][0] == '\"')
-                stru->args[i] = ft_strtrim(stru->args[i], "\"");
-            if (stru->args[i][0] == '\'')
-                stru->args[i] = ft_strtrim(stru->args[i], "\'");
-            free(tmp);
-        }
-    }
+//	free(tmp);
     free_all(args);
     find_env(stru->args, envp);
 }

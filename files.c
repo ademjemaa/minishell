@@ -41,6 +41,7 @@ char    **find_path(char **args, t_cmd *tmp, char **envp)
     char    **fill;
 
     i = 0;
+	
     while (args[i] && (args[i][0] == '<' || args[i][0] == '>'))
         i++;
     tmp->path = path_parser(args[i], envp, tmp);

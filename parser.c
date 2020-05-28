@@ -40,6 +40,7 @@ char    *path_parser(char *line, char **envp, t_cmd *tmp)
 {
     int i;
     char **str;
+	char *ret;
     struct stat sb;
 
 
@@ -49,19 +50,20 @@ char    *path_parser(char *line, char **envp, t_cmd *tmp)
     while (ft_strncmp(envp[i], "PATH=", 5))
         i++;
     str = ft_split(envp[i], ':');
-    i = 0;
-    while (str[i] != NULL)
+    i = -1;
+    while (str[++i] != NULL)
     {
         if (str[i][ft_strlen(str[i]) - 1] != '/')
             str[i] = ft_strjoinfree(str[i], "/", 1);
         str[i] = ft_strjoinfree(str[i], cmd_name(line), 3);
-        i++;
     }
     i = 0;
-    //**str fi e5er case lezemou NULL ema huwa ki youssil el e5er case yaamel segfault
-    while (((stat(str[i], &sb)) != 0) && (str[i] != NULL))
+	//boucle mouch 9a3da tou9if ki str[i] == NULL w timchi taamel check lil stat ye5i issir  segfault
+	while ((str[i] != NULL) && (stat(str[i], &sb) != 0))
         i++;
-    return (str[i]);
+	ret = ft_strdup(str[i]);
+//	free_all(str);
+    return (ret);
 }
 
 void    print_structure(t_cmd *tmp)
@@ -89,8 +91,7 @@ t_cmd   *params(char *line, char **envp)
     t_cmd *tmp;
 
     tmp = (t_cmd*)malloc(sizeof(t_cmd));
-    tmp->path = path_parser(line, envp, tmp);
-    args_parser(tmp->path, line, envp, tmp);
+    args_parser(line, envp, tmp);
     tmp->sep =  sep_parser(line, tmp);
     print_structure(tmp);
     return (tmp);

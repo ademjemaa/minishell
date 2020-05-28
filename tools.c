@@ -6,7 +6,7 @@
 /*   By: adjemaa <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/27 18:00:48 by adjemaa           #+#    #+#             */
-/*   Updated: 2020/05/27 18:00:50 by adjemaa          ###   ########.fr       */
+/*   Updated: 2020/05/28 21:10:47 by adjemaa          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,10 +56,12 @@ char    *rearrange(char *str)
     int i;
     int j;
     char *tmp;
+	int in;
 	char c;
 
     i = 0;
     j = 0;
+	in = 0;
     tmp = malloc(sizeof(char) * size_counter(str));
     tmp[size_counter(str) - 1] = 0;
     while (i < size_counter(str))
@@ -71,21 +73,21 @@ char    *rearrange(char *str)
 		}
 		if (str[j] == '\'' || str[j] == '\"')
 		{
-			c = str[j];
-			while (str[j + 1] && str[j + 1] != c)
+			if (in == 0)
 			{
-				tmp[i] = str[j];
-				i++;
-				j++;
+				c = str[j];
+				in = 1;
 			}
+			else
+				in = 0;
 		}
-        if (((str[j + 1] == '>' && str[j] != '>') || (str[j + 1] == '<')) && str[j] != ' ')
+        if (((str[j + 1] == '>' && str[j] != '>') || (str[j + 1] == '<')) && str[j] != ' ' && !in)
         {
             tmp[i] = str[j];
             i++;
             tmp[i] = ' ';
         }
-        else if ((str[j] == ' ') && (str[j - 1] == '>' || str[j - 1] == '<'))
+        else if ((str[j] == ' ') && (str[j - 1] == '>' || str[j - 1] == '<') && !in)
         {
             while (str[j] == ' ')
                 j++;
@@ -97,7 +99,6 @@ char    *rearrange(char *str)
         j++;
     }
     free(str);
-	printf("tmp == %s\n", tmp);
     return tmp;
 }
 
@@ -105,23 +106,31 @@ char    *change_str(char *envp, char *str)
 {
     int i;
     int j;
+	int c;
     char *tmp;
 
-    i = 0;
     j = 0;
-    while (str[i] != '$' && str[i])
-        i++;
+	c = 0;
     while (envp[j] && envp[j] != '=')
         j++;
     j++;
-    tmp = malloc(sizeof(char) * (i + ft_strlen(&envp[j]) + 1));
+    tmp = malloc(sizeof(char) * (final_size(str, envp)));
+	printf("%d\n", final_size(str, envp));
     i = -1;
-    tmp[i + ft_strlen(&envp[j])] = 0;
     while (str[++i] != '$' && str[i])
-        tmp[i] = str[i];
+        tmp[c] = str[i];
     while (envp[j])
-        tmp[i++] = envp[j++];
-    tmp[i] = 0;
+        tmp[c++] = envp[j++];
+	i++;
+	while (str[i] && ((str[i] >= 'a' && str[i] <= 'z') || (str[i] >= 'A' && str[i] <= 'Z') || (str[i] >= '0' && str[i] <= '9') || str[i] == '_'))
+		i++;
+	while (str[i])
+	{
+		tmp[c] = str[i];
+		c++;
+		i++;
+	}
+    tmp[c] = 0;
     free(str);
     return (tmp);
 }
@@ -131,6 +140,7 @@ void    find_env(char **args, char **envp)
     int i;
     int j;
     int c;
+	char *tmp;
     char *str;
 
     i = -1;
@@ -143,9 +153,14 @@ void    find_env(char **args, char **envp)
         if (args[i][j] == '$')
         {
             j++;
-            while (envp[c] != NULL && ft_strncmp(envp[c], &args[i][j], ft_strlen(&args[i][j])))
+			tmp = exact_env(&args[i][j]);
+            while (envp[c] != NULL && ft_strncmp(envp[c], tmp, ft_strlen(tmp)))
+			{
+				printf("envp %s\n", envp[c]);
                 c++;
-            if (envp[c] != NULL)
+			}
+			printf("%s\n", envp[c]);
+            if (args[i][0] != '\'')
             {
                 str = change_str(envp[c], args[i]);
                 args[i] = str;

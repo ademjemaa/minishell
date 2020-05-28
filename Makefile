@@ -6,7 +6,7 @@
 #    By: adjemaa <marvin@42.fr>                     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/11/06 21:13:47 by adjemaa           #+#    #+#              #
-#    Updated: 2020/05/27 18:13:15 by adjemaa          ###   ########.fr        #
+#    Updated: 2020/05/27 19:06:46 by adjemaa          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -19,6 +19,7 @@ NAME = minishell
 SRCS =	minishell.c\
 		parser.c\
 		params.c\
+		args_split.c\
 		cleaner.c\
 		execution.c\
 		tools.c\
