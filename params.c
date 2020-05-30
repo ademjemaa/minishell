@@ -33,8 +33,8 @@ void    args_parser(char *str, char **envp, t_cmd *stru)
         return ;
     }
 //	free(tmp);
-    free_all(args);
-    find_env(stru->args, envp);
+//    free_all(args);
+//    find_env(stru->args, envp);
 }
 
 int find_file(char *str)

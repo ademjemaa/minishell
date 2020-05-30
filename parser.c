@@ -23,6 +23,7 @@ char    *cmd_name(char *line)
     char *str;
 
     j = 0;
+	printf("line == %s\n", line);
     while (line[j] == ' ')
         j++;
     i = j;
@@ -33,6 +34,8 @@ char    *cmd_name(char *line)
     i = 0;
     while (line[j] != ' ' && line[j])
         str[i++] = line[j++];
+	str[i] = 0;
+	printf("str == %s\n", str);
     return (str);
 }
 
@@ -42,7 +45,6 @@ char    *path_parser(char *line, char **envp, t_cmd *tmp)
     char **str;
 	char *ret;
     struct stat sb;
-
 
     i = 0;
     if (check_name(line, tmp))
@@ -59,10 +61,19 @@ char    *path_parser(char *line, char **envp, t_cmd *tmp)
     }
     i = 0;
 	//boucle mouch 9a3da tou9if ki str[i] == NULL w timchi taamel check lil stat ye5i issir  segfault
-	while ((str[i] != NULL) && (stat(str[i], &sb) != 0))
+	while (str[i] != NULL)
+	{
+		printf("str == %s\n", str[i]);
+		if (stat(str[i], &sb) == 0)
+			break;
         i++;
-	ret = ft_strdup(str[i]);
-//	free_all(str);
+	}
+	printf("%d\n", i);
+	if (str[i] != NULL)
+		ret = ft_strdup(str[i]);
+	else
+		ret = NULL;
+	free_all(str);
     return (ret);
 }
 

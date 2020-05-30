@@ -6,7 +6,7 @@
 /*   By: adjemaa <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/27 18:01:22 by adjemaa           #+#    #+#             */
-/*   Updated: 2020/05/28 18:58:48 by adjemaa          ###   ########.fr       */
+/*   Updated: 2020/05/30 19:01:13 by adjemaa          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,6 +82,7 @@ char	*build_arg(char *str, int *j)
 	i = 0;
 	tmp = (char *)malloc(sizeof(char *) * malloc_size(str));
 	c = str[i];
+	//contains segfault
 	while (str[i])
 	{
 		while (str[i] == '\\' || str[i - 1] == '\\')
@@ -121,11 +122,13 @@ char	**first_split(char *line)
 {
 	int i;
 	int j;
+	char *str;
 	char **args;
 	int total;
 
 	i = 0;
 	j = 0;
+	//contains seg fault
 	total = total_argus(line);
 	args = (char **)malloc(sizeof(char *) * total);
 	args[total - 1] = NULL;
@@ -133,14 +136,12 @@ char	**first_split(char *line)
 	{
 		while (line[j] == ' ')
 			j++;
-		args[i] = build_arg(&line[j], &j);
+		str = build_arg(&line[j], &j);
+		args[i] = str;
+		printf("args == %s\n", args[i]);
 		i++;
 	}
-	*(args + i) = NULL;
-	while (i < total - 1)
-	{
-		printf(" full arg == %s\n", args[i]);
-		i++;
-	}
+	args[i] = NULL;
+	printf("args 0 == %s\n", args[0]);
 	return (args);
 }

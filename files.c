@@ -28,9 +28,14 @@ char     **total_args(char **args, char *str)
         i++;
     }
     fill = (char **)malloc(sizeof(char *) * total);
-    fill[total - 1] = NULL;
+    fill[i] = NULL;
     if (total > 1)
-        fill[0] = ft_strdup(str);
+	{
+		if (str != NULL)
+        	fill[0] = ft_strdup(str);
+		else
+			fill[0] = NULL;
+	}
     return (fill);
 }
 
@@ -41,7 +46,7 @@ char    **find_path(char **args, t_cmd *tmp, char **envp)
     char    **fill;
 
     i = 0;
-	
+
     while (args[i] && (args[i][0] == '<' || args[i][0] == '>'))
         i++;
     tmp->path = path_parser(args[i], envp, tmp);

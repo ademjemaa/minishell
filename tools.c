@@ -6,7 +6,7 @@
 /*   By: adjemaa <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/27 18:00:48 by adjemaa           #+#    #+#             */
-/*   Updated: 2020/05/28 21:10:47 by adjemaa          ###   ########.fr       */
+/*   Updated: 2020/05/30 18:36:27 by adjemaa          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,6 +64,7 @@ char    *rearrange(char *str)
 	in = 0;
     tmp = malloc(sizeof(char) * size_counter(str));
     tmp[size_counter(str) - 1] = 0;
+	(void)c;
     while (i < size_counter(str))
     {
 		while (str[j] == '\\' && str[j + 1])
@@ -81,13 +82,14 @@ char    *rearrange(char *str)
 			else
 				in = 0;
 		}
+		//seg fault in if block
         if (((str[j + 1] == '>' && str[j] != '>') || (str[j + 1] == '<')) && str[j] != ' ' && !in)
         {
             tmp[i] = str[j];
             i++;
             tmp[i] = ' ';
         }
-        else if ((str[j] == ' ') && (str[j - 1] == '>' || str[j - 1] == '<') && !in)
+		else if ((str[j] == ' ') && (str[j - 1] == '>' || str[j - 1] == '<') && !in)
         {
             while (str[j] == ' ')
                 j++;
