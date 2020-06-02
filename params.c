@@ -23,10 +23,17 @@ void    args_parser(char *str, char **envp, t_cmd *stru)
     char    *tmp;
 
     tmp = str_find(str);
+	printf("command string found\n");
 	tmp = cleaned(tmp);
+	printf("cleaning done, new string = #%s\n", tmp);
 	args = first_split(tmp);
+	printf("primal split done\n");
+	stru->files = NULL;
+	stru->file = NULL;
     stru->files = find_filelst(args);
+	printf("files done\n");
     stru->args = find_path(args, stru, envp);
+	printf("path || args done\n");
     if (!stru->args[0])
     {
         free(stru->args);
@@ -34,7 +41,8 @@ void    args_parser(char *str, char **envp, t_cmd *stru)
     }
 //	free(tmp);
 //    free_all(args);
-//    find_env(stru->args, envp);
+   	find_env(stru->args, envp);
+	printf("env done\n");
 }
 
 int find_file(char *str)

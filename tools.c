@@ -6,7 +6,7 @@
 /*   By: adjemaa <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/27 18:00:48 by adjemaa           #+#    #+#             */
-/*   Updated: 2020/05/30 18:36:27 by adjemaa          ###   ########.fr       */
+/*   Updated: 2020/06/02 21:31:35 by adjemaa          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -113,15 +113,23 @@ char    *change_str(char *envp, char *str)
 
     j = 0;
 	c = 0;
-    while (envp[j] && envp[j] != '=')
+    while (envp != NULL && envp[j] && envp[j] != '=')
         j++;
     j++;
     tmp = malloc(sizeof(char) * (final_size(str, envp)));
-	printf("%d\n", final_size(str, envp));
     i = -1;
-    while (str[++i] != '$' && str[i])
-        tmp[c] = str[i];
-    while (envp[j])
+    while (str[++i] && str[i] != '$')
+	{
+		if (str[i] == '\\')
+		{
+        	tmp[c] = str[i];
+			i++;
+			c++;
+		}
+		tmp[c] = str[i];
+		c++;
+	}
+    while (envp != NULL && envp[j])
         tmp[c++] = envp[j++];
 	i++;
 	while (str[i] && ((str[i] >= 'a' && str[i] <= 'z') || (str[i] >= 'A' && str[i] <= 'Z') || (str[i] >= '0' && str[i] <= '9') || str[i] == '_'))
@@ -145,29 +153,32 @@ void    find_env(char **args, char **envp)
 	char *tmp;
     char *str;
 
-    i = -1;
-    while (args[++i])
+    i = 0;
+    while (args[i] != NULL)
     {
         j = 0;
         c = 0;
-        while (args[i][j] != '$' && args[i][j])
-            j++;
-        if (args[i][j] == '$')
-        {
-            j++;
-			tmp = exact_env(&args[i][j]);
-            while (envp[c] != NULL && ft_strncmp(envp[c], tmp, ft_strlen(tmp)))
+		if (args[i][0] != '\'')
+		{
+        	while (args[i][j])
 			{
-				printf("envp %s\n", envp[c]);
-                c++;
+				if (args[i][j] == '\\')
+					j = j + 2;
+        		if (args[i][j] == '$')
+        		{
+        		    j++;
+					tmp = exact_env(&args[i][j]);
+					while (envp[c] != NULL && ft_strncmp(envp[c], tmp, envp_len(envp[c], tmp)))
+						c++;
+                	str = change_str(envp[c], args[i]);
+                	args[i] = str;
+					j = 0;
+				}
+				else
+					j++;
 			}
-			printf("%s\n", envp[c]);
-            if (args[i][0] != '\'')
-            {
-                str = change_str(envp[c], args[i]);
-                args[i] = str;
-            }
         }
+		i++;
     }
 }
 

@@ -6,7 +6,7 @@
 /*   By: adjemaa <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/25 18:49:51 by adjemaa           #+#    #+#             */
-/*   Updated: 2020/05/28 18:57:52 by adjemaa          ###   ########.fr       */
+/*   Updated: 2020/06/02 22:03:00 by adjemaa          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,48 +41,60 @@ int		find_len(char *str)
 	return (total);
 }
 
-void	check_final(int i, int j,char  *tmp)
+void	check_final(char  *tmp)
 {
-	char	*str;
-
-	str = ft_strdup(tmp);
-	if (i != j)
-		tmp = copy_clean(tmp, str);
+	int c;
+	int two;
+	int one;
+	
+	c = 0;
+	two = 0;
+	one = 0;
+	while (tmp[c])
+	{
+		while (tmp[c] == '\\')
+			c = c + 2;
+		if (tmp[c] == '\"' && !one)
+			two = !two;
+		if (tmp[c] == '\'' && !two)
+			one = !one;
+		c++;
+	}
+	if (two || one)
+		printf("quotes problem, two == %d one == %d\n", two, one);
 }
 
 char	*copy_clean(char *tmp, char *str)
 {
-	int i;
-	int j;
-	int	one;
-	int two;
+	t_check c;
 
-	i = 0;
-	j = 0;
-	one = 0;
-	two = 0;
-	while (str[i])
+	c.i = 0;
+	c.j = 0;
+	c.env = 0;
+	c.one = 0;
+	c.two = 0;
+	while (str[c.i])
 	{
-		if (str[i] == '\\' && one == 0)
+		if (str[c.i] == '$' && c.two)
+			c.env = 1;
+		if (c.two == 0)
+			c.env = 0;
+		if (str[c.i] == '\\' && c.one == 0)
 		{
-			tmp[j] = str[i];
-			tmp[j + 1] = str[i + 1];
-			i = i + 2;
-			j = j + 2;
+			tmp[c.j] = str[c.i];
+			tmp[c.j + 1] = str[c.i + 1];
+			c.i = c.i + 2;
+			c.j = c.j + 2;
 		}
-		if ((str[i]) && quote_status(&one, &two, &i, &str[i]))
+		if ((str[c.i]) && quote_status(&c, &str[c.i]))
 		{
-			tmp[j] = str[i];
-			i++;
-			j++;
-		}
-		if (str[i] == 0 && (one == 1 || two == 1))
-		{
-			printf("quotation error fix me later one == %d two == %d\n", one, two);
-			return (NULL);;
+			tmp[c.j] = str[c.i];
+			c.i++;
+			c.j++;
 		}
 	}
-	tmp[j] = 0;
+	tmp[c.j] = 0;
+	check_final(tmp);
 	return (tmp);
 }
 
@@ -97,5 +109,6 @@ char	*cleaned(char *str)
 	tmp = malloc(sizeof(char) * total);
 	tmp = copy_clean(tmp, str);
 	tmp = rearrange(tmp);
+	free(str);
 	return (tmp);
 }

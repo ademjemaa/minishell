@@ -6,7 +6,7 @@
 /*   By: adjemaa <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/27 17:05:56 by adjemaa           #+#    #+#             */
-/*   Updated: 2020/05/28 21:11:43 by adjemaa          ###   ########.fr       */
+/*   Updated: 2020/06/02 22:02:59 by adjemaa          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ int		final_size(char *str, char *envp)
 	total = 1;
 	while (str[++i] != '$')
 		total++;
-	while (envp[++j])
+	while (envp != NULL && envp[++j])
 		total++;
 	i++;
 	while (str[i] && ((str[i] >= 'a' && str[i] <= 'z') || (str[i] >= 'A' && str[i] <= 'Z') || (str[i] >= '0' && str[i] <= '9') || str[i] == '_'))
@@ -46,20 +46,21 @@ int		env_len(char *str)
 	return (i);
 }
 
-int		quote_status(int *one, int *two, int *i, char *str)
+int		quote_status(t_check *c, char *str)
 {
-	if (str[0] == '\"' && str[1] != '\"' && !(*one))
-		*two = !(*two);
-	else if (str[0] == '\'' && str[1] != '\'' && !(*two))
-		*one = !(*one);
-	else if (str[0] == '\"' && str[1] == '\"' && !(*one))
+
+	if (str[0] == '\"' && str[1] != '\"' && !(c->one))
+		c->two = !(c->two);
+	else if (str[0] == '\'' && str[1] != '\'' && !(c->two))
+		c->one = !(c->one);
+	else if (str[0] == '\"' && str[1] == '\"' && !(c->one) && !(c->env))
 	{
-		*i = *i + 2;
+		c->i = c->i + 2;
 		return (0);
 	}
-	else if (str[0] == '\'' && str[1] == '\'' && !(*two))
+	else if (str[0] == '\'' && str[1] == '\'' && !(c->two))
 	{
-		*i = *i + 2;
+		c->i = c->i + 2;
 		return (0);
 	}
 	return (1);

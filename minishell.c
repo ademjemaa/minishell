@@ -23,6 +23,7 @@ int	main(int argc, char **argv, char **envp)
 				exit(0);
 			}
 			tab = parser(line, envp);
+			printf("parsing done\n");
 			exec(tab, envp);
 	    	write(1,"kembyalet$",11);
 			free(line);
