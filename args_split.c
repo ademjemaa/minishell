@@ -6,7 +6,7 @@
 /*   By: adjemaa <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/27 18:01:22 by adjemaa           #+#    #+#             */
-/*   Updated: 2020/06/02 21:26:29 by adjemaa          ###   ########.fr       */
+/*   Updated: 2020/06/04 18:08:40 by adjemaa          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -131,8 +131,8 @@ char	**first_split(char *line)
 	//contains seg fault
 	total = total_argus(line);
 	args = (char **)malloc(sizeof(char *) * total);
-	args[total - 1] = NULL;
-	while (i < total)
+	args[total] = NULL;
+	while (i < total - 1)
 	{
 		while (line[j] == ' ')
 			j++;
@@ -140,6 +140,5 @@ char	**first_split(char *line)
 		args[i] = str;
 		i++;
 	}
-	args[i] = NULL;
 	return (args);
 }

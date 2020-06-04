@@ -61,6 +61,8 @@ char    **find_path(char **args, t_cmd *tmp, char **envp)
             j++;
         }
     }
+	printf("%d\n", j);
+	fill[j] = NULL;
     return (fill);
 }
 
@@ -80,7 +82,7 @@ int     file_counter(char **args)
     return (total + 1);
 }
 
-char    **find_filelst(char **args)
+char    **find_filelst(char **args, char **envp)
 {
     int i;
     int j;
@@ -94,10 +96,11 @@ char    **find_filelst(char **args)
     {
         if (args[i][0] == '<' || args[i][0] == '>')
         {
+			printf("to parse %s\n", args[i]);
             if (args[i][1] == '>')
-                files[j] = ft_strdup(&args[i][2]);
+                files[j] = retrieve(&args[i][2], envp);
             else
-                files[j] = ft_strdup(&args[i][1]);
+                files[j] = retrieve(&args[i][1], envp);
             j++;
         }
     }

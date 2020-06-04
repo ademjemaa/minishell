@@ -27,10 +27,9 @@ void    args_parser(char *str, char **envp, t_cmd *stru)
 	tmp = cleaned(tmp);
 	printf("cleaning done, new string = #%s\n", tmp);
 	args = first_split(tmp);
-	printf("primal split done\n");
 	stru->files = NULL;
 	stru->file = NULL;
-    stru->files = find_filelst(args);
+    stru->files = find_filelst(args, envp);
 	printf("files done\n");
     stru->args = find_path(args, stru, envp);
 	printf("path || args done\n");

@@ -6,7 +6,7 @@
 /*   By: abarbour <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/18 16:33:31 by abarbour          #+#    #+#             */
-/*   Updated: 2020/06/02 22:01:20 by adjemaa          ###   ########.fr       */
+/*   Updated: 2020/06/04 18:32:57 by adjemaa          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,11 +50,11 @@ int		quote_status(t_check *c, char *str);
 char	*cleaned(char *str);
 int		get_next_line(int fd, char **line);
 char    *rearrange(char *str);
-char	*retrieve(char *str);
+char	*retrieve(char *str, char **envp);
 void    free_all(char **args);
 t_cmd 	**parser(char *line, char **envp);
 int		final_size(char *str, char *envp);
-char    **find_filelst(char **args);
+char    **find_filelst(char **args, char **envp);
 int     sep_parser(char *str, t_cmd *tmp);
 void	args_parser(char *str, char **envp, t_cmd *stru);
 void 	find_env(char **args, char **envp);

@@ -6,7 +6,7 @@
 /*   By: adjemaa <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/25 18:49:51 by adjemaa           #+#    #+#             */
-/*   Updated: 2020/06/02 22:03:00 by adjemaa          ###   ########.fr       */
+/*   Updated: 2020/06/02 22:04:18 by adjemaa          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,7 @@ void	check_final(char  *tmp)
 		c++;
 	}
 	if (two || one)
-		printf("quotes problem, two == %d one == %d\n", two, one);
+		printf("quotes problem, two == %d one == %d, fix me later tard\n", two, one);
 }
 
 char	*copy_clean(char *tmp, char *str)

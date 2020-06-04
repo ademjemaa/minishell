@@ -6,7 +6,7 @@
 /*   By: adjemaa <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/27 18:00:48 by adjemaa           #+#    #+#             */
-/*   Updated: 2020/06/02 21:31:35 by adjemaa          ###   ########.fr       */
+/*   Updated: 2020/06/04 19:52:25 by adjemaa          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -171,6 +171,7 @@ void    find_env(char **args, char **envp)
 					while (envp[c] != NULL && ft_strncmp(envp[c], tmp, envp_len(envp[c], tmp)))
 						c++;
                 	str = change_str(envp[c], args[i]);
+					//delete str w 7ot tmp fi blassitha
                 	args[i] = str;
 					j = 0;
 				}
