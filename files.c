@@ -61,7 +61,6 @@ char    **find_path(char **args, t_cmd *tmp, char **envp)
             j++;
         }
     }
-	printf("%d\n", j);
 	fill[j] = NULL;
     return (fill);
 }
