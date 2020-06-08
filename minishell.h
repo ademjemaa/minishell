@@ -6,7 +6,7 @@
 /*   By: abarbour <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/18 16:33:31 by abarbour          #+#    #+#             */
-/*   Updated: 2020/06/07 21:43:46 by adjemaa          ###   ########.fr       */
+/*   Updated: 2020/06/08 23:36:26 by adjemaa          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,6 +45,7 @@ typedef struct s_cmd
 
 char	*copy_clean(char *tmp, char *str);
 int		envp_len(char *str, char *tmp);
+int		env_len(char *str);
 char	**first_split(char *line);
 char	*file_prot(char *str, char *tmp);
 int		line_return(char *str);

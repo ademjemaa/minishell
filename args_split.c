@@ -6,7 +6,7 @@
 /*   By: adjemaa <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/27 18:01:22 by adjemaa           #+#    #+#             */
-/*   Updated: 2020/06/07 21:49:48 by adjemaa          ###   ########.fr       */
+/*   Updated: 2020/06/08 23:58:08 by adjemaa          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,31 +22,32 @@ int	total_argus(char *line)
 	i = 0;
 	while (line[i])
 	{
-		while (line[i] == '\\')
-			i = i + 2;
 		while (line[i] == ' ')
 			i++;
 		total++;
 		if (line[i] == '>' || line[i] == '<')
-		{
-			total++;
 			i = line_return(&line[i]) + i;
-		}
 		if (line[i] == '\'' || line[i] == '\"')
 		{
 			c = line[i];
 			i++;
-			while (line[i] && line[i] != c )
+			while (line[i] && line[i] != c)
 			{
-				if (line[i] == '\\' && line[i + 1])
-					i = i + 2;
+				if (line[i] == '\\' && c != '\'')
+					i++;
 				i++;
 			}
 			i++;
 		}
 		else
+		{
 			while (line[i] != ' ' && line[i] != '\''  && line[i] != '\"' && line[i])
+			{
+				if (line[i] == '\\')
+					i++;
 				i++;
+			}
+		}
 	}
 	return (total);
 }
@@ -93,8 +94,10 @@ char	*build_arg(char *str, int *j)
 		return (file_prot(str, tmp));
 	while (str[i])
 	{
-		while (str[i] == '\\' || str[i - 1] == '\\')
+		while (str[i] == '\\' && c != '\'')
 		{
+			tmp[i] = str[i];
+			i++;
 			tmp[i] = str[i];
 			i++;
 		}
@@ -136,7 +139,6 @@ char	**first_split(char *line)
 
 	i = 0;
 	j = 0;
-	//contains seg fault
 	total = total_argus(line);
 	args = (char **)malloc(sizeof(char *) * total);
 	args[total] = NULL;
@@ -145,9 +147,9 @@ char	**first_split(char *line)
 		while (line[j] == ' ')
 			j++;
 		str = build_arg(&line[j], &j);
-		printf("string %s\n", str);
 		args[i] = str;
 		i++;
 	}
+	args[i] = NULL;
 	return (args);
 }

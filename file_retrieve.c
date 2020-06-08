@@ -6,11 +6,45 @@
 /*   By: adjemaa <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/02 18:38:18 by adjemaa           #+#    #+#             */
-/*   Updated: 2020/06/07 21:30:08 by adjemaa          ###   ########.fr       */
+/*   Updated: 2020/06/08 23:58:06 by adjemaa          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+
+void	change_status(t_check *check, char *str, char **envp, char *new)
+{
+	int t;
+	int b;
+	char *tmp;
+
+	t = 0;
+	b = 0;
+	if (str[check->i] == '\'' && check->two == 0)
+	{
+		check->one = !(check->one);
+		check->i++;
+	}
+	else if (str[check->i] == '\"' && check->one == 0)
+	{
+		check->two = !(check->two);
+		check->i++;
+	}
+	else if (str[check->i] == '$' && check->one == 0)
+	{
+		tmp = exact_env(&str[check->i + 1]);
+		while (envp[t] != NULL && ft_strncmp(envp[t], tmp, envp_len(envp[t], tmp)))
+			t++;
+		if (envp[t] != NULL)
+		{
+			while (envp[t][b] != '=')
+				b++;
+			while (envp[t][++b] != 0)
+				new[check->j++] = envp[t][b];
+		}
+		check->i = check->i + env_len(&str[check->i + 1]) + 1;
+	}
+}
 
 int		envp_len(char *str, char *tmp)
 {
@@ -36,20 +70,24 @@ int		env_tran_len(char *str, char **envp, int *i)
 {
 	int c;
 	int j;
+	int t;
 	char *tmp;
 
 	c = 0;
 	j = 0;
-	tmp = exact_env(str);
+	tmp = exact_env(&str[1]);
+	t = 1;
 	while (envp[c] != NULL  && ft_strncmp(envp[c], tmp, envp_len(envp[c], tmp)))
 		c++;
-	while (str[*i] && ((str[*i] >= 'a' && str[*i] <= 'z') || (str[*i] >= 'A' && str[*i] <= 'Z') || (str[*i] >= '0' && str[*i] <= '9') || str[*i] == '_'))
-		*i = *i + 1;
+	while (str[t] && ((str[t] >= 'a' && str[t] <= 'z') || (str[t] >= 'A' && str[t] <= 'Z') || (str[t] >= '0' && str[t] <= '9') || str[t] == '_'))
+		t++;
+	*i = t + *i;
+	free(tmp);
 	if (envp[c] != NULL)
 	{
 		while (envp[c][j] != '=')
 			j++;
-		return (ft_strlen(envp[c]) - j - 2);
+		return (ft_strlen(&envp[c][j + 1]));
 	}
 	return (0);
 }
@@ -65,38 +103,60 @@ int		file_len(char *str, char **envp)
 	i = 0;
 	one = 0;
 	two = 0;
-	printf("str == %s\n", str);
 	while (str[i] && str[i] != ' ')
 	{
-		if (str[i] == '\'' && str[i - 1] != '\\' && !two)
+		if (str[i] == '\\' && one == 0)
 		{
+			i++;
+			total++;
+		}
+		if (str[i] == '\'' && !two)
 			one = !one;
-			total--;
-		}
-		if (str[i] == '\"' && str[i - 1] != '\\' && !one)
-		{
+		else if (str[i] == '\"' && !one)
 			two = !two;
-			total--;
-		}
-		if (str[i] == '$' && one == 0 && str[i - 1] != '\\')
-			total = total + env_tran_len(&str[i + 1], envp, &i);
-		total++;
-		i++;
+		else if (str[i] == '$' && one == 0 && str[i - 1] != '\\')
+			total = total + env_tran_len(&str[i], envp, &i);
+		else
+			total++;
+		if (str[i] != 0)
+			i++;
 	}
-	printf("total == %d\n", total);
 	return (total);
 }
 
 char	*retrieve(char *str, char **envp)
 {
 	char *tmp;
-	int i;
+	t_check c;
 
-
-	i = 0;
-	printf("line %s\n", str);
+	c.i = 0;
+	c.j = 0;
+	c.one = 0;
+	c.two = 0;
 	tmp = malloc(sizeof(char *) * file_len(str, envp));
-	while (str[i])
-		i++;
+	tmp[file_len(str, envp)] = 0;
+	while (str[c.i])
+	{
+		if (str[c.i] == '\\' && c.one == 0)
+		{
+			tmp[c.j] = str[c.i];
+			c.j++;
+			c.i++;
+			tmp[c.j] = str[c.i];
+			c.j++;
+			c.i++;
+		}
+		else if (str[c.i] == '\'' || str[c.i] == '\"')
+			change_status(&c, str, envp, tmp);
+		else if (str[c.i] == '$' && c.one == 0)
+			change_status(&c, str, envp, tmp);
+		else
+		{
+			tmp[c.j] = str[c.i];
+			c.j++;
+			c.i++;	
+		}
+	}
+	tmp[c.j] = 0;
 	return (tmp);
 }

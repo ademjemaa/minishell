@@ -6,7 +6,7 @@
 /*   By: adjemaa <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/25 18:49:51 by adjemaa           #+#    #+#             */
-/*   Updated: 2020/06/02 22:04:18 by adjemaa          ###   ########.fr       */
+/*   Updated: 2020/06/08 22:31:34 by adjemaa          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,7 @@ void	check_final(char  *tmp)
 	one = 0;
 	while (tmp[c])
 	{
-		while (tmp[c] == '\\')
+		while (tmp[c] == '\\' && !one)
 			c = c + 2;
 		if (tmp[c] == '\"' && !one)
 			two = !two;
