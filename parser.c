@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   parser.c                                           :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: abarbour <abarbour@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2020/06/13 15:52:17 by abarbour          #+#    #+#             */
+/*   Updated: 2020/06/13 16:36:11 by abarbour         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "minishell.h"
 
 int counter(char *line)
@@ -123,7 +135,7 @@ t_cmd **parser(char *line, char **envp)
     {
         tab[i] = params(&line[j], envp);
         i++;
-        while (line[j] && line[i] != '|' && line[j] != ';')
+        while (line[j] && line[j] != '|' && line[j] != ';')
             j++;
     }
     tab[i] = NULL;// w lahna hattet el null

@@ -6,7 +6,7 @@
 #    By: adjemaa <marvin@42.fr>                     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/11/06 21:13:47 by adjemaa           #+#    #+#              #
-#    Updated: 2020/06/07 21:44:04 by adjemaa          ###   ########.fr        #
+#    Updated: 2020/06/13 16:23:27 by abarbour         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -28,19 +28,16 @@ SRCS =	minishell.c\
 		files.c\
 		quotes.c\
 		get_next_line/get_next_line.c \
-		get_next_line/get_next_line_utils.c
+		get_next_line/get_next_line_utils.c 
 
 SRC =		libft/ft_memset.c\
-		libft/ft_bzero.c\
 		libft/ft_memcpy.c\
 		libft/ft_memccpy.c\
 		libft/ft_memmove.c\
 		libft/ft_memchr.c\
 		libft/ft_memcmp.c\
-		libft/ft_strlen.c\
 		libft/ft_strlcat.c\
 		libft/ft_isalpha.c\
-		libft/ft_strdup.c\
 		libft/ft_isdigit.c\
 		libft/ft_isalnum.c\
 		libft/ft_isascii.c\
@@ -54,8 +51,6 @@ SRC =		libft/ft_memset.c\
 		libft/ft_strnstr.c\
 		libft/ft_atoi.c\
 		libft/ft_calloc.c\
-		libft/ft_substr.c\
-		libft/ft_strjoin.c\
 		libft/ft_strtrim.c\
 		libft/ft_split.c\
 		libft/ft_itoa.c\
@@ -72,14 +67,15 @@ OBJECT = $(SRCS:.c=.o)
 
 OBJECT_B = $(SRC:.c=.o)
 
-$(NAME):
-	@$(CC) $(FLAGS) $(SRCS)  libft/libft.a libft/libft.h 
+$(NAME): ${OBJECT} ${OBJECT_B}
+	@$(CC) $(FLAGS) -o $(NAME) ${OBJECT} ${OBJECT_B}
 
 all: $(NAME)
 
 clean:
 	@rm -rf $(NAME)
 	@rm -rf $(OBJECT_B)
+	@rm -rf $(OBJECT)
 
 fclean : clean 
 	@rm -rf $(NAME)

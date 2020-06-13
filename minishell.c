@@ -1,10 +1,22 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   minishell.c                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: abarbour <abarbour@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2020/06/13 15:47:50 by abarbour          #+#    #+#             */
+/*   Updated: 2020/06/13 16:20:53 by abarbour         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "minishell.h"
 
 int	main(int argc, char **argv, char **envp)
 {
 	char		*line;
 	int			ret;
-	t_cmd **	tab;
+	t_cmd 		**tab;
 
 	line = NULL;
 	(void)argc;
