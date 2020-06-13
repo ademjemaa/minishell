@@ -38,7 +38,7 @@ void    args_parser(char *str, char **envp, t_cmd *stru)
         free(stru->args);
         return ;
     }
-//	free(tmp);
+	free(tmp);
 //    free_all(args);
    	find_env(stru->args, envp);
 	printf("env done\n");

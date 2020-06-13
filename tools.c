@@ -6,7 +6,7 @@
 /*   By: adjemaa <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/27 18:00:48 by adjemaa           #+#    #+#             */
-/*   Updated: 2020/06/04 19:52:25 by adjemaa          ###   ########.fr       */
+/*   Updated: 2020/06/10 11:50:44 by adjemaa          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -151,7 +151,6 @@ void    find_env(char **args, char **envp)
     int j;
     int c;
 	char *tmp;
-    char *str;
 
     i = 0;
     while (args[i] != NULL)
@@ -170,9 +169,10 @@ void    find_env(char **args, char **envp)
 					tmp = exact_env(&args[i][j]);
 					while (envp[c] != NULL && ft_strncmp(envp[c], tmp, envp_len(envp[c], tmp)))
 						c++;
-                	str = change_str(envp[c], args[i]);
+					free(tmp);
+                	tmp = change_str(envp[c], args[i]);
 					//delete str w 7ot tmp fi blassitha
-                	args[i] = str;
+                	args[i] = tmp;
 					j = 0;
 				}
 				else

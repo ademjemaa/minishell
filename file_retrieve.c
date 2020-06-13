@@ -6,7 +6,7 @@
 /*   By: adjemaa <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/02 18:38:18 by adjemaa           #+#    #+#             */
-/*   Updated: 2020/06/08 23:58:06 by adjemaa          ###   ########.fr       */
+/*   Updated: 2020/06/10 11:48:21 by adjemaa          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,8 +41,10 @@ void	change_status(t_check *check, char *str, char **envp, char *new)
 				b++;
 			while (envp[t][++b] != 0)
 				new[check->j++] = envp[t][b];
+			check->i = check->i + env_len(&str[check->i + 1]);
 		}
-		check->i = check->i + env_len(&str[check->i + 1]) + 1;
+		free(tmp);
+		check->i++;
 	}
 }
 

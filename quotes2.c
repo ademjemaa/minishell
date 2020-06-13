@@ -6,13 +6,13 @@
 /*   By: adjemaa <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/07 21:30:15 by adjemaa           #+#    #+#             */
-/*   Updated: 2020/06/08 21:57:30 by adjemaa          ###   ########.fr       */
+/*   Updated: 2020/06/10 12:07:15 by adjemaa          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-char	*file_prot(char *str, char *tmp)
+char	*file_prot(char *str, char *tmp, int *j)
 {
 	int i;
 	int one;
@@ -32,6 +32,7 @@ char	*file_prot(char *str, char *tmp)
 			break;
 		i++;
 	}
+	*j = i + *j;
 	tmp[i] = 0;
 	return (tmp);
 }

@@ -6,7 +6,7 @@
 /*   By: adjemaa <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/27 18:01:22 by adjemaa           #+#    #+#             */
-/*   Updated: 2020/06/08 23:58:08 by adjemaa          ###   ########.fr       */
+/*   Updated: 2020/06/10 12:04:19 by adjemaa          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,7 +91,7 @@ char	*build_arg(char *str, int *j)
 	tmp = (char *)malloc(sizeof(char *) * malloc_size(str));
 	c = str[i];
 	if (str[0] == '>' || str[0] == '<')
-		return (file_prot(str, tmp));
+		return (file_prot(str, tmp, j));
 	while (str[i])
 	{
 		while (str[i] == '\\' && c != '\'')

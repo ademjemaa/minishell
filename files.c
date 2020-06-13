@@ -61,6 +61,7 @@ char    **find_path(char **args, t_cmd *tmp, char **envp)
             j++;
         }
     }
+	free_all(args);
 	fill[j] = NULL;
     return (fill);
 }
@@ -95,7 +96,6 @@ char    **find_filelst(char **args, char **envp)
     {
         if (args[i][0] == '<' || args[i][0] == '>')
         {
-			printf("to parse %s\n", args[i]);
             if (args[i][1] == '>')
                 files[j] = retrieve(&args[i][2], envp);
             else
