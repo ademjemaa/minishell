@@ -6,7 +6,7 @@
 /*   By: abarbour <abarbour@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/13 15:52:17 by abarbour          #+#    #+#             */
-/*   Updated: 2020/06/13 16:36:11 by abarbour         ###   ########.fr       */
+/*   Updated: 2020/06/13 19:49:45 by abarbour         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,8 +57,12 @@ char    *path_parser(char *line, char **envp, t_cmd *tmp)
     struct stat sb;
 
     i = 0;
+	ret = cmd_name(line);
     if (check_name(line, tmp))
-        return (cmd_name(line));
+        return (ret);
+	if (stat(ret, &sb) == 0)
+		return (ret);
+	free(ret);
     while (ft_strncmp(envp[i], "PATH=", 5))
         i++;
     str = ft_split(envp[i], ':');
@@ -92,12 +96,12 @@ void    print_structure(t_cmd *tmp)
     i = 0;
 	printf("structure : \n");
 	if (tmp->path)
-    	printf("path == %s\n", tmp ->path);
+    	printf("path == %s!!\n", tmp->path);
 	if (tmp->file)
-		printf("file == %s\n",  tmp->file);
+		printf("file == %s!!\n",  tmp->file);
     while (tmp->args[i] != NULL)
     {
-        printf("args == %s\n", tmp->args[i]);
+        printf("args == !!%s!!\n", tmp->args[i]);
         i++;
     }
     i = 0;
@@ -137,6 +141,8 @@ t_cmd **parser(char *line, char **envp)
         i++;
         while (line[j] && line[j] != '|' && line[j] != ';')
             j++;
+		if (line[j])
+			j++;
     }
     tab[i] = NULL;// w lahna hattet el null
     return (tab);

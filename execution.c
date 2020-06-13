@@ -36,7 +36,7 @@ int    exec_pipe(t_cmd **tab, int *i, char **envp)
     int pip[2];
 
     input_fd = 0;
-    while (tab[*i + 1] && tab[*i + 1]->sep == 3)
+    while (tab[*i] && tab[*i]->sep == 4)
     {
         pipe(pip);
         exec_prog(input_fd, pip[1], tab[*i], envp);
@@ -61,18 +61,9 @@ void    exec(t_cmd **tab, char **envp)
     i = 0;
     while (tab[i])
     {
-        if (!(tab[i]->path))
+        if (!(tab[i]->path))//lehna lazem gestion d'erreur
             i++;
-        if (tab[i + 1] && tab[i + 1]->sep == 3)
-           output = exec_pipe(tab, &i, envp);
-        else
-        {
-            pipe(pip);
-            exec_prog(0, pip[1], tab[i], envp);
-            close(pip[1]);
-            output = pip[0];
-            i++;
-        }
+        output = exec_pipe(tab, &i, envp);
         while (read(output,&c,1) > 0)
             write(1,&c,1);
     }

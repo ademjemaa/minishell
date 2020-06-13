@@ -6,7 +6,7 @@
 /*   By: adjemaa <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/27 18:01:22 by adjemaa           #+#    #+#             */
-/*   Updated: 2020/06/10 12:04:19 by adjemaa          ###   ########.fr       */
+/*   Updated: 2020/06/13 20:18:41 by abarbour         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,8 @@ int	total_argus(char *line)
 	{
 		while (line[i] == ' ')
 			i++;
-		total++;
+		if (line[i])//lehna kan ma famma chay ba3d el argument wela el commande ma lazemch ya3mel allocation zayda
+			total++;
 		if (line[i] == '>' || line[i] == '<')
 			i = line_return(&line[i]) + i;
 		if (line[i] == '\'' || line[i] == '\"')

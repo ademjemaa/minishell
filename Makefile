@@ -6,7 +6,7 @@
 #    By: adjemaa <marvin@42.fr>                     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/11/06 21:13:47 by adjemaa           #+#    #+#              #
-#    Updated: 2020/06/13 16:23:27 by abarbour         ###   ########.fr        #
+#    Updated: 2020/06/13 20:20:06 by abarbour         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -73,7 +73,6 @@ $(NAME): ${OBJECT} ${OBJECT_B}
 all: $(NAME)
 
 clean:
-	@rm -rf $(NAME)
 	@rm -rf $(OBJECT_B)
 	@rm -rf $(OBJECT)
 

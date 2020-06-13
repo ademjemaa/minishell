@@ -1,3 +1,5 @@
 echo $toto $__CF_USER_TEXT_ENCODING '$__CF_USER_TEXT_ENCODING' "$__CF_USER_TEXT_ENCODING""__CF_USER_TEXT_ENCODING""$__CF_USER_TEXT_ENCODING"
 echo \$yoyo$toto
 echo "'$TERMTERM'"
+comparison fel builtin lazem atzel chaine fel zouz
+separateur reste de la chaine
