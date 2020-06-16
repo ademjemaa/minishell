@@ -6,7 +6,7 @@
 /*   By: adjemaa <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/25 18:49:51 by adjemaa           #+#    #+#             */
-/*   Updated: 2020/06/08 22:31:34 by adjemaa          ###   ########.fr       */
+/*   Updated: 2020/06/16 23:56:43 by adjemaa          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,7 +79,7 @@ char	*copy_clean(char *tmp, char *str)
 			c.env = 1;
 		if (c.two == 0)
 			c.env = 0;
-		if (str[c.i] == '\\' && c.one == 0)
+		while (str[c.i] == '\\' && c.one == 0)
 		{
 			tmp[c.j] = str[c.i];
 			tmp[c.j + 1] = str[c.i + 1];
