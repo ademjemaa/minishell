@@ -6,7 +6,7 @@
 #    By: adjemaa <marvin@42.fr>                     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/11/06 21:13:47 by adjemaa           #+#    #+#              #
-#    Updated: 2020/06/13 20:20:06 by abarbour         ###   ########.fr        #
+#    Updated: 2020/06/17 00:11:52 by adjemaa          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -26,6 +26,7 @@ SRCS =	minishell.c\
 		quotes2.c\
 		tools.c\
 		files.c\
+		ft_tools.c\
 		quotes.c\
 		get_next_line/get_next_line.c \
 		get_next_line/get_next_line_utils.c 

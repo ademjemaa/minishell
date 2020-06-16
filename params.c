@@ -106,9 +106,9 @@ int check_name(char *line, t_cmd *tmp)
 
     ret = 0;
     str = cmd_name(line);
-    if (!ft_strncmp(str, "echo", 4) || !ft_strncmp(str, "cd", 2) ||
-        !ft_strncmp(str, "export", 6) || !ft_strncmp(str, "unset", 5) || !ft_strncmp(str, "env", 3) ||
-        !ft_strncmp(str, "exit", 4))
+/*    if (!ft_strcmp(str, "echo") || */ if (!ft_strcmp(str, "cd") ||
+        !ft_strcmp(str, "export") || !ft_strcmp(str, "unset") || !ft_strcmp(str, "env") ||
+        !ft_strcmp(str, "exit"))
     {
         ret = 1;
         tmp->built = 1;

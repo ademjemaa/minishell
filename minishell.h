@@ -6,7 +6,7 @@
 /*   By: abarbour <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/18 16:33:31 by abarbour          #+#    #+#             */
-/*   Updated: 2020/06/13 16:21:12 by abarbour         ###   ########.fr       */
+/*   Updated: 2020/06/17 00:11:35 by adjemaa          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,5 +68,6 @@ int 	check_name(char *line, t_cmd *tmp);
 char    *cmd_name(char *linep);
 int 	red_type(char *str);
 char	*exact_env(char *str);
+int	ft_strcmp(char *s1, char *s2);
 
 #endif
