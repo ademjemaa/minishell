@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   execution.c                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: abarbour <abarbour@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2020/06/16 21:20:12 by abarbour          #+#    #+#             */
+/*   Updated: 2020/06/16 21:56:30 by abarbour         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "minishell.h"
 
 int count_pipes(t_cmd **tab)
@@ -63,6 +75,7 @@ void    exec(t_cmd **tab, char **envp)
     {
         if (!(tab[i]->path))//lehna lazem gestion d'erreur
             i++;
+		proc_args(tab[i]);
         output = exec_pipe(tab, &i, envp);
         while (read(output,&c,1) > 0)
             write(1,&c,1);
