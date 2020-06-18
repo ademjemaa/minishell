@@ -17,8 +17,9 @@ char	*ft_strjoinfree(char *s1, char *s2, int crit)
 	int		j;
 
 	i = -1;
-	str = malloc(sizeof(char) * total(s1) + total(s2) + 1);
-	if (!str)
+	s1 = s1 ? s1 : ft_strdup("");
+	s2 = s2 ? s2 : ft_strdup("");
+	if (!(str = malloc(total(s1) + total(s2) + 1)))
 		return NULL;
 	while (s1[++i])
 		str[i] = s1[i];

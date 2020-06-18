@@ -6,7 +6,7 @@
 /*   By: abarbour <abarbour@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/16 21:20:12 by abarbour          #+#    #+#             */
-/*   Updated: 2020/06/16 21:56:30 by abarbour         ###   ########.fr       */
+/*   Updated: 2020/06/18 21:58:25 by abarbour         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,7 +75,9 @@ void    exec(t_cmd **tab, char **envp)
     {
         if (!(tab[i]->path))//lehna lazem gestion d'erreur
             i++;
-		proc_args(tab[i]);
+		concat_args(tab[i]);
+		print_structure(tab[i]);
+		/*proc_args(tab[i]);*/
         output = exec_pipe(tab, &i, envp);
         while (read(output,&c,1) > 0)
             write(1,&c,1);

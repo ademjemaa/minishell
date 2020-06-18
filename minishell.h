@@ -6,7 +6,7 @@
 /*   By: abarbour <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/18 16:33:31 by abarbour          #+#    #+#             */
-/*   Updated: 2020/06/17 00:11:35 by adjemaa          ###   ########.fr       */
+/*   Updated: 2020/06/19 00:13:59 by abarbour         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,6 +68,10 @@ int 	check_name(char *line, t_cmd *tmp);
 char    *cmd_name(char *linep);
 int 	red_type(char *str);
 char	*exact_env(char *str);
-int	ft_strcmp(char *s1, char *s2);
+int		ft_strcmp(char *s1, char *s2);
+int		nargs_count(char **args);
+void	concat_args(t_cmd *cmd);
+void    print_structure(t_cmd *tmp);
+int		narg_len_dq(char	*arg);
 
 #endif
