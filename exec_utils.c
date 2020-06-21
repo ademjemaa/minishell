@@ -6,7 +6,7 @@
 /*   By: abarbour <abarbour@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/18 19:59:38 by abarbour          #+#    #+#             */
-/*   Updated: 2020/06/21 21:36:36 by abarbour         ###   ########.fr       */
+/*   Updated: 2020/06/21 23:08:43 by abarbour         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,7 +78,7 @@ int		cr_files(t_cmd *cmd)
 	i = 0;
 	while (cmd->files[i])
 	{
-		fd = open(cmd->files[i], O_WRONLY | O_CREAT);
+		fd = open(cmd->files[i], O_WRONLY | O_CREAT, S_IRUSR | S_IWUSR | S_IRGRP | S_IROTH);
 		if (cmd->files[i + 1])
 			close(fd);
 		i++;
