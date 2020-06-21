@@ -6,7 +6,7 @@
 /*   By: abarbour <abarbour@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/13 15:52:17 by abarbour          #+#    #+#             */
-/*   Updated: 2020/06/21 23:09:54 by adjemaa          ###   ########.fr       */
+/*   Updated: 2020/06/21 23:51:31 by adjemaa          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,6 @@ char    *cmd_name(char *line)
     i = j;
     while (line[i] && line[i] != ' ')
         i++;
-	printf(" i == %d && j == %d\n", i, j);
     str = malloc(sizeof(char) * (i - j + 1));
     str[i - j] = '\0';
     i = 0;
@@ -61,6 +60,8 @@ char    *path_parser(char *line, char **envp, t_cmd *tmp)
 
     i = 0;
 	ret = cmd_name(line);
+	if (ret == NULL)
+		return (NULL);
     if (check_name(line, tmp))
         return (ret);
 	if (stat(ret, &sb) == 0)
@@ -102,11 +103,14 @@ void    print_structure(t_cmd *tmp)
     	printf("path == %s!!\n", tmp->path);
 	if (tmp->file)
 		printf("file == %s!!\n",  tmp->file);
-    while (tmp->args[i] != NULL)
-    {
-        printf("args == !!%s!!\n", tmp->args[i]);
+	if (tmp->args)
+	{
+    	while (tmp->args[i] != NULL)
+    	{
+    	    printf("args == !!%s!!\n", tmp->args[i]);
         i++;
-    }
+   		 }
+	}
     i = 0;
 	 while (tmp->files[i] != NULL)
     {

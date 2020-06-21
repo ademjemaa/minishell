@@ -33,12 +33,13 @@ void    args_parser(char *str, char **envp, t_cmd *stru)
 	printf("files done\n");
     stru->args = find_path(args, stru, envp);
 	printf("path || args done\n");
-    if (!stru->args[0])
+/*    if (!stru->args[0])
     {
+		printf("rbk\n");
         free(stru->args);
         return ;
     }
-	free(tmp);
+*/	free(tmp);
 //    free_all(args);
    	find_env(stru->args, envp);
 	printf("env done\n");
@@ -106,13 +107,16 @@ int check_name(char *line, t_cmd *tmp)
 
     ret = 0;
     str = cmd_name(line);
+	if (str != NULL)
+	{
 /*    if (!ft_strcmp(str, "echo") || */ if (!ft_strcmp(str, "cd") ||
         !ft_strcmp(str, "export") || !ft_strcmp(str, "unset") || !ft_strcmp(str, "env") ||
         !ft_strcmp(str, "exit"))
-    {
-        ret = 1;
-        tmp->built = 1;
-    }
+    	{
+    	    ret = 1;
+    	    tmp->built = 1;
+    	}
+	}
     else
         tmp->built = 0;
     free(str);

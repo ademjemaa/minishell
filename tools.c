@@ -6,7 +6,7 @@
 /*   By: adjemaa <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/27 18:00:48 by adjemaa           #+#    #+#             */
-/*   Updated: 2020/06/17 00:07:08 by adjemaa          ###   ########.fr       */
+/*   Updated: 2020/06/21 23:50:16 by adjemaa          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -153,6 +153,8 @@ void    find_env(char **args, char **envp)
 	char *tmp;
 
     i = 0;
+	if (args == NULL)
+		return ;
     while (args[i] != NULL)
     {
         j = 0;
