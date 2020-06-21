@@ -6,7 +6,7 @@
 /*   By: abarbour <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/18 16:33:31 by abarbour          #+#    #+#             */
-/*   Updated: 2020/06/19 00:13:59 by abarbour         ###   ########.fr       */
+/*   Updated: 2020/06/21 21:28:46 by abarbour         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@
 # include <sys/types.h>
 # include <sys/stat.h>
 # include <stdio.h>
+# include <fcntl.h>
 # include "get_next_line/get_next_line.h"
 # include "libft/libft.h"
 
@@ -73,5 +74,7 @@ int		nargs_count(char **args);
 void	concat_args(t_cmd *cmd);
 void    print_structure(t_cmd *tmp);
 int		narg_len_dq(char	*arg);
+int		narg_len_sq(char	*arg);
+int		cr_files(t_cmd *cmd);
 
 #endif

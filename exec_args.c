@@ -6,7 +6,7 @@
 /*   By: abarbour <abarbour@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/16 21:20:08 by abarbour          #+#    #+#             */
-/*   Updated: 2020/06/19 00:28:43 by abarbour         ###   ########.fr       */
+/*   Updated: 2020/06/19 22:23:07 by abarbour         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,22 +34,41 @@ char	*remove_dq(char	*arg)
 	return (str);
 }
 
+char	*remove_sq(char	*arg)
+{
+	char	*str;
+	int		j;
+	int		i;
+
+	if (!(str = malloc(narg_len_sq(arg))))
+		return (NULL);
+	j = 0;
+	i = 1;
+	while (arg[i])
+	{
+		if (arg[i + 1])
+			str[j++] = arg[i];
+		i++;
+	}
+	str[j] = '\0';
+	return (str);
+}
+
 char	*proc_arg(char **args, int i)
 {
 	char	*tmp;
 
-	if ((args[i][0] == '"') || (args[i][0] == '\''))
+	if (args[i] && ((args[i][0] == '"') || (args[i][0] == '\'')))
 	{
 		tmp = args[i];
 		if (args[i][0] == '"')
 			args[i] = remove_dq(args[i]);
-		/*else if (args[i][0] == '\'')
-			args[i] = remove_sq(args[i]);*/
+		else if (args[i][0] == '\'')
+			args[i] = remove_sq(args[i]);
 		free(tmp);
 	}
 	return (args[i]);
 }
-
 
 void	concat_args(t_cmd *cmd)
 {
@@ -72,7 +91,7 @@ void	concat_args(t_cmd *cmd)
 		}
 		if (cmd->args[i] && (cmd->args[i][0] == '"' || cmd->args[i][0] == '\''))
 			cmd->args[i][ft_strlen(cmd->args[i]) - 1] = '\0';
-		new_args[j] = ft_strjoinfree(new_args[j], cmd->args[i], 0);
+		new_args[j] = ft_strjoinfree(new_args[j], proc_arg(cmd->args, i), 0);
 		j++;
 		if (cmd->args[i])
 			i++;
@@ -82,5 +101,4 @@ void	concat_args(t_cmd *cmd)
 	free(cmd->args);
 	cmd->args = new_args;
 }
-
 

@@ -6,7 +6,7 @@
 /*   By: abarbour <abarbour@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/16 21:20:12 by abarbour          #+#    #+#             */
-/*   Updated: 2020/06/18 21:58:25 by abarbour         ###   ########.fr       */
+/*   Updated: 2020/06/21 21:52:14 by abarbour         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,13 +51,19 @@ int    exec_pipe(t_cmd **tab, int *i, char **envp)
     while (tab[*i] && tab[*i]->sep == 4)
     {
         pipe(pip);
-        exec_prog(input_fd, pip[1], tab[*i], envp);
+		if (tab[*i]->red == 3)
+        	exec_prog(input_fd, cr_files(tab[*i]), tab[*i], envp);
+		else
+        	exec_prog(input_fd, pip[1], tab[*i], envp);
         close(pip[1]);
         input_fd = pip[0];
         (*i)++;
     }
     pipe(pip);
-    exec_prog(input_fd, pip[1], tab[*i], envp);
+	if (tab[*i]->red == 3)
+       	exec_prog(input_fd, cr_files(tab[*i]), tab[*i], envp);
+	else
+    	exec_prog(input_fd, pip[1], tab[*i], envp);
     close(pip[1]);
     (*i)++;
     return (pip[0]);
@@ -76,8 +82,7 @@ void    exec(t_cmd **tab, char **envp)
         if (!(tab[i]->path))//lehna lazem gestion d'erreur
             i++;
 		concat_args(tab[i]);
-		print_structure(tab[i]);
-		/*proc_args(tab[i]);*/
+		//print_structure(tab[i]);
         output = exec_pipe(tab, &i, envp);
         while (read(output,&c,1) > 0)
             write(1,&c,1);

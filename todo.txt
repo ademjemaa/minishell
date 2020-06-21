@@ -3,3 +3,4 @@ echo \$yoyo$toto
 echo "'$TERMTERM'"
 comparison fel builtin lazem atzel chaine fel zouz
 separateur reste de la chaine
+Amine -> adem : erreur ki ba3d el redirection ma fammach esm wala famma kan des espace
