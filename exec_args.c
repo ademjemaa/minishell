@@ -6,7 +6,7 @@
 /*   By: abarbour <abarbour@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/16 21:20:08 by abarbour          #+#    #+#             */
-/*   Updated: 2020/06/19 22:23:07 by abarbour         ###   ########.fr       */
+/*   Updated: 2020/06/21 23:46:06 by abarbour         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,13 +83,13 @@ void	concat_args(t_cmd *cmd)
 	while (cmd->args[i])
 	{
 		new_args[j] = NULL;
-		while (cmd->args[i] && (cmd->args[i][0] == '"' || cmd->args[i][0] == '\'')
-			&& cmd->args[i][ft_strlen(cmd->args[i]) - 1] != ' ')
+		while (cmd->args[i] && (cmd->args[i][ft_strlen(cmd->args[i]) - 1] != ' '
+			|| cmd->args[i][ft_strlen(cmd->args[i]) - 2] == '\\'))
 		{
 			new_args[j] = ft_strjoinfree(new_args[j], proc_arg(cmd->args, i), 0);
 			i++;
 		}
-		if (cmd->args[i] && (cmd->args[i][0] == '"' || cmd->args[i][0] == '\''))
+		if (cmd->args[i])
 			cmd->args[i][ft_strlen(cmd->args[i]) - 1] = '\0';
 		new_args[j] = ft_strjoinfree(new_args[j], proc_arg(cmd->args, i), 0);
 		j++;
