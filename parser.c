@@ -6,7 +6,7 @@
 /*   By: abarbour <abarbour@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/13 15:52:17 by abarbour          #+#    #+#             */
-/*   Updated: 2020/06/13 19:49:45 by abarbour         ###   ########.fr       */
+/*   Updated: 2020/06/21 23:09:54 by adjemaa          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,11 +35,14 @@ char    *cmd_name(char *line)
     char *str;
 
     j = 0;
-    while (line[j] == ' ')
+	if (line == NULL)
+		return (NULL);
+    while (line[j] == ' ' && line[j])
         j++;
     i = j;
     while (line[i] && line[i] != ' ')
         i++;
+	printf(" i == %d && j == %d\n", i, j);
     str = malloc(sizeof(char) * (i - j + 1));
     str[i - j] = '\0';
     i = 0;
