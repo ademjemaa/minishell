@@ -6,7 +6,7 @@
 /*   By: abarbour <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/18 16:33:31 by abarbour          #+#    #+#             */
-/*   Updated: 2020/06/21 21:28:46 by abarbour         ###   ########.fr       */
+/*   Updated: 2020/06/22 02:10:28 by adjemaa          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,12 @@
 # include "get_next_line/get_next_line.h"
 # include "libft/libft.h"
 
+typedef struct	s_filelst
+{
+	int red;
+	char *file;
+}				t_filelst;
+
 typedef struct	s_check
 {
 	int i;
@@ -31,21 +37,20 @@ typedef struct	s_check
 	int two;
 }				t_check;
 
-typedef struct s_cmd
+typedef struct	s_cmd
 {
-	char 	*path;
-	//stat
-	int		sep;
-	char	*file;
-	char	**args;
-	char	**files;
-	int		red;
-	int 	built;
-	//path0, options,1, null,3
-}		t_cmd;
+	char 		*path;
+	int			sep;
+	char		*file;
+	char		**args;
+	t_filelst	*files;
+	int			red;
+	int 		built;
+}				t_cmd;
 
 char	*copy_clean(char *tmp, char *str);
 int		envp_len(char *str, char *tmp);
+int		find_filered(char *str);
 int		env_len(char *str);
 char	**first_split(char *line);
 char	*file_prot(char *str, char *tmp, int *j);
@@ -58,7 +63,7 @@ char	*retrieve(char *str, char **envp);
 void    free_all(char **args);
 t_cmd 	**parser(char *line, char **envp);
 int		final_size(char *str, char *envp);
-char    **find_filelst(char **args, char **envp);
+t_filelst    *find_filelst(char **args, char **envp);
 int     sep_parser(char *str, t_cmd *tmp);
 void	args_parser(char *str, char **envp, t_cmd *stru);
 void 	find_env(char **args, char **envp);

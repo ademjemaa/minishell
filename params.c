@@ -70,10 +70,10 @@ char    *file_name(char *str, t_cmd *struc)
 
     i = 0;
     struc->red = red_type(str);
-    while (struc->files && struc->files[i] != NULL)
+    while (struc->files && struc->files[i].file != NULL)
         i++;
     i--;
-    tmp = ft_strdup(struc->files[i]);
+    tmp = ft_strdup(struc->files[i].file);
     return (tmp);
 }
 

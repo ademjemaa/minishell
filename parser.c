@@ -6,7 +6,7 @@
 /*   By: abarbour <abarbour@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/13 15:52:17 by abarbour          #+#    #+#             */
-/*   Updated: 2020/06/21 23:51:31 by adjemaa          ###   ########.fr       */
+/*   Updated: 2020/06/22 02:35:29 by adjemaa          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -112,9 +112,9 @@ void    print_structure(t_cmd *tmp)
    		 }
 	}
     i = 0;
-	 while (tmp->files[i] != NULL)
+	 while (tmp->files[i].file != NULL)
     {
-        printf("files == %s\n", tmp->files[i]);
+        printf("files == %s\n", tmp->files[i].file);
         i++;
     }
     printf("sep == %d\nred == %d\nbuild == %d\n", tmp->sep, tmp->red, tmp->built);

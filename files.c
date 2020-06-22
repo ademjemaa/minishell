@@ -82,24 +82,25 @@ int     file_counter(char **args)
     return (total + 1);
 }
 
-char    **find_filelst(char **args, char **envp)
+t_filelst	*find_filelst(char **args, char **envp)
 {
     int i;
     int j;
-    char    **files;
+    t_filelst    *files;
 
     i = -1;
     j = 0;
-    files = (char **)malloc(sizeof(char *) * file_counter(args));
-    files[file_counter(args) - 1] = NULL;
+    files = (t_filelst *)malloc(sizeof(t_filelst*) * file_counter(args));
+    files[file_counter(args).file - 1] = NULL;
     while (args[++i] != NULL)
     {
         if (args[i][0] == '<' || args[i][0] == '>')
         {
+			files.red = find_filered(args[i]);
             if (args[i][1] == '>')
-                files[j] = retrieve(&args[i][2], envp);
+                files.file[j] = retrieve(&args[i][2], envp);
             else
-                files[j] = retrieve(&args[i][1], envp);
+                files.file[j] = retrieve(&args[i][1], envp);
             j++;
         }
     }

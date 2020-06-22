@@ -6,11 +6,36 @@
 /*   By: adjemaa <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/07 21:30:15 by adjemaa           #+#    #+#             */
-/*   Updated: 2020/06/10 12:07:15 by adjemaa          ###   ########.fr       */
+/*   Updated: 2020/06/22 02:10:47 by adjemaa          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+
+int		check_red(char *str, int sign)
+{
+	if (str[0] && ((str[0] >= 'a' && str[0] <= 'z') || (str[0] >= 'A' 
+		&& str[0] <= 'Z') || (str[0] >= '0' && str[0] <= '9') || str[0] == '_'
+		|| str[0] == '$' || str[0] == '\\'))
+	return (sign);
+	else
+		return (0);
+}
+
+int		find_filered(char *str)
+{
+	if (str[0] == '>')
+	{
+		if (str[1] == '>')
+			return (check_red(&str[2], 1));
+		else
+			return (check_red(&str[1], 2));
+	}
+	else if (str[0] == '<')
+		return (check_red(&str[1], 3));
+	else
+		return (-1);
+}
 
 char	*file_prot(char *str, char *tmp, int *j)
 {
