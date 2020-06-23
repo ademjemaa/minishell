@@ -90,8 +90,8 @@ t_filelst	*find_filelst(char **args, char **envp)
 
     i = -1;
     j = 0;
-    files = (t_filelst *)malloc(sizeof(t_filelst*) * file_counter(args));
-    files[file_counter(args).file - 1] = NULL;
+    files = (t_filelst *)malloc(sizeof(t_filelst) * file_counter(args));
+    files[file_counter(args).file - 1].file = NULL;
     while (args[++i] != NULL)
     {
         if (args[i][0] == '<' || args[i][0] == '>')
