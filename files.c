@@ -91,16 +91,16 @@ t_filelst	*find_filelst(char **args, char **envp)
     i = -1;
     j = 0;
     files = (t_filelst *)malloc(sizeof(t_filelst) * file_counter(args));
-    files[file_counter(args).file - 1].file = NULL;
+    files[file_counter(args) - 1].file = NULL;
     while (args[++i] != NULL)
     {
         if (args[i][0] == '<' || args[i][0] == '>')
         {
-			files.red = find_filered(args[i]);
+			files[j].red = find_filered(args[i]);
             if (args[i][1] == '>')
-                files.file[j] = retrieve(&args[i][2], envp);
+                files[j].file = retrieve(&args[i][2], envp);
             else
-                files.file[j] = retrieve(&args[i][1], envp);
+                files[j].file = retrieve(&args[i][1], envp);
             j++;
         }
     }
