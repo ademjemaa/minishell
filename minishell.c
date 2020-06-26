@@ -6,7 +6,7 @@
 /*   By: abarbour <abarbour@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/13 15:47:50 by abarbour          #+#    #+#             */
-/*   Updated: 2020/06/13 16:20:53 by abarbour         ###   ########.fr       */
+/*   Updated: 2020/06/27 00:14:17 by abarbour         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,8 @@ int	main(int argc, char **argv, char **envp)
 			}
 			tab = parser(line, envp);
 			printf("parsing done\n");
-			exec(tab, envp);
+			//exec(tab, envp);
+			free_cmds(tab);
 	    	write(1,"kembyalet$",11);
 			free(line);
 		}

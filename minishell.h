@@ -81,5 +81,6 @@ void    print_structure(t_cmd *tmp);
 int		narg_len_dq(char	*arg);
 int		narg_len_sq(char	*arg);
 int		cr_files(t_cmd *cmd);
+void	free_cmds(t_cmd **tab);
 
 #endif

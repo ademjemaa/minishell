@@ -6,13 +6,13 @@
 #    By: adjemaa <marvin@42.fr>                     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/11/06 21:13:47 by adjemaa           #+#    #+#              #
-#    Updated: 2020/06/18 20:58:30 by abarbour         ###   ########.fr        #
+#    Updated: 2020/06/27 00:12:55 by abarbour         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 CC = gcc
 
-FLAGS = -Wall -Wextra -Werror
+FLAGS = -Wall -Wextra -Werror 
 
 NAME = minishell
 
@@ -29,6 +29,7 @@ SRCS =	minishell.c\
 		tools.c\
 		files.c\
 		ft_tools.c\
+		free_cmds.c\
 		quotes.c\
 		get_next_line/get_next_line.c \
 		get_next_line/get_next_line_utils.c 
