@@ -89,7 +89,7 @@ char	*build_arg(char *str, int *j)
 	char c;
 
 	i = 0;
-	tmp = (char *)malloc(sizeof(char *) * malloc_size(str));
+	tmp = (char *)malloc(sizeof(char) * (malloc_size(str) + 2));
 	c = str[i];
 	if (str[0] == '>' || str[0] == '<')
 		return (file_prot(str, tmp, j));
@@ -141,7 +141,7 @@ char	**first_split(char *line)
 	i = 0;
 	j = 0;
 	total = total_argus(line);
-	args = (char **)malloc(sizeof(char *) * total);
+	args = (char **)malloc(sizeof(char *) * (total));
 	args[total] = NULL;
 	while (i < total - 1)
 	{

@@ -6,7 +6,7 @@
 /*   By: abarbour <abarbour@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/26 20:05:41 by abarbour          #+#    #+#             */
-/*   Updated: 2020/06/26 20:24:10 by abarbour         ###   ########.fr       */
+/*   Updated: 2020/07/04 22:12:09 by abarbour         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,6 +49,7 @@ void	free_cmds(t_cmd **tab)
 		free(tab[i]->args);
 		free_files(tab[i]->files);
 		free(tab[i]->files);
+		free(tab[i]);
 		i++;
 	}
 	free(tab);
