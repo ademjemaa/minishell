@@ -6,7 +6,7 @@
 /*   By: abarbour <abarbour@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/16 21:20:12 by abarbour          #+#    #+#             */
-/*   Updated: 2020/06/21 21:52:14 by abarbour         ###   ########.fr       */
+/*   Updated: 2020/07/13 00:26:18 by abarbour         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,9 @@ void    exec_prog(int in, int out, t_cmd *cmd, char **envp)
             dup2(out, 1);
             close(out);
         }
-        execve(cmd->path, cmd->args, envp);
+		if (execve(cmd->path, cmd->args, envp) == -1)
+			ft_putstr_error(strerror(errno));
+		exit(0);
     }
 }
 
@@ -79,10 +81,7 @@ void    exec(t_cmd **tab, char **envp)
     i = 0;
     while (tab[i])
     {
-        if (!(tab[i]->path))//lehna lazem gestion d'erreur
-            i++;
 		concat_args(tab[i]);
-		//print_structure(tab[i]);
         output = exec_pipe(tab, &i, envp);
         while (read(output,&c,1) > 0)
             write(1,&c,1);

@@ -6,7 +6,7 @@
 /*   By: abarbour <abarbour@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/13 15:52:17 by abarbour          #+#    #+#             */
-/*   Updated: 2020/07/08 20:42:51 by abarbour         ###   ########.fr       */
+/*   Updated: 2020/07/13 00:20:46 by abarbour         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,7 +88,7 @@ char    *path_parser(char *line, char **envp, t_cmd *tmp)
 	if (str[i] != NULL)
 		ret = ft_strdup(str[i]);
 	else
-		ret = NULL;
+		ret = cmd_name(line);
 	free_all(str);
     return (ret);
 }

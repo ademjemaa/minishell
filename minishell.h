@@ -6,7 +6,7 @@
 /*   By: abarbour <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/18 16:33:31 by abarbour          #+#    #+#             */
-/*   Updated: 2020/06/22 02:10:28 by adjemaa          ###   ########.fr       */
+/*   Updated: 2020/07/12 20:27:39 by abarbour         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,8 @@
 # include <fcntl.h>
 # include "get_next_line/get_next_line.h"
 # include "libft/libft.h"
+# include <sys/errno.h>
+# include <string.h>
 
 typedef struct	s_filelst
 {
@@ -82,5 +84,6 @@ int		narg_len_dq(char	*arg);
 int		narg_len_sq(char	*arg);
 int		cr_files(t_cmd *cmd);
 void	free_cmds(t_cmd **tab);
+void	ft_putstr_error(char *str);
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: abarbour <abarbour@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/18 19:59:38 by abarbour          #+#    #+#             */
-/*   Updated: 2020/06/24 19:38:30 by abarbour         ###   ########.fr       */
+/*   Updated: 2020/07/12 22:03:32 by abarbour         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,4 +84,17 @@ int		cr_files(t_cmd *cmd)
 		i++;
 	}
 	return (fd);
+}
+
+void	ft_putstr_error(char *str)
+{
+	int	i;
+
+	i = 0;
+	while (str[i])
+	{
+		write(2, str + i, 1);
+		i++;
+	}
+	write(2, "\n", 1);
 }
