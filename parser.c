@@ -6,7 +6,7 @@
 /*   By: abarbour <abarbour@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/13 15:52:17 by abarbour          #+#    #+#             */
-/*   Updated: 2020/07/13 22:20:45 by adjemaa          ###   ########.fr       */
+/*   Updated: 2020/07/13 23:09:11 by abarbour         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,8 +66,6 @@ char    *path_parser(char *line, char **envp, t_cmd *tmp)
         return (ret);
 	if (stat(ret, &sb) == 0)
 		return (ret);
-	else
-		ft_putstr_error(strerror(errno));
 	free(ret);
     while (ft_strncmp(envp[i], "PATH=", 5))
         i++;
