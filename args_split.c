@@ -6,7 +6,7 @@
 /*   By: adjemaa <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/27 18:01:22 by adjemaa           #+#    #+#             */
-/*   Updated: 2020/06/21 22:58:39 by adjemaa          ###   ########.fr       */
+/*   Updated: 2020/07/13 22:21:40 by adjemaa          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -147,7 +147,7 @@ char	**first_split(char *line)
 	{
 		while (line[j] == ' ')
 			j++;
-		str = build_arg(&line[j], &j);
+		str = build_arg(&(line[j]), &j);
 		args[i] = str;
 		i++;
 	}

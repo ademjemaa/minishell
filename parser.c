@@ -6,7 +6,7 @@
 /*   By: abarbour <abarbour@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/13 15:52:17 by abarbour          #+#    #+#             */
-/*   Updated: 2020/07/13 00:20:46 by abarbour         ###   ########.fr       */
+/*   Updated: 2020/07/13 22:20:45 by adjemaa          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,6 +66,8 @@ char    *path_parser(char *line, char **envp, t_cmd *tmp)
         return (ret);
 	if (stat(ret, &sb) == 0)
 		return (ret);
+	else
+		ft_putstr_error(strerror(errno));
 	free(ret);
     while (ft_strncmp(envp[i], "PATH=", 5))
         i++;
@@ -124,7 +126,6 @@ t_cmd   *params(char *line, char **envp)
 {
     t_cmd *tmp;
 
-	printf("sizeof = %lu\n", sizeof(t_cmd));
     tmp = (t_cmd*)malloc(sizeof(t_cmd));
     args_parser(line, envp, tmp);
     tmp->sep =  sep_parser(line, tmp);
