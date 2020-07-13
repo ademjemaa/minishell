@@ -6,7 +6,7 @@
 /*   By: abarbour <abarbour@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/13 15:47:50 by abarbour          #+#    #+#             */
-/*   Updated: 2020/07/04 22:12:47 by abarbour         ###   ########.fr       */
+/*   Updated: 2020/07/14 00:14:10 by abarbour         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,7 @@ int	main(int argc, char **argv, char **envp)
 
 	line = NULL;
 	(void)argc;
+	exit_code = 0;
 	write(1,"kembyalet$",11);
 	write(1, argv[1], 3);
 	while(1)
@@ -38,6 +39,7 @@ int	main(int argc, char **argv, char **envp)
 			printf("parsing done\n");
 			exec(tab, envp);
 			free_cmds(tab);
+			printf("exit code = %d\n", exit_code);
 	    	write(1,"kembyalet$",11);
 			free(line);
 		}

@@ -6,7 +6,7 @@
 /*   By: abarbour <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/18 16:33:31 by abarbour          #+#    #+#             */
-/*   Updated: 2020/07/12 20:27:39 by abarbour         ###   ########.fr       */
+/*   Updated: 2020/07/14 00:02:29 by abarbour         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,6 +50,7 @@ typedef struct	s_cmd
 	int 		built;
 }				t_cmd;
 
+int		exit_code;
 char	*copy_clean(char *tmp, char *str);
 int		envp_len(char *str, char *tmp);
 int		find_filered(char *str);

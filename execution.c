@@ -6,7 +6,7 @@
 /*   By: abarbour <abarbour@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/16 21:20:12 by abarbour          #+#    #+#             */
-/*   Updated: 2020/07/13 00:26:18 by abarbour         ###   ########.fr       */
+/*   Updated: 2020/07/14 00:14:12 by abarbour         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ int count_pipes(t_cmd **tab)
     return (i);
 }
 
-void    exec_prog(int in, int out, t_cmd *cmd, char **envp)
+int    exec_prog(int in, int out, t_cmd *cmd, char **envp)
 {
     int pid;
 
@@ -40,14 +40,17 @@ void    exec_prog(int in, int out, t_cmd *cmd, char **envp)
         }
 		if (execve(cmd->path, cmd->args, envp) == -1)
 			ft_putstr_error(strerror(errno));
-		exit(0);
+		exit(EXIT_FAILURE);
     }
+	return (pid);
 }
 
 int    exec_pipe(t_cmd **tab, int *i, char **envp)
 {
     int input_fd;
     int pip[2];
+	int	old_pid;
+	int	status;
 
     input_fd = 0;
     while (tab[*i] && tab[*i]->sep == 4)
@@ -63,9 +66,10 @@ int    exec_pipe(t_cmd **tab, int *i, char **envp)
     }
     pipe(pip);
 	if (tab[*i]->red == 3)
-       	exec_prog(input_fd, cr_files(tab[*i]), tab[*i], envp);
+       	old_pid = exec_prog(input_fd, cr_files(tab[*i]), tab[*i], envp);
 	else
-    	exec_prog(input_fd, pip[1], tab[*i], envp);
+    	old_pid = exec_prog(input_fd, pip[1], tab[*i], envp);
+	waitpid(old_pid, &exit_code, 0);
     close(pip[1]);
     (*i)++;
     return (pip[0]);
