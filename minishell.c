@@ -6,7 +6,7 @@
 /*   By: abarbour <abarbour@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/13 15:47:50 by abarbour          #+#    #+#             */
-/*   Updated: 2020/07/14 00:14:10 by abarbour         ###   ########.fr       */
+/*   Updated: 2020/07/15 22:56:38 by abarbour         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,7 @@ int	main(int argc, char **argv, char **envp)
 		//get_next_line fih segfault, jarab ikteb b "ls || cat" fil ./a.out
 		//adem : testi cat libft/*, i9olik error ema normalment ti5dem, mahouch 9a3ed ichouf fil *, normal ?
 		ret = get_next_line(0, &line);
+		printf("gnl_lineeeeeeeee = %s, reeeet = %d\n", line, ret);
 		if(line && ret > 0)
 		{
 			if(!ft_strncmp(line, "exit", 5))

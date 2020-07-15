@@ -6,7 +6,7 @@
 /*   By: abarbour <abarbour@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/16 21:20:12 by abarbour          #+#    #+#             */
-/*   Updated: 2020/07/14 00:14:12 by abarbour         ###   ########.fr       */
+/*   Updated: 2020/07/15 20:20:51 by abarbour         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,7 +69,8 @@ int    exec_pipe(t_cmd **tab, int *i, char **envp)
        	old_pid = exec_prog(input_fd, cr_files(tab[*i]), tab[*i], envp);
 	else
     	old_pid = exec_prog(input_fd, pip[1], tab[*i], envp);
-	waitpid(old_pid, &exit_code, 0);
+	waitpid(old_pid, &status, 0);
+	exit_code = WEXITSTATUS(status);
     close(pip[1]);
     (*i)++;
     return (pip[0]);
