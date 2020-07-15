@@ -6,7 +6,7 @@
 /*   By: abarbour <abarbour@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/16 21:20:08 by abarbour          #+#    #+#             */
-/*   Updated: 2020/06/21 23:46:06 by abarbour         ###   ########.fr       */
+/*   Updated: 2020/07/15 23:42:45 by abarbour         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ char	*remove_dq(char	*arg)
 	int		j;
 	int		i;
 
-	if (!(str = malloc(narg_len_dq(arg))))
+	if ((narg_len_dq(arg) < 0) || (!(str = malloc(narg_len_dq(arg)))))
 		return (NULL);
 	j = 0;
 	i = 1;
@@ -40,7 +40,7 @@ char	*remove_sq(char	*arg)
 	int		j;
 	int		i;
 
-	if (!(str = malloc(narg_len_sq(arg))))
+	if ((narg_len_sq(arg) <= 0) || (!(str = malloc(narg_len_sq(arg)))))
 		return (NULL);
 	j = 0;
 	i = 1;

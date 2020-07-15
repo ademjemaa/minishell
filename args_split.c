@@ -6,7 +6,7 @@
 /*   By: adjemaa <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/27 18:01:22 by adjemaa           #+#    #+#             */
-/*   Updated: 2020/07/15 23:07:33 by abarbour         ###   ########.fr       */
+/*   Updated: 2020/07/15 23:22:35 by abarbour         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -150,7 +150,6 @@ char	**first_split(char *line)
 		printf("2lineeeeeee = %s, j = %d!!\n", line, j);
 		while (line[j] == ' ')
 			j++;
-		printf("3lineeeeeee = %s, j = %d!!\n", line, j);
 		str = build_arg((line + j), &j);
 		args[i] = str;
 		i++;
