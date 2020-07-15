@@ -6,7 +6,7 @@
 /*   By: adjemaa <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/27 18:01:22 by adjemaa           #+#    #+#             */
-/*   Updated: 2020/07/15 23:22:35 by abarbour         ###   ########.fr       */
+/*   Updated: 2020/07/15 23:59:07 by adjemaa          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,7 +89,6 @@ char	*build_arg(char *str, int *j)
 	char c;
 
 	i = 0;
-	printf("4lineeeeeee = %s, j = %d!!\n", str, *j);
 	tmp = (char *)malloc(sizeof(char) * (malloc_size(str) + 2));
 	c = str[i];
 	if (str[0] == '>' || str[0] == '<')
@@ -141,13 +140,11 @@ char	**first_split(char *line)
 
 	i = 0;
 	j = 0;
-	printf("1lineeeeeee = %s, j = %d!!\n", line, j);
 	total = total_argus(line);
 	args = (char **)malloc(sizeof(char *) * (total));
 	args[total] = NULL;
 	while (i < total - 1)
 	{
-		printf("2lineeeeeee = %s, j = %d!!\n", line, j);
 		while (line[j] == ' ')
 			j++;
 		str = build_arg((line + j), &j);

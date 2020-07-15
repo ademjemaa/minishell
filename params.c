@@ -34,7 +34,6 @@ void    args_parser(char *str, char **envp, t_cmd *stru)
     stru->args = find_path(args, stru, envp);
 	printf("path || args done\n");
 	free(tmp);
-	printf("tmp freed\n");
    	find_env(stru->args, envp);
 	printf("env done\n");
 }
