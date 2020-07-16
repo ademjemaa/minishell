@@ -6,7 +6,7 @@
 /*   By: abarbour <abarbour@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/16 21:20:12 by abarbour          #+#    #+#             */
-/*   Updated: 2020/07/15 20:20:51 by abarbour         ###   ########.fr       */
+/*   Updated: 2020/07/16 22:38:46 by abarbour         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,10 @@ int    exec_prog(int in, int out, t_cmd *cmd, char **envp)
         }
 		if (execve(cmd->path, cmd->args, envp) == -1)
 			ft_putstr_error(strerror(errno));
+		if (errno == 2)
+			exit(127);
+		if (errno == 13)
+			exit(126);
 		exit(EXIT_FAILURE);
     }
 	return (pid);
@@ -70,7 +74,10 @@ int    exec_pipe(t_cmd **tab, int *i, char **envp)
 	else
     	old_pid = exec_prog(input_fd, pip[1], tab[*i], envp);
 	waitpid(old_pid, &status, 0);
-	exit_code = WEXITSTATUS(status);
+	if (WIFSIGNALED(status))
+		exit_code = 128 + WTERMSIG(status);
+	else
+		exit_code = WEXITSTATUS(status);
     close(pip[1]);
     (*i)++;
     return (pip[0]);
