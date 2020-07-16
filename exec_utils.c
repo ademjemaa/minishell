@@ -6,7 +6,7 @@
 /*   By: abarbour <abarbour@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/18 19:59:38 by abarbour          #+#    #+#             */
-/*   Updated: 2020/07/15 23:29:15 by abarbour         ###   ########.fr       */
+/*   Updated: 2020/07/16 21:40:39 by abarbour         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,25 @@ int		narg_len_dq(char *arg)
 	}
 	if (arg[i - 1] != '"')
 		return (0);//lazem gestion d'erreur
+	return (j);
+}
+
+int		narg_len_nq(char *arg)
+{
+	int		i;
+	int		j;
+
+	i = 0;
+	j = ft_strlen(arg);
+	while (arg[i])
+	{
+		if (arg[i] == '\\')
+		{
+			j--;
+			i++;
+		}
+		i++;
+	}
 	return (j);
 }
 
