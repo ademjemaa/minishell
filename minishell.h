@@ -6,7 +6,7 @@
 /*   By: abarbour <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/18 16:33:31 by abarbour          #+#    #+#             */
-/*   Updated: 2020/07/17 02:20:26 by adjemaa          ###   ########.fr       */
+/*   Updated: 2020/07/18 00:28:45 by abarbour         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,4 +89,6 @@ void	ft_putstr_error(char *str);
 int		narg_len_nq(char *arg);
 char	*swap_case(char *args, char **envp, int j);
 char	*change_str(char *envp, char *str);
+void	catch_signals();
+
 #endif

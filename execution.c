@@ -6,7 +6,7 @@
 /*   By: abarbour <abarbour@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/16 21:20:12 by abarbour          #+#    #+#             */
-/*   Updated: 2020/07/16 22:38:46 by abarbour         ###   ########.fr       */
+/*   Updated: 2020/07/18 00:31:34 by abarbour         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,6 +96,7 @@ void    exec(t_cmd **tab, char **envp)
 		concat_args(tab[i]);
         output = exec_pipe(tab, &i, envp);
         while (read(output,&c,1) > 0)
-            write(1,&c,1);
+			if (c != 3)
+            	write(1,&c,1);
     }
 }

@@ -6,7 +6,7 @@
 #    By: adjemaa <marvin@42.fr>                     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/11/06 21:13:47 by adjemaa           #+#    #+#              #
-#    Updated: 2020/07/17 02:11:34 by adjemaa          ###   ########.fr        #
+#    Updated: 2020/07/18 00:19:13 by abarbour         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -33,7 +33,8 @@ SRCS =	minishell.c\
 		quotes.c\
 		get_next_line/get_next_line.c \
 		get_next_line/get_next_line_utils.c\
-		env_changer.c
+		env_changer.c\
+		signal_handler.c
 
 SRC =		libft/ft_memset.c\
 		libft/ft_memcpy.c\

@@ -6,7 +6,7 @@
 /*   By: abarbour <abarbour@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/13 15:47:50 by abarbour          #+#    #+#             */
-/*   Updated: 2020/07/15 23:59:38 by adjemaa          ###   ########.fr       */
+/*   Updated: 2020/07/18 00:33:18 by abarbour         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,7 @@ int	main(int argc, char **argv, char **envp)
 	exit_code = 0;
 	write(1,"kembyalet$",11);
 	write(1, argv[1], 3);
+	catch_signals(0);
 	while(1)
 	{
 		//get_next_line fih segfault, jarab ikteb b "ls || cat" fil ./a.out
@@ -36,10 +37,9 @@ int	main(int argc, char **argv, char **envp)
 				exit(0);
 			}
 			tab = parser(line, envp);
-			printf("parsing done\n");
+			printf("parsing done %s\n",line);
 			exec(tab, envp);
 			free_cmds(tab);
-			printf("exit code = %d\n", exit_code);
 	    	write(1,"kembyalet$",11);
 			free(line);
 		}
