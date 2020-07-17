@@ -6,13 +6,13 @@
 #    By: adjemaa <marvin@42.fr>                     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/11/06 21:13:47 by adjemaa           #+#    #+#              #
-#    Updated: 2020/07/15 23:47:10 by abarbour         ###   ########.fr        #
+#    Updated: 2020/07/17 02:11:34 by adjemaa          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 CC = gcc
 
-FLAGS = -Wall -Wextra -Werror -fsanitize=address
+FLAGS = -Wall -Wextra -Werror
 
 NAME = minishell
 
@@ -32,7 +32,8 @@ SRCS =	minishell.c\
 		free_cmds.c\
 		quotes.c\
 		get_next_line/get_next_line.c \
-		get_next_line/get_next_line_utils.c 
+		get_next_line/get_next_line_utils.c\
+		env_changer.c
 
 SRC =		libft/ft_memset.c\
 		libft/ft_memcpy.c\

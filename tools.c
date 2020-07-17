@@ -6,7 +6,7 @@
 /*   By: adjemaa <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/27 18:00:48 by adjemaa           #+#    #+#             */
-/*   Updated: 2020/06/21 23:50:16 by adjemaa          ###   ########.fr       */
+/*   Updated: 2020/07/17 03:59:23 by adjemaa          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,7 +82,6 @@ char    *rearrange(char *str)
 			else
 				in = 0;
 		}
-		//seg fault in if block
         if (((str[j + 1] == '>' && str[j] != '>') || (str[j + 1] == '<')) && str[j] != ' ' && !in)
         {
             tmp[i] = str[j];
@@ -149,40 +148,29 @@ void    find_env(char **args, char **envp)
 {
     int i;
     int j;
-    int c;
-	char *tmp;
 
-    i = 0;
+    i = -1;
 	if (args == NULL)
 		return ;
-    while (args[i] != NULL)
+    while (args[++i] != NULL)
     {
-        j = 0;
-        c = 0;
+		j = 0;
 		if (args[i][0] != '\'')
 		{
-        	while (args[i][j])
+			while (args[i][j])
 			{
 				if (args[i][j] == '\\')
 					j = j + 2;
-        		if (args[i][j] == '$')
-        		{
-        		    j++;
-					tmp = exact_env(&args[i][j]);
-					while (envp[c] != NULL && ft_strncmp(envp[c], tmp, envp_len(envp[c], tmp)))
-						c++;
-					free(tmp);
-                	tmp = change_str(envp[c], args[i]);
-					//delete str w 7ot tmp fi blassitha
-                	args[i] = tmp;
+				if (args[i][j] == '$')
+				{
+					args[i] = swap_case(args[i], envp, j + 1);
 					j = 0;
 				}
 				else
 					j++;
 			}
-        }
-		i++;
-    }
+		}
+	}
 }
 
 int red_type(char *str)
