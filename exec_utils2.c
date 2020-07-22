@@ -1,23 +1,41 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   signal_handler.c                                   :+:      :+:    :+:   */
+/*   exec_utils2.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: abarbour <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/07/17 21:14:06 by abarbour          #+#    #+#             */
-/*   Updated: 2020/07/18 22:59:58 by abarbour         ###   ########.fr       */
+/*   Created: 2020/07/22 23:20:05 by abarbour          #+#    #+#             */
+/*   Updated: 2020/07/23 00:00:24 by abarbour         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void	int_handler(int signum)
+int		rd_files(t_cmd *cmd, int in)
 {
-	exit_code = 1;
-}
+	int		i;
+	int		fd;
 
-void	catch_signals()
-{
-	signal(SIGINT, &int_handler);
+	i = -1;
+	fd = -2;
+	while (cmd->files[++i].file)
+	{
+		if (cmd->files[i].red == 1)
+			fd = open(cmd->files[i].file, O_RDONLY);
+		else
+		{
+			while (cmd->files[i].file && cmd->files[i].red != 1)
+				i++;
+			i--;
+		}
+		if (fd == -1)
+		{
+			ft_putstr_error(strerror(errno));
+			return (-1);
+		}
+		if (cmd->files[i + 1].file)
+			close(fd);
+	}
+	return (fd == -2 ? in : fd);
 }

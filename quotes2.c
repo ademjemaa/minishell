@@ -6,7 +6,7 @@
 /*   By: adjemaa <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/07 21:30:15 by adjemaa           #+#    #+#             */
-/*   Updated: 2020/06/22 02:10:47 by adjemaa          ###   ########.fr       */
+/*   Updated: 2020/07/23 00:19:32 by abarbour         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,12 +27,12 @@ int		find_filered(char *str)
 	if (str[0] == '>')
 	{
 		if (str[1] == '>')
-			return (check_red(&str[2], 1));
+			return (check_red(&str[2], 2));
 		else
-			return (check_red(&str[1], 2));
+			return (check_red(&str[1], 3));
 	}
 	else if (str[0] == '<')
-		return (check_red(&str[1], 3));
+		return (check_red(&str[1], 1));
 	else
 		return (-1);
 }

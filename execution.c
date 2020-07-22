@@ -6,7 +6,7 @@
 /*   By: abarbour <abarbour@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/16 21:20:12 by abarbour          #+#    #+#             */
-/*   Updated: 2020/07/18 00:31:34 by abarbour         ###   ########.fr       */
+/*   Updated: 2020/07/23 00:22:10 by abarbour         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,8 @@ int    exec_prog(int in, int out, t_cmd *cmd, char **envp)
 
     if ((pid = fork ()) == 0)
     {
+		if (out == -1 || in == -1)
+			exit(1);
         if (in != 0)
         {
             dup2(in, 0);
@@ -49,7 +51,18 @@ int    exec_prog(int in, int out, t_cmd *cmd, char **envp)
 	return (pid);
 }
 
-int    exec_pipe(t_cmd **tab, int *i, char **envp)
+int		perform_redirects(t_cmd *tab, int input_fd, int *pip, char **envp)
+{
+	int		old_pid;
+
+	if (tab->red == 3 || tab->red == 2 || tab->red == 1)
+       	old_pid = exec_prog(rd_files(tab, input_fd), cr_files(tab, pip[1]), tab, envp);
+	else
+       	old_pid = exec_prog(input_fd, pip[1], tab, envp);
+	return (old_pid);
+}
+
+int		exec_pipe(t_cmd **tab, int *i, char **envp)
 {
     int input_fd;
     int pip[2];
@@ -60,19 +73,13 @@ int    exec_pipe(t_cmd **tab, int *i, char **envp)
     while (tab[*i] && tab[*i]->sep == 4)
     {
         pipe(pip);
-		if (tab[*i]->red == 3)
-        	exec_prog(input_fd, cr_files(tab[*i]), tab[*i], envp);
-		else
-        	exec_prog(input_fd, pip[1], tab[*i], envp);
+		perform_redirects(tab[*i], input_fd, pip, envp);
         close(pip[1]);
         input_fd = pip[0];
         (*i)++;
     }
     pipe(pip);
-	if (tab[*i]->red == 3)
-       	old_pid = exec_prog(input_fd, cr_files(tab[*i]), tab[*i], envp);
-	else
-    	old_pid = exec_prog(input_fd, pip[1], tab[*i], envp);
+	old_pid = perform_redirects(tab[*i], input_fd, pip, envp);
 	waitpid(old_pid, &status, 0);
 	if (WIFSIGNALED(status))
 		exit_code = 128 + WTERMSIG(status);
@@ -96,7 +103,6 @@ void    exec(t_cmd **tab, char **envp)
 		concat_args(tab[i]);
         output = exec_pipe(tab, &i, envp);
         while (read(output,&c,1) > 0)
-			if (c != 3)
             	write(1,&c,1);
     }
 }

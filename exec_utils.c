@@ -6,7 +6,7 @@
 /*   By: abarbour <abarbour@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/18 19:59:38 by abarbour          #+#    #+#             */
-/*   Updated: 2020/07/16 21:40:39 by abarbour         ###   ########.fr       */
+/*   Updated: 2020/07/23 00:15:04 by abarbour         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,20 +89,34 @@ int		nargs_count(char **args)
 	return (j);
 }
 
-int		cr_files(t_cmd *cmd)
+int		cr_files(t_cmd *cmd, int out)
 {
 	int		i;
 	int		fd;
 
-	i = 0;
-	while (cmd->files[i].file)
+	i = -1;
+	fd = -2;
+	while (cmd->files[++i].file)
 	{
-		fd = open(cmd->files[i].file, O_WRONLY | O_CREAT | O_TRUNC, S_IRUSR | S_IWUSR | S_IRGRP | S_IROTH);
+		printf("!!!!!!%d\n", cmd->files[i].red);
+		if (cmd->files[i].red == 3 || cmd->files[i].red == 2)
+			fd = open(cmd->files[i].file, (cmd->files[i].red == 2 ? 513 : 1537),
+			S_IRUSR | S_IWUSR | S_IRGRP | S_IROTH);
+		else
+		{
+			while (cmd->files[i].file && cmd->files[i].red == 1)
+				i++;
+			i--;
+		}
+		if (fd == -1)
+		{
+			ft_putstr_error(strerror(errno));
+			return (-1);
+		}
 		if (cmd->files[i + 1].file)
 			close(fd);
-		i++;
 	}
-	return (fd);
+	return (fd == -2 ? out : fd);
 }
 
 void	ft_putstr_error(char *str)
