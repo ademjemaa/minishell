@@ -6,13 +6,13 @@
 /*   By: adjemaa <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/27 18:01:22 by adjemaa           #+#    #+#             */
-/*   Updated: 2020/07/15 23:59:07 by adjemaa          ###   ########.fr       */
+/*   Updated: 2020/07/23 22:39:01 by adjemaa          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-int	total_argus(char *line)
+int		total_argus(char *line)
 {
 	int i;
 	int total;
@@ -23,7 +23,7 @@ int	total_argus(char *line)
 	{
 		while (line[i] == ' ')
 			i++;
-		if (line[i])//lehna kan ma famma chay ba3d el argument wela el commande ma lazemch ya3mel allocation zayda
+		if (line[i])
 			total++;
 		if (line[i] == '>' || line[i] == '<')
 			i = line_return(&line[i]) + i;
@@ -31,7 +31,8 @@ int	total_argus(char *line)
 			quotes_cal(line, &i);
 		else
 		{
-			while (line[i] != ' ' && line[i] != '\''  && line[i] != '\"' && line[i] && line[i] != '>' && line[i] != '<')
+			while (line[i] != ' ' && line[i] != '\'' && line[i] != '\"' &&
+					line[i] && line[i] != '>' && line[i] != '<')
 				if (line[i++] == '\\')
 					i++;
 		}
@@ -41,8 +42,8 @@ int	total_argus(char *line)
 
 int		malloc_size(char *str)
 {
-	int i;
-	char c;
+	int		i;
+	char	c;
 
 	i = 0;
 	c = str[i];
@@ -59,8 +60,8 @@ int		malloc_size(char *str)
 		}
 		else if (str[i] == ' ')
 		{
-				i++;
-				return (i + 1);
+			i++;
+			return (i + 1);
 		}
 		else
 			i++;
@@ -70,48 +71,17 @@ int		malloc_size(char *str)
 
 char	*build_arg(char *str, int *j)
 {
-	int i;
-	char *tmp;
-	char c;
+	int		i;
+	char	*tmp;
 
 	i = 0;
 	tmp = (char *)malloc(sizeof(char) * (malloc_size(str) + 2));
-	c = str[i];
-	printf("args 0 == %s\n", str);
 	if (str[0] == '>' || str[0] == '<')
 		return (file_prot(str, tmp, j));
 	while (str[i])
 	{
-		while (str[i] == '\\' && c != '\'')
-		{
-			tmp[i] = str[i];
-			i++;
-			tmp[i] = str[i];
-			i++;
-		}
-		if (str[i] == '>' || str[i] == '<')
-			break;
-		if (c == '\'' || c == '\"')
-		{
-			if (c == str[i] && i != 0)
-			{
-				tmp[i] = str[i];
-				i++;
-				if (str[i] == ' ')
-					tmp[i++] = ' ';
-				break;
-			}
-			else
-				tmp[i] = str[i];
-		}
-		else if (str[i] == ' ' || str[i] == '\'' || str[i] == '\"')
-		{
-			if (str[i] == ' ')
-				tmp[i++] = ' ';
-			break;
-		}
-		else
-			tmp[i] = str[i];
+		if (arg_handler(str, tmp, &i) == 1)
+			break ;
 		i++;
 	}
 	tmp[i] = 0;
@@ -121,11 +91,11 @@ char	*build_arg(char *str, int *j)
 
 char	**first_split(char *line)
 {
-	int i;
-	int j;
-	char *str;
-	char **args;
-	int total;
+	int		i;
+	int		j;
+	char	*str;
+	char	**args;
+	int		total;
 
 	i = 0;
 	j = 0;
@@ -141,11 +111,5 @@ char	**first_split(char *line)
 		i++;
 	}
 	args[i] = NULL;
-	i = 0;
-	while (args[i] !=  NULL)
-	{
-		printf("args == %s\n", args[i]);
-		i++;
-	}
 	return (args);
 }

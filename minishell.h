@@ -51,6 +51,8 @@ typedef struct	s_cmd
 }				t_cmd;
 
 int		exit_code;
+int		backslash(char *str, char *tmp, int *i, int cond);
+int		arg_handler(char *str, char *tmp, int *i);
 void	quotes_cal(char *line, int *i);
 char	*copy_clean(char *tmp, char *str);
 int		envp_len(char *str, char *tmp);

@@ -26,7 +26,9 @@ int		final_size(char *str, char *envp)
 	while (envp != NULL && envp[++j])
 		total++;
 	i++;
-	while (str[i] && ((str[i] >= 'a' && str[i] <= 'z') || (str[i] >= 'A' && str[i] <= 'Z') || (str[i] >= '0' && str[i] <= '9') || str[i] == '_'))
+	while (str[i] && ((str[i] >= 'a' && str[i] <= 'z') || (str[i] >= 'A' &&
+			str[i] <= 'Z') || (str[i] >= '0' && str[i] <= '9') ||
+			str[i] == '_'))
 		i++;
 	while (str[i])
 	{
@@ -41,14 +43,15 @@ int		env_len(char *str)
 	int i;
 
 	i = 1;
-	while (str[i] && ((str[i] >= 'a' && str[i] <= 'z') || (str[i] >= 'A' && str[i] <= 'Z') || (str[i] >= '0' && str[i] <= '9') || str[i] == '_'))
+	while (str[i] && ((str[i] >= 'a' && str[i] <= 'z') || (str[i] >= 'A' &&
+			str[i] <= 'Z') || (str[i] >= '0' && str[i] <= '9') ||
+			str[i] == '_'))
 		i++;
 	return (i);
 }
 
 int		quote_status(t_check *c, char *str)
 {
-
 	if (str[0] == '\"' && str[1] != '\"' && !(c->one))
 		c->two = !(c->two);
 	else if (str[0] == '\'' && str[1] != '\'' && !(c->two))
@@ -68,12 +71,14 @@ int		quote_status(t_check *c, char *str)
 
 char	*exact_env(char *str)
 {
-	char *tmp;
-	int i;
+	char	*tmp;
+	int		i;
 
 	i = 0;
 	tmp = malloc(sizeof(char *) * env_len(str));
-	while (str[i] && ((str[i] >= 'a' && str[i] <= 'z') || (str[i] >= 'A' && str[i] <= 'Z') || (str[i] >= '0' && str[i] <= '9') || str[i] == '_'))
+	while (str[i] && ((str[i] >= 'a' && str[i] <= 'z') || (str[i] >= 'A' &&
+			str[i] <= 'Z') || (str[i] >= '0' && str[i] <= '9') ||
+			str[i] == '_'))
 	{
 		tmp[i] = str[i];
 		i++;

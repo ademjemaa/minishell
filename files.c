@@ -1,9 +1,21 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   files.c                                            :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: adjemaa <marvin@42.fr>                     +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2020/07/23 23:07:55 by adjemaa           #+#    #+#             */
+/*   Updated: 2020/07/23 23:10:13 by adjemaa          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "minishell.h"
 
-void    free_all(char **args)
+void	free_all(char **args)
 {
     int i;
-    
+
     i = 0;
     while (args[i] != NULL)
     {
@@ -13,11 +25,11 @@ void    free_all(char **args)
     free(args);
 }
 
-char     **total_args(char **args, char *str)
+char	**total_args(char **args, char *str)
 {
-    int i;
-    int total;
-    char    **fill;
+    int		i;
+    int		total;
+    char	**fill;
 
     i = 0;
     total = 1;
@@ -39,11 +51,11 @@ char     **total_args(char **args, char *str)
     return (fill);
 }
 
-char    **find_path(char **args, t_cmd *tmp, char **envp)
+char	**find_path(char **args, t_cmd *tmp, char **envp)
 {
-    int i;
-    int j;
-    char    **fill;
+    int		i;
+    int		j;
+    char	**fill;
 
     i = 0;
     while (args[i] && (args[i][0] == '<' || args[i][0] == '>'))
@@ -65,7 +77,7 @@ char    **find_path(char **args, t_cmd *tmp, char **envp)
     return (fill);
 }
 
-int     file_counter(char **args)
+int		file_counter(char **args)
 {
     int i;
     int total;
@@ -83,12 +95,12 @@ int     file_counter(char **args)
 
 t_filelst	*find_filelst(char **args, char **envp)
 {
-    int i;
-    int j;
-    t_filelst    *files;
+    int			i;
+    int			j;
+    t_filelst	*files;
 
-    i = -1;
-    j = 0;
+	i = -1;
+	j = 0;
     files = (t_filelst *)malloc(sizeof(t_filelst) * file_counter(args));
     files[file_counter(args) - 1].file = NULL;
     while (args[++i] != NULL)

@@ -14,7 +14,7 @@
 
 char	*change_code(char *tmp, char *args, int j)
 {
-	int 	i;
+	int		i;
 	char	*str;
 
 	str = malloc(sizeof(char) * j + ft_strlen(tmp) + 1);
@@ -40,7 +40,7 @@ char	*change_code(char *tmp, char *args, int j)
 char	*swap_case(char *args, char **envp, int j)
 {
 	char	*tmp;
-	int 	c;
+	int		c;
 
 	c = 0;
 	if (args[j] == '?')
@@ -52,7 +52,8 @@ char	*swap_case(char *args, char **envp, int j)
 	else
 	{
 		tmp = exact_env(&args[j]);
-		while (envp[c] != NULL && ft_strncmp(envp[c], tmp, envp_len(envp[c], tmp)))
+		while (envp[c] != NULL && ft_strncmp(envp[c],
+				tmp, envp_len(envp[c], tmp)))
 			c++;
 		free(tmp);
 		tmp = change_str(envp[c], args);

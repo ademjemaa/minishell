@@ -14,10 +14,10 @@
 
 int		check_red(char *str, int sign)
 {
-	if (str[0] && ((str[0] >= 'a' && str[0] <= 'z') || (str[0] >= 'A' 
+	if (str[0] && ((str[0] >= 'a' && str[0] <= 'z') || (str[0] >= 'A'
 		&& str[0] <= 'Z') || (str[0] >= '0' && str[0] <= '9') || str[0] == '_'
 		|| str[0] == '$' || str[0] == '\\'))
-	return (sign);
+		return (sign);
 	else
 		return (0);
 }
@@ -54,7 +54,7 @@ char	*file_prot(char *str, char *tmp, int *j)
 		if (str[i] == '\"' && one == 0 && str[i - 1] != '\\')
 			two = !two;
 		if (str[i] == ' ' && str[i - 1] != '\\' && one == 0 && two == 0)
-			break;
+			break ;
 		i++;
 	}
 	*j = i + *j;
@@ -80,7 +80,7 @@ int		line_return(char *str)
 		else if (str[i] == '\"' && one == 0)
 			two = !two;
 		if (str[i] == ' ' && !two && !one)
-			break;
+			break ;
 		i++;
 	}
 	return (i);

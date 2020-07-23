@@ -6,13 +6,63 @@
 /*   By: adjemaa <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/17 00:11:06 by adjemaa           #+#    #+#             */
-/*   Updated: 2020/06/17 00:11:22 by adjemaa          ###   ########.fr       */
+/*   Updated: 2020/07/23 22:38:54 by adjemaa          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void	quotes_cal(char	*line, int *i)
+int		arg_handler(char *str, char *tmp, int *i)
+{
+	while (str[*i] == '\\' && str[0] != '\'')
+		backslash(str, tmp, i, 0);
+	if (str[*i] == '>' || str[*i] == '<')
+		return (1);
+	if (str[0] == '\'' || str[0] == '\"')
+	{
+		if (backslash(str, tmp, i, 1))
+			return (1);
+	}
+	else if (str[*i] == ' ' || str[*i] == '\'' || str[*i] == '\"')
+	{
+		if (str[*i] == ' ')
+			tmp[(*i)++] = ' ';
+		return (1);
+	}
+	else
+		tmp[*i] = str[*i];
+	return (0);
+}
+
+int		backslash(char *str, char *tmp, int *i, int cond)
+{
+	char	c;
+
+	c = str[0];
+	if (cond == 0)
+	{
+		tmp[*i] = str[*i];
+		*i = *i + 1;
+		tmp[*i] = str[*i];
+		*i = *i + 1;
+	}
+	else if (cond == 1)
+	{
+		if (c == str[*i] && *i != 0)
+		{
+			tmp[*i] = str[*i];
+			*i = *i + 1;
+			if (str[*i] == ' ')
+				tmp[(*i)++] = ' ';
+			return (1);
+		}
+		else
+			tmp[*i] = str[*i];
+	}
+	return (0);
+}
+
+void	quotes_cal(char *line, int *i)
 {
 	char	c;
 
@@ -27,7 +77,7 @@ void	quotes_cal(char	*line, int *i)
 	*i = *i + 1;
 }
 
-int	ft_strcmp(char *s1, char *s2)
+int		ft_strcmp(char *s1, char *s2)
 {
 	unsigned int i;
 
