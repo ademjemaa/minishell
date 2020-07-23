@@ -12,6 +12,21 @@
 
 #include "minishell.h"
 
+void	quotes_cal(char	*line, int *i)
+{
+	char	c;
+
+	c = line[*i];
+	*i = *i + 1;
+	while (line[*i] && line[*i] != c)
+	{
+		if (line[*i] == '\\' && c != '\'')
+			*i = *i + 1;
+		*i = *i + 1;
+	}
+	*i = *i + 1;
+}
+
 int	ft_strcmp(char *s1, char *s2)
 {
 	unsigned int i;

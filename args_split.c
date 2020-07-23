@@ -15,7 +15,6 @@
 int	total_argus(char *line)
 {
 	int i;
-	char c;
 	int total;
 
 	total = 1;
@@ -29,25 +28,12 @@ int	total_argus(char *line)
 		if (line[i] == '>' || line[i] == '<')
 			i = line_return(&line[i]) + i;
 		if (line[i] == '\'' || line[i] == '\"')
-		{
-			c = line[i];
-			i++;
-			while (line[i] && line[i] != c)
-			{
-				if (line[i] == '\\' && c != '\'')
-					i++;
-				i++;
-			}
-			i++;
-		}
+			quotes_cal(line, &i);
 		else
 		{
-			while (line[i] != ' ' && line[i] != '\''  && line[i] != '\"' && line[i])
-			{
-				if (line[i] == '\\')
+			while (line[i] != ' ' && line[i] != '\''  && line[i] != '\"' && line[i] && line[i] != '>' && line[i] != '<')
+				if (line[i++] == '\\')
 					i++;
-				i++;
-			}
 		}
 	}
 	return (total);
@@ -91,6 +77,7 @@ char	*build_arg(char *str, int *j)
 	i = 0;
 	tmp = (char *)malloc(sizeof(char) * (malloc_size(str) + 2));
 	c = str[i];
+	printf("args 0 == %s\n", str);
 	if (str[0] == '>' || str[0] == '<')
 		return (file_prot(str, tmp, j));
 	while (str[i])
@@ -102,6 +89,8 @@ char	*build_arg(char *str, int *j)
 			tmp[i] = str[i];
 			i++;
 		}
+		if (str[i] == '>' || str[i] == '<')
+			break;
 		if (c == '\'' || c == '\"')
 		{
 			if (c == str[i] && i != 0)
@@ -152,5 +141,11 @@ char	**first_split(char *line)
 		i++;
 	}
 	args[i] = NULL;
+	i = 0;
+	while (args[i] !=  NULL)
+	{
+		printf("args == %s\n", args[i]);
+		i++;
+	}
 	return (args);
 }
