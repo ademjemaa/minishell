@@ -6,7 +6,7 @@
 /*   By: abarbour <abarbour@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/18 19:59:38 by abarbour          #+#    #+#             */
-/*   Updated: 2020/07/23 00:15:04 by abarbour         ###   ########.fr       */
+/*   Updated: 2020/07/24 00:31:36 by abarbour         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,34 +89,31 @@ int		nargs_count(char **args)
 	return (j);
 }
 
-int		cr_files(t_cmd *cmd, int out)
+void	rd_cr_files(t_cmd *cmd, int *in, int *out)
 {
 	int		i;
-	int		fd;
 
 	i = -1;
-	fd = -2;
 	while (cmd->files[++i].file)
 	{
-		printf("!!!!!!%d\n", cmd->files[i].red);
+		if (*in != 0)
+			close(cmd->files[i].red == 1 ? *in : *out);
 		if (cmd->files[i].red == 3 || cmd->files[i].red == 2)
-			fd = open(cmd->files[i].file, (cmd->files[i].red == 2 ? 513 : 1537),
+			*out = open(cmd->files[i].file, (cmd->files[i].red == 2 ? 513 : 1537),
 			S_IRUSR | S_IWUSR | S_IRGRP | S_IROTH);
 		else
-		{
-			while (cmd->files[i].file && cmd->files[i].red == 1)
-				i++;
-			i--;
-		}
-		if (fd == -1)
+			*in = open(cmd->files[i].file, O_RDONLY);
+		if (*out == -1 || *in == -1)
 		{
 			ft_putstr_error(strerror(errno));
-			return (-1);
+			break;
 		}
-		if (cmd->files[i + 1].file)
-			close(fd);
+		if (cmd->files[i + 1].file && cmd->files[i + 1].red == 1)
+			close(*in);
+		if (cmd->files[i + 1].file &&
+			(cmd->files[i + 1].red == 2 || cmd->files[i].red == 2))
+			close(*out);
 	}
-	return (fd == -2 ? out : fd);
 }
 
 void	ft_putstr_error(char *str)

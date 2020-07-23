@@ -6,7 +6,7 @@
 /*   By: abarbour <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/18 16:33:31 by abarbour          #+#    #+#             */
-/*   Updated: 2020/07/23 22:31:12 by adjemaa          ###   ########.fr       */
+/*   Updated: 2020/07/24 00:22:58 by abarbour         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,7 +86,7 @@ void	concat_args(t_cmd *cmd);
 void    print_structure(t_cmd *tmp);
 int		narg_len_dq(char	*arg);
 int		narg_len_sq(char	*arg);
-int		cr_files(t_cmd *cmd, int out);
+void	rd_cr_files(t_cmd *cmd, int *in, int *out);
 void	free_cmds(t_cmd **tab);
 void	ft_putstr_error(char *str);
 int		narg_len_nq(char *arg);

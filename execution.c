@@ -6,7 +6,7 @@
 /*   By: abarbour <abarbour@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/16 21:20:12 by abarbour          #+#    #+#             */
-/*   Updated: 2020/07/23 00:22:10 by abarbour         ###   ########.fr       */
+/*   Updated: 2020/07/24 00:09:40 by abarbour         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,9 +54,16 @@ int    exec_prog(int in, int out, t_cmd *cmd, char **envp)
 int		perform_redirects(t_cmd *tab, int input_fd, int *pip, char **envp)
 {
 	int		old_pid;
+	int		in;
+	int		out;
 
+	in = input_fd;
+	out = pip[1];
 	if (tab->red == 3 || tab->red == 2 || tab->red == 1)
-       	old_pid = exec_prog(rd_files(tab, input_fd), cr_files(tab, pip[1]), tab, envp);
+	{
+		rd_cr_files(tab, &in, &out);
+       	old_pid = exec_prog(in, out, tab, envp);
+	}
 	else
        	old_pid = exec_prog(input_fd, pip[1], tab, envp);
 	return (old_pid);
