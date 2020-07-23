@@ -16,7 +16,8 @@ int		arg_handler(char *str, char *tmp, int *i)
 {
 	while (str[*i] == '\\' && str[0] != '\'')
 		backslash(str, tmp, i, 0);
-	if (str[*i] == '>' || str[*i] == '<')
+	if ((str[*i] == '>' || str[*i] == '<') && !((str[0] == '\'') ||
+		str[0] == '\"'))
 		return (1);
 	if (str[0] == '\'' || str[0] == '\"')
 	{
