@@ -50,24 +50,6 @@ void    args_parser(char *str, char **envp, t_cmd *stru)
 	printf("env done\n");
 }
 
-int find_file(char *str)
-{
-    int i;
-    int j;
-
-    i = 1;
-    j = 0;
-    while (str[j] && (str[j] == '>' || str[j] == ' ' || str[j] == '<'))
-        j++;
-    while (str[j] != ' ' && str[j] != 0 && str[j] != '|' && str[j] != '>'
-            && str[j] != '<' && str[j] != ';')
-    {
-        i++;
-        j++;
-    }
-    return (i);
-}
-
 int     sep_parser(char *str, t_cmd *tmp)
 {
     int i;
