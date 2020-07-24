@@ -19,7 +19,7 @@ int		check_red(char *str, int sign)
 		|| str[0] == '$' || str[0] == '\\'))
 		return (sign);
 	else
-		return (0);
+		return (-1);
 }
 
 int		find_filered(char *str)

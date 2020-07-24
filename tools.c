@@ -175,27 +175,29 @@ void    find_env(char **args, char **envp)
 
 int red_type(char *str)
 {
-    int i;
-    int j;
+	int i;
+	int one;
+	int two;
+	int ret;
 
-    i = -1;
-    j = 0;
-    while (str[++i] && str[i] != '|' && str[i] != ';')
-    {
-        if (str[i] == '<' || str[i] == '>')
-        {
-            j = i;
-            if (str[i + 1] == '>' && str[i] == '>')
-                i++;
-        }
-    }
-    if (str[j] == '<')
-        return (1);
-    else if (str[j] == '>')
-    {
-        if (str[j + 1] == '>')
-            return (2);
-        return (3);
-    }
-    return (0);
+	i = -1;
+	one = 0;
+	two = 0;
+	ret = 0;
+	while (str[++i])
+	{
+		while (str[i] == '\\' && one == 0)
+			i = i + 2;
+		if (str[i] == '\'' && !two)
+			one = !one;
+		if (str[i] == '\"' && !one)
+			two = !two;
+		if ((str[i] == '>' || str[i] == '<') && one == 0 && two == 0)
+			ret = find_filered(&str[i]);
+		if (ret > 0)
+			break;
+	}
+	if (one || two)
+		ret = -1;
+	return (ret);
 }

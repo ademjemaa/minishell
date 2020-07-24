@@ -68,31 +68,15 @@ int find_file(char *str)
     return (i);
 }
 
-char    *file_name(char *str, t_cmd *struc)
-{
-    int i;
-    char *tmp;
-
-    i = 0;
-    struc->red = red_type(str);
-    while (struc->files && struc->files[i].file != NULL)
-        i++;
-    i--;
-    tmp = ft_strdup(struc->files[i].file);
-    return (tmp);
-}
-
 int     sep_parser(char *str, t_cmd *tmp)
 {
     int i;
 
     i = 0;
     tmp->red = -1;
-    while (str[i] != 0 && str[i] != '|' && str[i] != '>'
-            && str[i] != '<' && str[i] != ';')
+    while (str[i] != 0 && str[i] != '|' && str[i] != ';')
         i++;
-    if (str[i] == '>' || str[i] == '<')
-        tmp->file = file_name(&str[i], tmp);
+	tmp->red = red_type(str);
     while (str[i] != 0 && str[i] != '|' && str[i] != ';')
         i++;
     if (str[i] == ';')
