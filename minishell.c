@@ -42,7 +42,7 @@ int	main(int argc, char **argv, char **envp)
 			printf("parsing done %s\n",line);
 			exec(tab, envp);
 			free_cmds(tab);
-	    	write(1,"kembyalet$",11);
+			write(1,"kembyalet$",11);
 			free(line);
 		}
 		else
