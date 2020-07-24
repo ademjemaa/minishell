@@ -6,7 +6,7 @@
 /*   By: adjemaa <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/17 01:48:21 by adjemaa           #+#    #+#             */
-/*   Updated: 2020/07/17 02:25:51 by adjemaa          ###   ########.fr       */
+/*   Updated: 2020/07/25 00:11:57 by abarbour         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ char	*swap_case(char *args, char **envp, int j)
 	c = 0;
 	if (args[j] == '?')
 	{
-		tmp = ft_itoa(exit_code);
+		tmp = ft_itoa(g_exit_code);
 		tmp = ft_strjoinfree(tmp, &args[j + 1], 1);
 		tmp = change_code(tmp, args, j);
 	}

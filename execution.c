@@ -6,7 +6,7 @@
 /*   By: abarbour <abarbour@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/16 21:20:12 by abarbour          #+#    #+#             */
-/*   Updated: 2020/07/24 00:09:40 by abarbour         ###   ########.fr       */
+/*   Updated: 2020/07/25 00:12:17 by abarbour         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,9 +89,9 @@ int		exec_pipe(t_cmd **tab, int *i, char **envp)
 	old_pid = perform_redirects(tab[*i], input_fd, pip, envp);
 	waitpid(old_pid, &status, 0);
 	if (WIFSIGNALED(status))
-		exit_code = 128 + WTERMSIG(status);
+		g_exit_code = 128 + WTERMSIG(status);
 	else
-		exit_code = WEXITSTATUS(status);
+		g_exit_code = WEXITSTATUS(status);
 	close(pip[1]);
 	(*i)++;
 	return (pip[0]);

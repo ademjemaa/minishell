@@ -6,7 +6,7 @@
 /*   By: abarbour <abarbour@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/13 15:47:50 by abarbour          #+#    #+#             */
-/*   Updated: 2020/07/22 23:53:57 by abarbour         ###   ########.fr       */
+/*   Updated: 2020/07/25 00:14:44 by abarbour         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ int	main(int argc, char **argv, char **envp)
 
 	line = NULL;
 	(void)argc;
-	exit_code = 0;
+	g_exit_code = 0;
 	printf("aaa = %d\n", O_WRONLY | O_CREAT | O_TRUNC);
 	printf("abbbaa = %d\n", O_WRONLY | O_CREAT);
 	write(1, argv[1], 3);
