@@ -6,7 +6,7 @@
 /*   By: abarbour <abarbour@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/16 21:20:08 by abarbour          #+#    #+#             */
-/*   Updated: 2020/07/16 21:40:37 by abarbour         ###   ########.fr       */
+/*   Updated: 2020/07/25 21:50:51 by abarbour         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,8 @@ char	*remove_dq(char	*arg)
 	i = 1;
 	while (arg[i])
 	{
-		if (arg[i] == '\\' && (arg[i + 1] == '\\' || arg[i + 1] == '$'))
+		if (arg[i] == '\\' && (arg[i + 1] == '\\' || arg[i + 1] == '$'
+			|| arg[i + 1] == '\"'))
 			i++;
 		if (arg[i + 1])
 			str[j++] = arg[i];
