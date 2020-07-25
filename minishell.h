@@ -6,7 +6,7 @@
 /*   By: abarbour <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/25 00:08:49 by abarbour          #+#    #+#             */
-/*   Updated: 2020/07/25 19:07:12 by abarbour         ###   ########.fr       */
+/*   Updated: 2020/07/25 20:53:09 by adjemaa          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,7 +73,7 @@ t_cmd			**parser(char *line, char **envp);
 int				final_size(char *str, char *envp);
 t_filelst		*find_filelst(char **args, char **envp);
 int				sep_parser(char *str, t_cmd *tmp);
-void			args_parser(char *str, char **envp, t_cmd *stru);
+char			*args_parser(char *str, char **envp, t_cmd *stru);
 void			find_env(char **args, char **envp);
 char			**find_path(char **args, t_cmd *tmp, char **envp);
 char			*path_parser(char *line, char **envp, t_cmd *tmp);

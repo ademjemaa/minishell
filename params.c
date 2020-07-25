@@ -6,7 +6,7 @@
 /*   By: adjemaa <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/23 23:14:11 by adjemaa           #+#    #+#             */
-/*   Updated: 2020/07/25 18:19:39 by abarbour         ###   ########.fr       */
+/*   Updated: 2020/07/25 20:53:50 by adjemaa          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ char	*str_find(char *line)
 	return (str);
 }
 
-void	args_parser(char *str, char **envp, t_cmd *stru)
+char	*args_parser(char *str, char **envp, t_cmd *stru)
 {
 	char	**args;
 	char	*tmp;
@@ -45,9 +45,10 @@ void	args_parser(char *str, char **envp, t_cmd *stru)
 	printf("files done\n");
 	stru->args = find_path(args, stru, envp);
 	printf("path || args done\n");
-	free(tmp);
    	find_env(stru->args, envp);
 	printf("env done\n");
+	printf("tmp == %s\n", tmp);
+	return (tmp);
 }
 
 int	 sep_parser(char *str, t_cmd *tmp)

@@ -6,7 +6,7 @@
 /*   By: abarbour <abarbour@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/13 15:52:17 by abarbour          #+#    #+#             */
-/*   Updated: 2020/07/13 23:09:11 by abarbour         ###   ########.fr       */
+/*   Updated: 2020/07/25 20:52:16 by adjemaa          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -122,12 +122,14 @@ void	print_structure(t_cmd *tmp)
 
 t_cmd   *params(char *line, char **envp)
 {
-	t_cmd *tmp;
+	t_cmd 	*tmp;
+	char	*str;
 
 	tmp = (t_cmd*)malloc(sizeof(t_cmd));
-	args_parser(line, envp, tmp);
-	tmp->sep =  sep_parser(line, tmp);
+	str = args_parser(line, envp, tmp);
+	tmp->sep =  sep_parser(str, tmp);
 	print_structure(tmp);
+	free(str);
 	return (tmp);
 }
 
