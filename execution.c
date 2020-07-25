@@ -6,13 +6,13 @@
 /*   By: abarbour <abarbour@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/16 21:20:12 by abarbour          #+#    #+#             */
-/*   Updated: 2020/07/25 00:12:17 by abarbour         ###   ########.fr       */
+/*   Updated: 2020/07/25 18:25:03 by abarbour         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-int count_pipes(t_cmd **tab)
+int		count_pipes(t_cmd **tab)
 {
 	int i;
 
@@ -22,7 +22,7 @@ int count_pipes(t_cmd **tab)
 	return (i);
 }
 
-int	exec_prog(int in, int out, t_cmd *cmd, char **envp)
+int		exec_prog(int in, int out, t_cmd *cmd, char **envp)
 {
 	int pid;
 
@@ -62,10 +62,16 @@ int		perform_redirects(t_cmd *tab, int input_fd, int *pip, char **envp)
 	if (tab->red == 3 || tab->red == 2 || tab->red == 1)
 	{
 		rd_cr_files(tab, &in, &out);
-	   	old_pid = exec_prog(in, out, tab, envp);
+		if (tab->built)
+			old_pid = exec_built_in(in, out, tab, envp);
+		else
+	   		old_pid = exec_prog(in, out, tab, envp);
 	}
 	else
-	   	old_pid = exec_prog(input_fd, pip[1], tab, envp);
+		if (tab->built)
+			old_pid = exec_built_in(in, out, tab, envp);
+		else
+	   		old_pid = exec_prog(input_fd, pip[1], tab, envp);
 	return (old_pid);
 }
 
@@ -99,10 +105,10 @@ int		exec_pipe(t_cmd **tab, int *i, char **envp)
 
 void	exec(t_cmd **tab, char **envp)
 {
-	int	 i;
+	int		i;
 	char	c;
-	int	 pip[2];
-	int	 output;
+	int	 	pip[2];
+	int		output;
 
 	i = 0;
 	while (tab[i])

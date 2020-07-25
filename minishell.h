@@ -6,7 +6,7 @@
 /*   By: abarbour <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/25 00:08:49 by abarbour          #+#    #+#             */
-/*   Updated: 2020/07/25 00:19:12 by abarbour         ###   ########.fr       */
+/*   Updated: 2020/07/25 19:07:12 by abarbour         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,7 @@
 # include "get_next_line/get_next_line.h"
 # include "libft/libft.h"
 # include <sys/errno.h>
+# include <sys/param.h>
 # include <string.h>
 
 typedef struct	s_filelst
@@ -95,5 +96,9 @@ char			*swap_case(char *args, char **envp, int j);
 char			*change_str(char *envp, char *str);
 void			catch_signals();
 int				rd_files(t_cmd *cmd, int in);
+int				exec_built_int(int in, int out, t_cmd *tab, char **envp);
+int				exec_built_in(int in, int out, t_cmd *tab, char **envp);
+int				ft_echo(char *path, char **args, char **envp);
+int				ft_pwd(char *path, char **args, char **envp);
 
 #endif

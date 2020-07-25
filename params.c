@@ -6,7 +6,7 @@
 /*   By: adjemaa <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/23 23:14:11 by adjemaa           #+#    #+#             */
-/*   Updated: 2020/07/23 23:14:14 by adjemaa          ###   ########.fr       */
+/*   Updated: 2020/07/25 18:19:39 by abarbour         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,7 +81,7 @@ int check_name(char *line, t_cmd *tmp)
 	str = cmd_name(line);
 	if (str != NULL)
 	{
-/*    if (!ft_strcmp(str, "echo") || */ if (!ft_strcmp(str, "cd") ||
+	if (!ft_strcmp(str, "echo") || !ft_strcmp(str, "cd") ||
 		!ft_strcmp(str, "export") || !ft_strcmp(str, "unset") || !ft_strcmp(str, "env") ||
 		!ft_strcmp(str, "exit"))
 		{
