@@ -1,19 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_export.c                                        :+:      :+:    :+:   */
+/*   ft_cd.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: abarbour <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/07/25 19:30:41 by abarbour          #+#    #+#             */
-/*   Updated: 2020/07/25 22:05:22 by abarbour         ###   ########.fr       */
+/*   Created: 2020/07/25 23:05:00 by abarbour          #+#    #+#             */
+/*   Updated: 2020/07/26 00:20:24 by abarbour         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
 
-int		ft_export(char *path, char **args, char ***envp)
+int		ft_cd(char *path, char **args, char **envp)
 {
-	if (args
-	return (0);	
+	if (chdir(args[1]))
+		return (1);
+	return(0);
 }

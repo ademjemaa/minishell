@@ -1,19 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_export.c                                        :+:      :+:    :+:   */
+/*   ft_env.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: abarbour <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/07/25 19:30:41 by abarbour          #+#    #+#             */
-/*   Updated: 2020/07/25 22:05:22 by abarbour         ###   ########.fr       */
+/*   Created: 2020/07/25 23:22:25 by abarbour          #+#    #+#             */
+/*   Updated: 2020/07/25 23:29:41 by abarbour         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
 
-int		ft_export(char *path, char **args, char ***envp)
+int		ft_env(char *path, char **args, char **env)
 {
-	if (args
-	return (0);	
+	int		i;
+
+	i = 0;
+	while (env[i])
+	{
+		write(1, env[i], ft_strlen(env[i]));
+		write(1, "\n", 1);
+		i++;
+	}
+	exit(0);
 }

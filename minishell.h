@@ -6,7 +6,7 @@
 /*   By: abarbour <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/25 00:08:49 by abarbour          #+#    #+#             */
-/*   Updated: 2020/07/25 23:54:46 by adjemaa          ###   ########.fr       */
+/*   Updated: 2020/07/26 00:30:25 by abarbour         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -104,5 +104,7 @@ int				exec_built_int(int in, int out, t_cmd *tab, char **envp);
 int				exec_built_in(int in, int out, t_cmd *tab, char **envp);
 int				ft_echo(char *path, char **args, char **envp);
 int				ft_pwd(char *path, char **args, char **envp);
+int				ft_env(char *path, char **args, char **env);
+int				ft_cd(char *path, char **args, char **envp);
 
 #endif

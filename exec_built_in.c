@@ -6,7 +6,7 @@
 /*   By: abarbour <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/25 00:26:53 by abarbour          #+#    #+#             */
-/*   Updated: 2020/07/25 19:06:46 by abarbour         ###   ########.fr       */
+/*   Updated: 2020/07/26 00:20:16 by abarbour         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ int		dispatch_built_in(char *path, char **args, char **envp)
 	if (!ft_strncmp(path, "echo", 5))
 		return (ft_echo(path, args, envp));
 	else if (!ft_strncmp(path, "cd", 3))
-		return (ft_echo(path, args, envp));
+		exit(ft_cd(path, args, envp));
 	else if (!ft_strncmp(path, "pwd", 4))
 		return (ft_pwd(path, args, envp));
 	else if (!ft_strncmp(path, "export", 7))
@@ -25,7 +25,7 @@ int		dispatch_built_in(char *path, char **args, char **envp)
 	else if (!ft_strncmp(path, "unset", 6))
 		return (ft_echo(path, args, envp));
 	else if (!ft_strncmp(path, "env", 4))
-		return (ft_echo(path, args, envp));
+		return (ft_env(path, args, envp));
 	return (-1);
 }
 

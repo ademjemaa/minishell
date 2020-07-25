@@ -6,7 +6,7 @@
 /*   By: abarbour <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/25 18:48:49 by abarbour          #+#    #+#             */
-/*   Updated: 2020/07/25 19:10:34 by abarbour         ###   ########.fr       */
+/*   Updated: 2020/07/25 23:30:15 by abarbour         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,5 +30,5 @@ int		ft_pwd(char *path, char **args, char **envp)
 		write(1, buf + i, 1);
 	write(1, "\n", 1);
 	free(buf);
-	return (0);
+	exit(0);
 }

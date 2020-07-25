@@ -6,7 +6,7 @@
 /*   By: abarbour <abarbour@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/13 15:47:50 by abarbour          #+#    #+#             */
-/*   Updated: 2020/07/25 20:54:12 by adjemaa          ###   ########.fr       */
+/*   Updated: 2020/07/25 23:17:55 by abarbour         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ int	main(int argc, char **argv, char **envp)
 			if(!ft_strncmp(line, "exit", 5))
 			{
 				free(line);
-				exit(0);
+				break;
 			}
 			tab = parser(line, envp);
 			printf("parsing done %s\n",line);
@@ -46,5 +46,5 @@ int	main(int argc, char **argv, char **envp)
 			break;
 		}
 	}
-	return (0);
+	return (g_exit_code);
 }
