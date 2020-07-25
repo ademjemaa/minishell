@@ -6,7 +6,7 @@
 /*   By: adjemaa <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/02 18:38:18 by adjemaa           #+#    #+#             */
-/*   Updated: 2020/06/22 01:51:14 by adjemaa          ###   ########.fr       */
+/*   Updated: 2020/07/25 21:53:40 by adjemaa          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,9 @@
 
 void	change_status(t_check *check, char *str, char **envp, char *new)
 {
-	int t;
-	int b;
-	char *tmp;
+	int		t;
+	int		b;
+	char	*tmp;
 
 	t = 0;
 	b = 0;

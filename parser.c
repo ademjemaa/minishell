@@ -6,7 +6,7 @@
 /*   By: abarbour <abarbour@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/13 15:52:17 by abarbour          #+#    #+#             */
-/*   Updated: 2020/07/25 20:52:16 by adjemaa          ###   ########.fr       */
+/*   Updated: 2020/07/25 21:12:15 by adjemaa          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,7 +78,6 @@ char	*path_parser(char *line, char **envp, t_cmd *tmp)
 		str[i] = ft_strjoinfree(str[i], cmd_name(line), 3);
 	}
 	i = 0;
-	//boucle mouch 9a3da tou9if ki str[i] == NULL w timchi taamel check lil stat ye5i issir  segfault
 	while (str[i] != NULL)
 	{
 		if (stat(str[i], &sb) == 0)

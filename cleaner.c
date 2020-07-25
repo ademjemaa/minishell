@@ -6,7 +6,7 @@
 /*   By: adjemaa <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/25 18:49:51 by adjemaa           #+#    #+#             */
-/*   Updated: 2020/07/04 21:40:59 by abarbour         ###   ########.fr       */
+/*   Updated: 2020/07/25 21:17:56 by adjemaa          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,21 +16,18 @@ int		find_len(char *str)
 {
 	int i;
 	int total;
-	int one;
-	int two;
 
 	i = 0;
 	total = 1;
-	one = 0;
-	two = 0;
 	while (str[i])
 	{
-		if (str[i] == '\\' && str[i + 1] && one == 0)
+		if (str[i] == '\\' && str[i + 1])
 		{
 			i = i + 2;
 			total = total + 2;
 		}
-		if ((str[i] == '\"' && str[i + 1] == '\"' && two == 0) || (str[i] == '\'' && str[i + 1] == '\'' && one == 0))
+		if ((str[i] == '\"' && str[i + 1] == '\"') ||
+				(str[i] == '\'' && str[i + 1] == '\''))
 			i = i + 2;
 		else if (str[i])
 		{
@@ -41,38 +38,20 @@ int		find_len(char *str)
 	return (total);
 }
 
-void	check_final(char  *tmp)
+void	init_struct(t_check *c)
 {
-	int c;
-	int two;
-	int one;
-	
-	c = 0;
-	two = 0;
-	one = 0;
-	while (tmp[c])
-	{
-		while (tmp[c] == '\\' && !one)
-			c = c + 2;
-		if (tmp[c] == '\"' && !one)
-			two = !two;
-		if (tmp[c] == '\'' && !two)
-			one = !one;
-		c++;
-	}
-	if (two || one)
-		printf("quotes problem, two == %d one == %d, fix me later tard\n", two, one);
+	c->i = 0;
+	c->j = 0;
+	c->env = 0;
+	c->one = 0;
+	c->two = 0;
 }
 
 char	*copy_clean(char *tmp, char *str)
 {
 	t_check c;
 
-	c.i = 0;
-	c.j = 0;
-	c.env = 0;
-	c.one = 0;
-	c.two = 0;
+	init_struct(&c);
 	while (str[c.i])
 	{
 		if (str[c.i] == '$' && c.two)
@@ -94,14 +73,13 @@ char	*copy_clean(char *tmp, char *str)
 		}
 	}
 	tmp[c.j] = 0;
-	check_final(tmp);
 	return (tmp);
 }
 
 char	*cleaned(char *str)
 {
-	int 	i;
-	int 	total;
+	int		i;
+	int		total;
 	char	*tmp;
 
 	i = 0;
