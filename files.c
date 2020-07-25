@@ -6,13 +6,13 @@
 /*   By: adjemaa <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/23 23:07:55 by adjemaa           #+#    #+#             */
-/*   Updated: 2020/07/25 21:04:49 by adjemaa          ###   ########.fr       */
+/*   Updated: 2020/07/26 00:05:27 by adjemaa          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void	free_all(char **args)
+void		free_all(char **args)
 {
 	int i;
 
@@ -25,7 +25,7 @@ void	free_all(char **args)
 	free(args);
 }
 
-char	**total_args(char **args, char *str)
+char		**total_args(char **args, char *str)
 {
 	int		i;
 	int		total;
@@ -40,7 +40,7 @@ char	**total_args(char **args, char *str)
 		i++;
 	}
 	fill = (char **)malloc(sizeof(char *) * total);
-	fill[i] = NULL;
+	fill[total - 1] = NULL;
 	if (total > 1)
 	{
 		if (str != NULL)
@@ -51,7 +51,7 @@ char	**total_args(char **args, char *str)
 	return (fill);
 }
 
-char	**find_path(char **args, t_cmd *tmp, char **envp)
+char		**find_path(char **args, t_cmd *tmp, char **envp)
 {
 	int		i;
 	int		j;
@@ -63,21 +63,24 @@ char	**find_path(char **args, t_cmd *tmp, char **envp)
 	tmp->path = path_parser(args[i], envp, tmp);
 	fill = total_args(args, tmp->path);
 	j = 1;
-	while (args[i] && ((args[i + 1] != NULL)))
+	if (fill[1] != NULL)
 	{
-		i++;
-		if (args[i][0] != '>' && args[i][0] != '<')
+		while (args[i] && ((args[i + 1] != NULL)))
 		{
-			fill[j] = ft_strdup(args[i]);
-			j++;
+			i++;
+			if (args[i][0] != '>' && args[i][0] != '<')
+			{
+				fill[j] = ft_strdup(args[i]);
+				j++;
+			}
 		}
+		free_all(args);
+		fill[j] = NULL;
 	}
-	free_all(args);
-	fill[j] = NULL;
 	return (fill);
 }
 
-int		file_counter(char **args)
+int			file_counter(char **args)
 {
 	int i;
 	int total;

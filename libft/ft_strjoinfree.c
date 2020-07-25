@@ -6,7 +6,7 @@
 /*   By: adjemaa <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/13 21:45:28 by adjemaa           #+#    #+#             */
-/*   Updated: 2020/07/13 21:46:12 by adjemaa          ###   ########.fr       */
+/*   Updated: 2020/07/26 00:08:32 by adjemaa          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ static	int		total(char const *str)
 	return (i);
 }
 
-char	*ft_strjoinfree(char *s1, char *s2, int crit)
+char			*ft_strjoinfree(char *s1, char *s2, int crit)
 {
 	char	*str;
 	int		i;
@@ -32,7 +32,7 @@ char	*ft_strjoinfree(char *s1, char *s2, int crit)
 	s1 = s1 ? s1 : ft_strdup("");
 	s2 = s2 ? s2 : ft_strdup("");
 	if (!(str = malloc(total(s1) + total(s2) + 1)))
-		return NULL;
+		return (NULL);
 	while (s1[++i])
 		str[i] = s1[i];
 	j = -1;

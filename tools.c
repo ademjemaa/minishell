@@ -6,7 +6,7 @@
 /*   By: adjemaa <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/27 18:00:48 by adjemaa           #+#    #+#             */
-/*   Updated: 2020/07/17 03:59:23 by adjemaa          ###   ########.fr       */
+/*   Updated: 2020/07/25 23:57:53 by adjemaa          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -194,8 +194,6 @@ int red_type(char *str)
 			two = !two;
 		if ((str[i] == '>' || str[i] == '<') && one == 0 && two == 0)
 			ret = find_filered(&str[i]);
-		if (ret > 0)
-			break;
 	}
 	if (one || two)
 		ret = -1;

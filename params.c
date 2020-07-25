@@ -6,7 +6,7 @@
 /*   By: adjemaa <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/23 23:14:11 by adjemaa           #+#    #+#             */
-/*   Updated: 2020/07/25 21:01:37 by adjemaa          ###   ########.fr       */
+/*   Updated: 2020/07/26 00:07:16 by adjemaa          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,8 @@
 
 char	*str_find(char *line)
 {
-	int	 i;
-	int	 j;
+	int		i;
+	int		j;
 	char	*str;
 
 	i = 0;
@@ -45,13 +45,13 @@ char	*args_parser(char *str, char **envp, t_cmd *stru)
 	printf("files done\n");
 	stru->args = find_path(args, stru, envp);
 	printf("path || args done\n");
-   	find_env(stru->args, envp);
+	find_env(stru->args, envp);
 	printf("env done\n");
 	printf("tmp == %s\n", tmp);
 	return (tmp);
 }
 
-int	 sep_parser(char *str, t_cmd *tmp)
+int		sep_parser(char *str, t_cmd *tmp)
 {
 	int i;
 
@@ -72,9 +72,9 @@ int	 sep_parser(char *str, t_cmd *tmp)
 		return (-1);
 }
 
-int check_name(char *line, t_cmd *tmp)
+int		check_name(char *line, t_cmd *tmp)
 {
-	int	 ret;
+	int		ret;
 	char	*str;
 
 	ret = 0;
@@ -82,9 +82,9 @@ int check_name(char *line, t_cmd *tmp)
 	str = cmd_name(line);
 	if (str != NULL)
 	{
-	if (!ft_strcmp(str, "echo") || !ft_strcmp(str, "cd") ||
-		!ft_strcmp(str, "export") || !ft_strcmp(str, "unset") || !ft_strcmp(str, "env") ||
-		!ft_strcmp(str, "exit"))
+		if (!ft_strcmp(str, "echo") || !ft_strcmp(str, "cd") ||
+			!ft_strcmp(str, "export") || !ft_strcmp(str, "unset") ||
+			!ft_strcmp(str, "env") || !ft_strcmp(str, "exit"))
 		{
 			ret = 1;
 			tmp->built = 1;
@@ -93,5 +93,5 @@ int check_name(char *line, t_cmd *tmp)
 	else
 		tmp->built = 0;
 	free(str);
-	return ret;
+	return (ret);
 }

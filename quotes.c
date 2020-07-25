@@ -6,11 +6,28 @@
 /*   By: adjemaa <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/27 17:05:56 by adjemaa           #+#    #+#             */
-/*   Updated: 2020/07/25 21:14:47 by adjemaa          ###   ########.fr       */
+/*   Updated: 2020/07/25 23:25:52 by adjemaa          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+
+int		fix_quotes(t_check *check, char *str)
+{
+	if (str[check->i] == '\'' && check->two == 0)
+	{
+		check->one = !(check->one);
+		check->i++;
+		return (0);
+	}
+	else if (str[check->i] == '\"' && check->one == 0)
+	{
+		check->two = !(check->two);
+		check->i++;
+		return (0);
+	}
+	return (1);
+}
 
 int		final_size(char *str, char *envp)
 {

@@ -6,11 +6,40 @@
 /*   By: adjemaa <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/17 00:11:06 by adjemaa           #+#    #+#             */
-/*   Updated: 2020/07/23 22:38:54 by adjemaa          ###   ########.fr       */
+/*   Updated: 2020/07/26 00:07:50 by adjemaa          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+
+char	*ret_handler(char *line, char **envp, struct stat *sb)
+{
+	char	**str;
+	int		i;
+	char	*ret;
+
+	i = 0;
+	while (ft_strncmp(envp[i], "PATH=", 5))
+		i++;
+	str = ft_split(envp[i], ':');
+	i = -1;
+	while (str[++i] != NULL)
+	{
+		if (str[i][ft_strlen(str[i]) - 1] != '/')
+			str[i] = ft_strjoinfree(str[i], "/", 1);
+		str[i] = ft_strjoinfree(str[i], cmd_name(line), 3);
+	}
+	i = -1;
+	while (str[++i] != NULL)
+		if (stat(str[i], sb) == 0)
+			break ;
+	if (str[i] != NULL)
+		ret = ft_strdup(str[i]);
+	else
+		ret = cmd_name(line);
+	free_all(str);
+	return (ret);
+}
 
 int		arg_handler(char *str, char *tmp, int *i)
 {

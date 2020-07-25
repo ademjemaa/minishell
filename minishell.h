@@ -6,7 +6,7 @@
 /*   By: abarbour <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/25 00:08:49 by abarbour          #+#    #+#             */
-/*   Updated: 2020/07/25 20:53:09 by adjemaa          ###   ########.fr       */
+/*   Updated: 2020/07/25 23:54:46 by adjemaa          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,6 +72,8 @@ void			free_all(char **args);
 t_cmd			**parser(char *line, char **envp);
 int				final_size(char *str, char *envp);
 t_filelst		*find_filelst(char **args, char **envp);
+void			copy_slash(char *tmp, char *str, t_check *c);
+void			init_struct(t_check *c);
 int				sep_parser(char *str, t_cmd *tmp);
 char			*args_parser(char *str, char **envp, t_cmd *stru);
 void			find_env(char **args, char **envp);
@@ -79,9 +81,11 @@ char			**find_path(char **args, t_cmd *tmp, char **envp);
 char			*path_parser(char *line, char **envp, t_cmd *tmp);
 void			exec(t_cmd **tab, char **envp);
 int				check_name(char *line, t_cmd *tmp);
+int				fix_quotes(t_check *check, char *str);
 char			*cmd_name(char *linep);
 int				red_type(char *str);
 char			*exact_env(char *str);
+char			*ret_handler(char *line, char **envp, struct stat *sb);
 int				ft_strcmp(char *s1, char *s2);
 int				nargs_count(char **args);
 void			concat_args(t_cmd *cmd);

@@ -6,22 +6,22 @@
 /*   By: abarbour <abarbour@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/13 15:52:17 by abarbour          #+#    #+#             */
-/*   Updated: 2020/07/25 21:12:15 by adjemaa          ###   ########.fr       */
+/*   Updated: 2020/07/26 00:13:39 by adjemaa          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-int counter(char *line)
+int		counter(char *line)
 {
 	int total;
 	int i;
 
 	total = 1;
 	i = 0;
-	while(line[i])
+	while (line[i])
 	{
-		if (line[i] == '|' ||  line[i] == ';' )
+		if (line[i] == '|' || line[i] == ';')
 			total++;
 		i++;
 	}
@@ -30,9 +30,9 @@ int counter(char *line)
 
 char	*cmd_name(char *line)
 {
-	int i;
-	int j;
-	char *str;
+	int		i;
+	int		j;
+	char	*str;
 
 	j = 0;
 	if (line == NULL)
@@ -53,43 +53,19 @@ char	*cmd_name(char *line)
 
 char	*path_parser(char *line, char **envp, t_cmd *tmp)
 {
-	int i;
-	char **str;
-	char *ret;
-	struct stat sb;
+	char			*stri;
+	struct stat		sb;
 
-	i = 0;
-	ret = cmd_name(line);
-	if (ret == NULL)
+	tmp->built = 0;
+	stri = cmd_name(line);
+	if (stri == NULL)
 		return (NULL);
 	if (check_name(line, tmp))
-		return (ret);
-	if (stat(ret, &sb) == 0)
-		return (ret);
-	free(ret);
-	while (ft_strncmp(envp[i], "PATH=", 5))
-		i++;
-	str = ft_split(envp[i], ':');
-	i = -1;
-	while (str[++i] != NULL)
-	{
-		if (str[i][ft_strlen(str[i]) - 1] != '/')
-			str[i] = ft_strjoinfree(str[i], "/", 1);
-		str[i] = ft_strjoinfree(str[i], cmd_name(line), 3);
-	}
-	i = 0;
-	while (str[i] != NULL)
-	{
-		if (stat(str[i], &sb) == 0)
-			break;
-		i++;
-	}
-	if (str[i] != NULL)
-		ret = ft_strdup(str[i]);
-	else
-		ret = cmd_name(line);
-	free_all(str);
-	return (ret);
+		return (stri);
+	if (stat(stri, &sb) == 0)
+		return (stri);
+	free(stri);
+	return (ret_handler(line, envp, &sb));
 }
 
 void	print_structure(t_cmd *tmp)
@@ -119,30 +95,30 @@ void	print_structure(t_cmd *tmp)
 	printf("sep == %d\nred == %d\nbuild == %d\n", tmp->sep, tmp->red, tmp->built);
 }
 
-t_cmd   *params(char *line, char **envp)
+t_cmd	*params(char *line, char **envp)
 {
-	t_cmd 	*tmp;
+	t_cmd	*tmp;
 	char	*str;
 
 	tmp = (t_cmd*)malloc(sizeof(t_cmd));
 	str = args_parser(line, envp, tmp);
-	tmp->sep =  sep_parser(str, tmp);
+	tmp->sep = sep_parser(str, tmp);
 	print_structure(tmp);
 	free(str);
 	return (tmp);
 }
 
-t_cmd **parser(char *line, char **envp)
+t_cmd	**parser(char *line, char **envp)
 {
-	int total;
-	t_cmd **tab;
-	int i;
-	int j;
+	int		total;
+	t_cmd	**tab;
+	int		i;
+	int		j;
 
 	i = 0;
 	total = counter(line);
 	j = 0;
-	tab = (t_cmd**)malloc(sizeof(t_cmd**) * (total + 1));//lahna zedet el + 1 lazem yofa b null
+	tab = (t_cmd**)malloc(sizeof(t_cmd**) * (total + 1));
 	while (line[j])
 	{
 		tab[i] = params(&line[j], envp);
@@ -152,6 +128,6 @@ t_cmd **parser(char *line, char **envp)
 		if (line[j])
 			j++;
 	}
-	tab[i] = NULL;// w lahna hattet el null
+	tab[i] = NULL;
 	return (tab);
 }

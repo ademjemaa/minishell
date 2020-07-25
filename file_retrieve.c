@@ -6,7 +6,7 @@
 /*   By: adjemaa <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/02 18:38:18 by adjemaa           #+#    #+#             */
-/*   Updated: 2020/07/25 21:53:40 by adjemaa          ###   ########.fr       */
+/*   Updated: 2020/07/25 23:29:10 by adjemaa          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,20 +20,11 @@ void	change_status(t_check *check, char *str, char **envp, char *new)
 
 	t = 0;
 	b = 0;
-	if (str[check->i] == '\'' && check->two == 0)
-	{
-		check->one = !(check->one);
-		check->i++;
-	}
-	else if (str[check->i] == '\"' && check->one == 0)
-	{
-		check->two = !(check->two);
-		check->i++;
-	}
-	else if (str[check->i] == '$' && check->one == 0)
+	if (fix_quotes(check, str) && str[check->i] == '$' && check->one == 0)
 	{
 		tmp = exact_env(&str[check->i + 1]);
-		while (envp[t] != NULL && ft_strncmp(envp[t], tmp, envp_len(envp[t], tmp)))
+		while (envp[t] != NULL && ft_strncmp(envp[t], tmp,
+					envp_len(envp[t], tmp)))
 			t++;
 		if (envp[t] != NULL)
 		{
@@ -60,7 +51,7 @@ int		envp_len(char *str, char *tmp)
 	while (str[i])
 	{
 		if (str[i] == '=')
-			break;
+			break ;
 		i++;
 	}
 	if (j > i)
@@ -70,18 +61,19 @@ int		envp_len(char *str, char *tmp)
 
 int		env_tran_len(char *str, char **envp, int *i)
 {
-	int c;
-	int j;
-	int t;
-	char *tmp;
+	int		c;
+	int		j;
+	int		t;
+	char	*tmp;
 
 	c = 0;
 	j = 0;
 	tmp = exact_env(&str[1]);
 	t = 1;
-	while (envp[c] != NULL  && ft_strncmp(envp[c], tmp, envp_len(envp[c], tmp)))
+	while (envp[c] != NULL && ft_strncmp(envp[c], tmp, envp_len(envp[c], tmp)))
 		c++;
-	while (str[t] && ((str[t] >= 'a' && str[t] <= 'z') || (str[t] >= 'A' && str[t] <= 'Z') || (str[t] >= '0' && str[t] <= '9') || str[t] == '_'))
+	while (str[t] && ((str[t] >= 'a' && str[t] <= 'z') || (str[t] >= 'A' &&
+		str[t] <= 'Z') || (str[t] >= '0' && str[t] <= '9') || str[t] == '_'))
 		t++;
 	*i = t + *i;
 	free(tmp);
@@ -96,58 +88,44 @@ int		env_tran_len(char *str, char **envp, int *i)
 
 int		file_len(char *str, char **envp)
 {
-	int i;
-	int total;
-	int one;
-	int two;
+	int		total;
+	t_check c;
 
 	total = 1;
-	i = 0;
-	one = 0;
-	two = 0;
-	while (str[i] && str[i] != ' ')
+	init_struct(&c);
+	while (str[c.i] && str[c.i] != ' ')
 	{
-		if (str[i] == '\\' && one == 0)
+		if (str[c.i] == '\\' && c.one == 0)
 		{
-			i++;
+			(c.i)++;
 			total++;
 		}
-		if (str[i] == '\'' && !two)
-			one = !one;
-		else if (str[i] == '\"' && !one)
-			two = !two;
-		else if (str[i] == '$' && one == 0 && str[i - 1] != '\\')
-			total = total + env_tran_len(&str[i], envp, &i);
+		if (str[c.i] == '\'' && !(c.two))
+			c.one = !(c.one);
+		else if (str[c.i] == '\"' && !(c.one))
+			c.two = !(c.two);
+		else if (str[c.i] == '$' && c.one == 0 && str[c.i - 1] != '\\')
+			total = total + env_tran_len(&str[c.i], envp, &c.i);
 		else
 			total++;
-		if (str[i] != 0)
-			i++;
+		if (str[c.i] != 0)
+			(c.i)++;
 	}
 	return (total);
 }
 
 char	*retrieve(char *str, char **envp)
 {
-	char *tmp;
-	t_check c;
+	char	*tmp;
+	t_check	c;
 
-	c.i = 0;
-	c.j = 0;
-	c.one = 0;
-	c.two = 0;
+	init_struct(&c);
 	tmp = malloc(sizeof(char *) * file_len(str, envp));
 	tmp[file_len(str, envp)] = 0;
 	while (str[c.i])
 	{
 		if (str[c.i] == '\\' && c.one == 0)
-		{
-			tmp[c.j] = str[c.i];
-			c.j++;
-			c.i++;
-			tmp[c.j] = str[c.i];
-			c.j++;
-			c.i++;
-		}
+			copy_slash(tmp, str, &c);
 		else if (str[c.i] == '\'' || str[c.i] == '\"')
 			change_status(&c, str, envp, tmp);
 		else if (str[c.i] == '$' && c.one == 0)
@@ -156,7 +134,7 @@ char	*retrieve(char *str, char **envp)
 		{
 			tmp[c.j] = str[c.i];
 			c.j++;
-			c.i++;	
+			c.i++;
 		}
 	}
 	tmp[c.j] = 0;

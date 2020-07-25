@@ -6,17 +6,28 @@
 /*   By: adjemaa <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/07 21:30:15 by adjemaa           #+#    #+#             */
-/*   Updated: 2020/07/23 00:19:32 by abarbour         ###   ########.fr       */
+/*   Updated: 2020/07/25 23:29:08 by adjemaa          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
+void	copy_slash(char *tmp, char *str, t_check *c)
+{
+	tmp[c->j] = str[c->i];
+	c->j++;
+	c->i++;
+	tmp[c->j] = str[c->i];
+	c->j++;
+	c->i++;
+}
+
 int		check_red(char *str, int sign)
 {
 	if (str[0] && ((str[0] >= 'a' && str[0] <= 'z') || (str[0] >= 'A'
 		&& str[0] <= 'Z') || (str[0] >= '0' && str[0] <= '9') || str[0] == '_'
-		|| str[0] == '$' || str[0] == '\\'))
+		|| str[0] == '$' || str[0] == '\\' || str[0] == '\'' ||
+		str[0] == '\"'))
 		return (sign);
 	else
 		return (-1);

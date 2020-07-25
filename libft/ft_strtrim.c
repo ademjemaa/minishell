@@ -6,13 +6,13 @@
 /*   By: abarbour <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/10 16:47:01 by abarbour          #+#    #+#             */
-/*   Updated: 2019/11/13 13:35:46 by abarbour         ###   ########.fr       */
+/*   Updated: 2020/07/26 00:09:11 by adjemaa          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-char	*ft_strtrim(char  *s1, char  *set)
+char	*ft_strtrim(char *s1, char *set)
 {
 	size_t	i;
 	size_t	j;
