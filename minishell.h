@@ -6,7 +6,7 @@
 /*   By: abarbour <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/25 00:08:49 by abarbour          #+#    #+#             */
-/*   Updated: 2020/07/26 00:30:25 by abarbour         ###   ########.fr       */
+/*   Updated: 2020/07/27 00:16:50 by abarbour         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -106,5 +106,8 @@ int				ft_echo(char *path, char **args, char **envp);
 int				ft_pwd(char *path, char **args, char **envp);
 int				ft_env(char *path, char **args, char **env);
 int				ft_cd(char *path, char **args, char **envp);
+int				ft_export(char *path, char **args, char ***envp);
+char			**env_start(char **envp);
+int				dispatch_built_in(char *path, char **args, char **envp);
 
 #endif

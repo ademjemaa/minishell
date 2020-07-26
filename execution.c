@@ -6,7 +6,7 @@
 /*   By: abarbour <abarbour@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/16 21:20:12 by abarbour          #+#    #+#             */
-/*   Updated: 2020/07/26 00:33:32 by abarbour         ###   ########.fr       */
+/*   Updated: 2020/07/27 00:01:08 by abarbour         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -114,9 +114,16 @@ void	exec(t_cmd **tab, char **envp)
 	while (tab[i])
 	{
 		concat_args(tab[i]);
-		if (tab[i]->path && tab[i]->sep != 4 && !ft_strncmp(tab[i]->path, "cd", 3))
+		if (tab[i]->path && tab[i]->sep != 4 &&
+		(!ft_strncmp(tab[i]->path, "cd", 3)
+		|| !ft_strncmp(tab[i]->path, "export", 7)
+		|| !ft_strncmp(tab[i]->path, "unset", 6)))
 		{
-			ft_cd(tab[i]->path, tab[i]->args, envp);
+			if (dispatch_built_in(tab[i]->path, tab[i]->args, envp) == -1)
+			{
+				g_exit_code = 1;
+				ft_putstr_error(strerror(errno));
+			}
 			i++;
 		}
 		else

@@ -6,7 +6,7 @@
 /*   By: abarbour <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/25 23:05:00 by abarbour          #+#    #+#             */
-/*   Updated: 2020/07/26 00:20:24 by abarbour         ###   ########.fr       */
+/*   Updated: 2020/07/26 23:59:52 by abarbour         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,6 @@
 int		ft_cd(char *path, char **args, char **envp)
 {
 	if (chdir(args[1]))
-		return (1);
+		return (-1);
 	return(0);
 }
