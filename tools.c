@@ -6,46 +6,27 @@
 /*   By: adjemaa <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/27 18:00:48 by adjemaa           #+#    #+#             */
-/*   Updated: 2020/07/25 23:57:53 by adjemaa          ###   ########.fr       */
+/*   Updated: 2020/07/28 09:50:05 by adjemaa          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-int	 size_counter(char *str)
+int		size_counter(char *str)
 {
-	int i;
-	int j;
-	char c;
+	int		i;
+	int		j;
+	char	c;
 
 	i = 0;
 	j = 0;
 	while (str[i])
 	{
-		while (str[i] == '\\' && str[i + 1])
-		{
-			i = i + 2;
-			j = j + 2;
-		}
-		if (str[i] == '\'' || str[i] == '\"')
-		{
-			c = str[i];
-			i++;
-			j++;
-			while (str[i] && str[i] != c)
-			{
-				i++;
-				j++;
-			}
-		}
-		if (((str[i + 1] == '>' && str[i] != '>') || (str[i + 1] == '<')) && str[i] != ' ')
-			j++;
-		if (!((str[i] == '>' || str[i] == '<') && str[i + 1] == ' '))
-			j++;
+		quote_limits(str, &j, &i);
 		if (((str[i] == '>' || str[i] == '<') && str[i + 1] == ' '))
 			while (str[i + 1] == ' ')
 				i++;
-		else	   
+		else
 			i++;
 	}
 	return (j + 1);
@@ -53,93 +34,40 @@ int	 size_counter(char *str)
 
 char	*rearrange(char *str)
 {
-	int i;
-	int j;
-	char *tmp;
-	int in;
-	char c;
+	char	*tmp;
+	t_check	c;
 
-	i = 0;
-	j = 0;
-	in = 0;
+	init_struct(&c);
 	tmp = malloc(sizeof(char) * size_counter(str));
 	tmp[size_counter(str) - 1] = 0;
-	(void)c;
-	while (i < size_counter(str))
+	while (c.i < size_counter(str))
 	{
-		while (str[j] == '\\' && str[j + 1])
-		{
-			tmp[i++] = str[j++];
-			tmp[i++] = str[j++];
-		}
-		if (str[j] == '\'' || str[j] == '\"')
-		{
-			if (in == 0)
-			{
-				c = str[j];
-				in = 1;
-			}
-			else
-				in = 0;
-		}
-		if (((str[j + 1] == '>' && str[j] != '>') || (str[j + 1] == '<')) && str[j] != ' ' && !in)
-		{
-			tmp[i] = str[j];
-			i++;
-			tmp[i] = ' ';
-		}
-		else if ((str[j] == ' ') && (str[j - 1] == '>' || str[j - 1] == '<') && !in)
-		{
-			while (str[j] == ' ')
-				j++;
-			tmp[i] = str[j];
-		}
-		else
-			tmp[i] = str[j];
-		i++;
-		j++;
+		copy_quotes(str, tmp, &c);
+		c.i++;
+		c.j++;
 	}
 	free(str);
-	return tmp;
+	return (tmp);
 }
 
 char	*change_str(char *envp, char *str)
 {
-	int i;
-	int j;
-	int c;
-	char *tmp;
+	t_check	c;
+	char	*tmp;
 
-	j = 0;
-	c = 0;
-	while (envp != NULL && envp[j] && envp[j] != '=')
-		j++;
-	j++;
+	init_struct(&c);
+	while (envp != NULL && envp[c.j] && envp[c.j] != '=')
+		c.j++;
+	c.j++;
 	tmp = malloc(sizeof(char) * (final_size(str, envp)));
-	i = -1;
-	while (str[++i] && str[i] != '$')
+	envp_slash(str, tmp, &c, envp);
+	while (str[c.i])
 	{
-		if (str[i] == '\\')
-		{
-			tmp[c] = str[i];
-			i++;
-			c++;
-		}
-		tmp[c] = str[i];
-		c++;
+		tmp[c.env] = str[c.i];
+		c.env++;
+		c.i++;
 	}
-	while (envp != NULL && envp[j])
-		tmp[c++] = envp[j++];
-	i++;
-	while (str[i] && ((str[i] >= 'a' && str[i] <= 'z') || (str[i] >= 'A' && str[i] <= 'Z') || (str[i] >= '0' && str[i] <= '9') || str[i] == '_'))
-		i++;
-	while (str[i])
-	{
-		tmp[c] = str[i];
-		c++;
-		i++;
-	}
-	tmp[c] = 0;
+	tmp[c.env] = 0;
 	free(str);
 	return (tmp);
 }
@@ -173,7 +101,7 @@ void	find_env(char **args, char **envp)
 	}
 }
 
-int red_type(char *str)
+int		red_type(char *str)
 {
 	int i;
 	int one;

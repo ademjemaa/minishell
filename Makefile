@@ -6,7 +6,7 @@
 #    By: adjemaa <marvin@42.fr>                     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/11/06 21:13:47 by adjemaa           #+#    #+#              #
-#    Updated: 2020/07/27 00:17:09 by abarbour         ###   ########.fr        #
+#    Updated: 2020/07/28 09:38:10 by adjemaa          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -28,6 +28,7 @@ SRCS =	minishell.c\
 		exec_utils2.c\
 		quotes2.c\
 		tools.c\
+		tools_for_tools.c\
 		files.c\
 		ft_tools.c\
 		free_cmds.c\

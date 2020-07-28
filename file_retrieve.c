@@ -126,7 +126,8 @@ char	*retrieve(char *str, char **envp)
 	{
 		if (str[c.i] == '\\' && c.one == 0)
 			copy_slash(tmp, str, &c);
-		else if (str[c.i] == '\'' || str[c.i] == '\"')
+		else if ((str[c.i] == '\'' && c.two == 0) ||
+				(str[c.i] == '\"' && c.one == 0))
 			change_status(&c, str, envp, tmp);
 		else if (str[c.i] == '$' && c.one == 0)
 			change_status(&c, str, envp, tmp);
