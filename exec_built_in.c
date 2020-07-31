@@ -6,30 +6,30 @@
 /*   By: abarbour <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/25 00:26:53 by abarbour          #+#    #+#             */
-/*   Updated: 2020/07/27 00:18:23 by abarbour         ###   ########.fr       */
+/*   Updated: 2020/07/31 20:01:01 by abarbour         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-int		dispatch_built_in(char *path, char **args, char **envp)
+int		dispatch_built_in(char *path, char **args, char ***envp, int p)
 {
 	if (!ft_strncmp(path, "echo", 5))
-		return (ft_echo(path, args, envp));
+		return (ft_echo(path, args, *envp));
 	else if (!ft_strncmp(path, "cd", 3))
-		return (ft_cd(path, args, envp));
+		return (ft_cd(path, args, *envp));
 	else if (!ft_strncmp(path, "pwd", 4))
-		return (ft_pwd(path, args, envp));
-	else if (!ft_strncmp(path, "export", 7))
-		return (ft_export(path, args, &envp));
+		return (ft_pwd(path, args, *envp));
+	else if (!ft_strncmp(path, "export", 7) && !p)
+		return (ft_export(path, args, envp));
 	else if (!ft_strncmp(path, "unset", 6))
-		return (ft_echo(path, args, envp));
+		return (ft_echo(path, args, *envp));
 	else if (!ft_strncmp(path, "env", 4))
-		return (ft_env(path, args, envp));
+		return (ft_env(path, args, *envp));
 	return (-1);
 }
 
-int		exec_built_in(int in, int out, t_cmd *cmd, char **envp)
+int		exec_built_in(int in, int out, t_cmd *cmd, char ***envp)
 {
 	int pid;
 
@@ -47,7 +47,7 @@ int		exec_built_in(int in, int out, t_cmd *cmd, char **envp)
 			dup2(out, 1);
 			close(out);
 		}
-		if ((out = dispatch_built_in(cmd->path, cmd->args, envp)) == -1)
+		if ((out = dispatch_built_in(cmd->path, cmd->args, envp, 1)) == -1)
 			ft_putstr_error(strerror(errno));
 		if (errno == 2)
 			exit(127);

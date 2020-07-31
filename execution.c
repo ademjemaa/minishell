@@ -6,7 +6,7 @@
 /*   By: abarbour <abarbour@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/16 21:20:12 by abarbour          #+#    #+#             */
-/*   Updated: 2020/07/27 00:01:08 by abarbour         ###   ########.fr       */
+/*   Updated: 2020/07/31 20:16:23 by abarbour         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ int		count_pipes(t_cmd **tab)
 	return (i);
 }
 
-int		exec_prog(int in, int out, t_cmd *cmd, char **envp)
+int		exec_prog(int in, int out, t_cmd *cmd, char ***envp)
 {
 	int pid;
 
@@ -40,7 +40,7 @@ int		exec_prog(int in, int out, t_cmd *cmd, char **envp)
 			dup2(out, 1);
 			close(out);
 		}
-		if (execve(cmd->path, cmd->args, envp) == -1)
+		if (execve(cmd->path, cmd->args, *envp) == -1)
 			ft_putstr_error(strerror(errno));
 		if (errno == 2)
 			exit(127);
@@ -51,7 +51,7 @@ int		exec_prog(int in, int out, t_cmd *cmd, char **envp)
 	return (pid);
 }
 
-int		perform_redirects(t_cmd *tab, int input_fd, int *pip, char **envp)
+int		perform_redirects(t_cmd *tab, int input_fd, int *pip, char ***envp)
 {
 	int		old_pid;
 	int		in;
@@ -75,7 +75,7 @@ int		perform_redirects(t_cmd *tab, int input_fd, int *pip, char **envp)
 	return (old_pid);
 }
 
-int		exec_pipe(t_cmd **tab, int *i, char **envp)
+int		exec_pipe(t_cmd **tab, int *i, char ***envp)
 {
 	int input_fd;
 	int pip[2];
@@ -103,7 +103,7 @@ int		exec_pipe(t_cmd **tab, int *i, char **envp)
 	return (pip[0]);
 }
 
-void	exec(t_cmd **tab, char **envp)
+void	exec(t_cmd **tab, char ***envp)
 {
 	int		i;
 	char	c;
@@ -119,7 +119,8 @@ void	exec(t_cmd **tab, char **envp)
 		|| !ft_strncmp(tab[i]->path, "export", 7)
 		|| !ft_strncmp(tab[i]->path, "unset", 6)))
 		{
-			if (dispatch_built_in(tab[i]->path, tab[i]->args, envp) == -1)
+			printf("exec in the main process\n");
+			if (dispatch_built_in(tab[i]->path, tab[i]->args, envp, 0) == -1)
 			{
 				g_exit_code = 1;
 				ft_putstr_error(strerror(errno));
@@ -128,6 +129,7 @@ void	exec(t_cmd **tab, char **envp)
 		}
 		else
 		{
+			printf("exec in the child process\n");
 			output = exec_pipe(tab, &i, envp);
 			while (read(output,&c,1) > 0)
 					write(1,&c,1);

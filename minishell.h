@@ -6,7 +6,7 @@
 /*   By: abarbour <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/25 00:08:49 by abarbour          #+#    #+#             */
-/*   Updated: 2020/07/28 09:47:44 by adjemaa          ###   ########.fr       */
+/*   Updated: 2020/07/31 20:01:50 by abarbour         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,7 +80,7 @@ char			*args_parser(char *str, char **envp, t_cmd *stru);
 void			find_env(char **args, char **envp);
 char			**find_path(char **args, t_cmd *tmp, char **envp);
 char			*path_parser(char *line, char **envp, t_cmd *tmp);
-void			exec(t_cmd **tab, char **envp);
+void			exec(t_cmd **tab, char ***envp);
 int				check_name(char *line, t_cmd *tmp);
 int				fix_quotes(t_check *check, char *str);
 void			quote_limits(char *str, int *i, int *j);
@@ -103,14 +103,16 @@ char			*swap_case(char *args, char **envp, int j);
 char			*change_str(char *envp, char *str);
 void			catch_signals();
 int				rd_files(t_cmd *cmd, int in);
-int				exec_built_int(int in, int out, t_cmd *tab, char **envp);
-int				exec_built_in(int in, int out, t_cmd *tab, char **envp);
+int				exec_built_in(int in, int out, t_cmd *tab, char ***envp);
 int				ft_echo(char *path, char **args, char **envp);
 int				ft_pwd(char *path, char **args, char **envp);
 int				ft_env(char *path, char **args, char **env);
 int				ft_cd(char *path, char **args, char **envp);
 int				ft_export(char *path, char **args, char ***envp);
 char			**env_start(char **envp);
-int				dispatch_built_in(char *path, char **args, char **envp);
+int				dispatch_built_in(char *path, char **args, char ***envp, int p);
+int				equal_pos(char *var);
+void			update_env(char *var, char **envp, int i);
+void			add_env(char *var, char ***envp);
 
 #endif

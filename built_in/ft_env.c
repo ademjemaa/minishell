@@ -6,7 +6,7 @@
 /*   By: abarbour <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/25 23:22:25 by abarbour          #+#    #+#             */
-/*   Updated: 2020/07/25 23:29:41 by abarbour         ###   ########.fr       */
+/*   Updated: 2020/07/31 20:18:29 by abarbour         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@ int		ft_env(char *path, char **args, char **env)
 {
 	int		i;
 
+	printf("env pointer = %p\n", env); 
 	i = 0;
 	while (env[i])
 	{
