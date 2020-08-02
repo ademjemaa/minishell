@@ -6,7 +6,7 @@
 /*   By: abarbour <abarbour@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/16 21:20:12 by abarbour          #+#    #+#             */
-/*   Updated: 2020/07/31 20:16:23 by abarbour         ###   ########.fr       */
+/*   Updated: 2020/08/02 17:09:02 by abarbour         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,10 +77,10 @@ int		perform_redirects(t_cmd *tab, int input_fd, int *pip, char ***envp)
 
 int		exec_pipe(t_cmd **tab, int *i, char ***envp)
 {
-	int input_fd;
-	int pip[2];
-	int	old_pid;
-	int	status;
+	int 	input_fd;
+	int 	pip[2];
+	int		old_pid;
+	char	c;
 
 	input_fd = 0;
 	while (tab[*i] && tab[*i]->sep == 4)
@@ -93,14 +93,11 @@ int		exec_pipe(t_cmd **tab, int *i, char ***envp)
 	}
 	pipe(pip);
 	old_pid = perform_redirects(tab[*i], input_fd, pip, envp);
-	waitpid(old_pid, &status, 0);
-	if (WIFSIGNALED(status))
-		g_exit_code = 128 + WTERMSIG(status);
-	else
-		g_exit_code = WEXITSTATUS(status);
 	close(pip[1]);
+	while (read(pip[0],&c,1) > 0)
+		write(1,&c,1);
 	(*i)++;
-	return (pip[0]);
+	return (old_pid);
 }
 
 void	exec(t_cmd **tab, char ***envp)
@@ -108,7 +105,8 @@ void	exec(t_cmd **tab, char ***envp)
 	int		i;
 	char	c;
 	int	 	pip[2];
-	int		output;
+	int		old_pid;
+	int		status;
 
 	i = 0;
 	while (tab[i])
@@ -119,20 +117,24 @@ void	exec(t_cmd **tab, char ***envp)
 		|| !ft_strncmp(tab[i]->path, "export", 7)
 		|| !ft_strncmp(tab[i]->path, "unset", 6)))
 		{
-			printf("exec in the main process\n");
+			printf("exec in the main process %d\n", tab[i]->sep);
 			if (dispatch_built_in(tab[i]->path, tab[i]->args, envp, 0) == -1)
 			{
 				g_exit_code = 1;
-				ft_putstr_error(strerror(errno));
+				if (errno)
+					ft_putstr_error(strerror(errno));
 			}
 			i++;
 		}
 		else
 		{
 			printf("exec in the child process\n");
-			output = exec_pipe(tab, &i, envp);
-			while (read(output,&c,1) > 0)
-					write(1,&c,1);
+			old_pid = exec_pipe(tab, &i, envp);
+			waitpid(old_pid, &status, 0);
+			if (WIFSIGNALED(status))
+				g_exit_code = 128 + WTERMSIG(status);
+			else
+				g_exit_code = WEXITSTATUS(status);
 		}
 	}
 }

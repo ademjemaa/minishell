@@ -6,7 +6,7 @@
 /*   By: adjemaa <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/23 23:07:55 by adjemaa           #+#    #+#             */
-/*   Updated: 2020/07/26 00:05:27 by adjemaa          ###   ########.fr       */
+/*   Updated: 2020/08/01 17:59:33 by abarbour         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,23 +60,21 @@ char		**find_path(char **args, t_cmd *tmp, char **envp)
 	i = 0;
 	while (args[i] && (args[i][0] == '<' || args[i][0] == '>'))
 		i++;
-	tmp->path = path_parser(args[i], envp, tmp);
+	tmp->path = args[i] ? path_parser(args[i], envp, tmp) : NULL;
 	fill = total_args(args, tmp->path);
 	j = 1;
-	if (fill[1] != NULL)
+	i = args[i] ? i + 1 : i;
+	while (args[i])
 	{
-		while (args[i] && ((args[i + 1] != NULL)))
+		if (args[i][0] != '>' && args[i][0] != '<')
 		{
-			i++;
-			if (args[i][0] != '>' && args[i][0] != '<')
-			{
-				fill[j] = ft_strdup(args[i]);
-				j++;
-			}
+			fill[j] = ft_strdup(args[i]);
+			j++;
 		}
-		free_all(args);
-		fill[j] = NULL;
+		i++;
 	}
+	free_all(args);
+	fill[j] = NULL;
 	return (fill);
 }
 

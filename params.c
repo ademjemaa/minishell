@@ -6,13 +6,13 @@
 /*   By: adjemaa <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/23 23:14:11 by adjemaa           #+#    #+#             */
-/*   Updated: 2020/07/26 00:07:16 by adjemaa          ###   ########.fr       */
+/*   Updated: 2020/08/01 19:48:55 by abarbour         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-char	*str_find(char *line)
+char	*str_find(char *line, t_cmd *stru)
 {
 	int		i;
 	int		j;
@@ -21,6 +21,13 @@ char	*str_find(char *line)
 	i = 0;
 	while (!(line[i] == '|' || line[i] == ';' || line[i] == '\0'))
 		i++;
+	// lehna hattet el code ta3 sep_parser zid thabet
+	if (line[i] == ';')
+		stru->sep = 5;
+	else if (line[i] == '|')
+		stru->sep = 4;
+	else if (line[i] == 0)
+		stru->sep = 0;
 	str = malloc(sizeof(char) * (i + 1));
 	str[i] = 0;
 	j = -1;
@@ -34,7 +41,7 @@ char	*args_parser(char *str, char **envp, t_cmd *stru)
 	char	**args;
 	char	*tmp;
 
-	tmp = str_find(str);
+	tmp = str_find(str, stru);
 	printf("command string found\n");
 	tmp = cleaned(tmp);
 	printf("cleaning done, new string = #%s\n", tmp);
@@ -57,6 +64,7 @@ int		sep_parser(char *str, t_cmd *tmp)
 
 	i = 0;
 	tmp->red = -1;
+	printf("str = %s\n", str);
 	while (str[i] != 0 && str[i] != '|' && str[i] != ';')
 		i++;
 	tmp->red = red_type(str);

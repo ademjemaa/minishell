@@ -6,7 +6,7 @@
 /*   By: abarbour <abarbour@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/13 15:52:17 by abarbour          #+#    #+#             */
-/*   Updated: 2020/07/26 00:13:39 by adjemaa          ###   ########.fr       */
+/*   Updated: 2020/08/01 19:43:35 by abarbour         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,8 +83,8 @@ void	print_structure(t_cmd *tmp)
 		while (tmp->args[i] != NULL)
 		{
 			printf("args == !!%s!!\n", tmp->args[i]);
-		i++;
-   		 }
+			i++;
+		}
 	}
 	i = 0;
 	 while (tmp->files[i].file != NULL)
@@ -102,7 +102,7 @@ t_cmd	*params(char *line, char **envp)
 
 	tmp = (t_cmd*)malloc(sizeof(t_cmd));
 	str = args_parser(line, envp, tmp);
-	tmp->sep = sep_parser(str, tmp);
+	//tmp->sep = sep_parser(str, tmp);
 	print_structure(tmp);
 	free(str);
 	return (tmp);
