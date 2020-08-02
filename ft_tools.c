@@ -6,7 +6,7 @@
 /*   By: adjemaa <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/17 00:11:06 by adjemaa           #+#    #+#             */
-/*   Updated: 2020/07/26 00:07:50 by adjemaa          ###   ########.fr       */
+/*   Updated: 2020/08/02 22:44:36 by adjemaa          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ char	*ret_handler(char *line, char **envp, struct stat *sb)
 	if (str[i] != NULL)
 		ret = ft_strdup(str[i]);
 	else
-		ret = cmd_name(line);
+		ret = NULL;
 	free_all(str);
 	return (ret);
 }

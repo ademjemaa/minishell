@@ -6,7 +6,7 @@
 /*   By: abarbour <abarbour@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/13 15:52:17 by abarbour          #+#    #+#             */
-/*   Updated: 2020/08/02 21:25:46 by abarbour         ###   ########.fr       */
+/*   Updated: 2020/08/02 22:42:18 by adjemaa          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,6 +43,8 @@ char	*cmd_name(char *line)
 	while (line[i] && line[i] != ' ')
 		i++;
 	str = malloc(sizeof(char) * (i - j + 1));
+	if (str == NULL)
+		return (NULL);
 	str[i - j] = '\0';
 	i = 0;
 	while (line[j] != ' ' && line[j])
@@ -55,14 +57,24 @@ char	*path_parser(char *line, char **envp, t_cmd *tmp)
 {
 	char			*stri;
 	struct stat		sb;
+	int				i;
 
 	tmp->built = 0;
+	i = 0;
+	tmp->prog = 0;
 	stri = cmd_name(line);
 	if (stri == NULL)
 		return (NULL);
+	while (stri[i] && stri[i] != '/')
+		i++;
+	if (stri[i] == '/')
+	{
+		tmp->prog = 1;
+		if (stat(&stri[i + 1], &sb) == 0)
+			return (stri);
+	}
+	printf("stri %s wou i %d\n", &stri[i], i);
 	if (check_name(line, tmp))
-		return (stri);
-	if (stat(stri, &sb) == 0)
 		return (stri);
 	free(stri);
 	return (ret_handler(line, envp, &sb));
@@ -74,6 +86,7 @@ void	print_structure(t_cmd *tmp)
 
 	i = 0;
 	printf("structure : \n");
+	printf("prog == %d\n", tmp->prog);
 	if (tmp->path)
 		printf("path == %s!!\n", tmp->path);
 	if (tmp->file)
@@ -101,6 +114,8 @@ t_cmd	*params(char *line, char **envp)
 	char	*str;
 
 	tmp = (t_cmd*)malloc(sizeof(t_cmd));
+	if (tmp == NULL)
+		return (NULL);
 	init_tmp(tmp);
 	str = args_parser(line, envp, tmp);
 	tmp->sep = sep_parser(line, tmp);
@@ -121,6 +136,8 @@ t_cmd	**parser(char *line, char **envp)
 	total = counter(line);
 	j = 0;
 	tab = (t_cmd**)malloc(sizeof(t_cmd**) * (total + 1));
+	if (tab == NULL)
+		return (NULL);
 	while (line[j])
 	{
 		tab[i] = params(&line[j], envp);

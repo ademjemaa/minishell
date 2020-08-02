@@ -6,7 +6,7 @@
 /*   By: abarbour <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/25 00:08:49 by abarbour          #+#    #+#             */
-/*   Updated: 2020/08/02 21:03:21 by adjemaa          ###   ########.fr       */
+/*   Updated: 2020/08/02 22:41:05 by adjemaa          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,6 +45,7 @@ typedef struct	s_cmd
 	char		*path;
 	int			sep;
 	char		*file;
+	int			prog;
 	char		**args;
 	t_filelst	*files;
 	int			red;
