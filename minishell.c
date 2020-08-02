@@ -6,7 +6,7 @@
 /*   By: abarbour <abarbour@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/13 15:47:50 by abarbour          #+#    #+#             */
-/*   Updated: 2020/08/01 19:43:59 by abarbour         ###   ########.fr       */
+/*   Updated: 2020/08/02 20:46:28 by abarbour         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,6 @@ int	main(int argc, char **argv, char **envp)
 				free(line);
 				break;
 			}
-			printf("main line : %p \n", line);
 			tab = parser(line, env_allo);
 			printf("parsing done %s\n",line);
 			exec(tab, &env_allo);
