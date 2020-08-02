@@ -6,7 +6,7 @@
 /*   By: adjemaa <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/23 23:14:11 by adjemaa           #+#    #+#             */
-/*   Updated: 2020/08/01 19:48:55 by abarbour         ###   ########.fr       */
+/*   Updated: 2020/08/02 21:01:58 by adjemaa          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,6 @@ char	*str_find(char *line, t_cmd *stru)
 	i = 0;
 	while (!(line[i] == '|' || line[i] == ';' || line[i] == '\0'))
 		i++;
-	// lehna hattet el code ta3 sep_parser zid thabet
 	if (line[i] == ';')
 		stru->sep = 5;
 	else if (line[i] == '|')
@@ -67,7 +66,6 @@ int		sep_parser(char *str, t_cmd *tmp)
 	printf("str = %s\n", str);
 	while (str[i] != 0 && str[i] != '|' && str[i] != ';')
 		i++;
-	tmp->red = red_type(str);
 	while (str[i] != 0 && str[i] != '|' && str[i] != ';')
 		i++;
 	if (str[i] == ';')

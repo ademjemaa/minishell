@@ -6,11 +6,18 @@
 /*   By: adjemaa <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/26 23:20:26 by adjemaa           #+#    #+#             */
-/*   Updated: 2020/07/28 09:50:06 by adjemaa          ###   ########.fr       */
+/*   Updated: 2020/08/02 21:03:03 by adjemaa          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+
+void	init_tmp(t_cmd *tmp)
+{
+	tmp->sep = 0;
+	tmp->red = 0;
+	tmp->built = 0;
+}
 
 void	quote_limits(char *str, int *j, int *i)
 {

@@ -6,7 +6,7 @@
 /*   By: abarbour <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/25 00:08:49 by abarbour          #+#    #+#             */
-/*   Updated: 2020/08/01 20:59:09 by abarbour         ###   ########.fr       */
+/*   Updated: 2020/08/02 21:03:21 by adjemaa          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,6 +87,7 @@ void			quote_limits(char *str, int *i, int *j);
 void			copy_quotes(char *str, char *tmp, t_check *c);
 char			*cmd_name(char *linep);
 int				red_type(char *str);
+void			init_tmp(t_cmd *tmp);
 char			*exact_env(char *str);
 char			*ret_handler(char *line, char **envp, struct stat *sb);
 int				ft_strcmp(char *s1, char *s2);

@@ -6,7 +6,7 @@
 /*   By: abarbour <abarbour@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/13 15:52:17 by abarbour          #+#    #+#             */
-/*   Updated: 2020/08/01 19:43:35 by abarbour         ###   ########.fr       */
+/*   Updated: 2020/08/02 21:01:53 by adjemaa          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,9 +100,11 @@ t_cmd	*params(char *line, char **envp)
 	t_cmd	*tmp;
 	char	*str;
 
+	init_tmp(tmp);
 	tmp = (t_cmd*)malloc(sizeof(t_cmd));
 	str = args_parser(line, envp, tmp);
-	//tmp->sep = sep_parser(str, tmp);
+	tmp->sep = sep_parser(line, tmp);
+	tmp->red = red_type(str);
 	print_structure(tmp);
 	free(str);
 	return (tmp);
