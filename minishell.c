@@ -6,7 +6,7 @@
 /*   By: abarbour <abarbour@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/13 15:47:50 by abarbour          #+#    #+#             */
-/*   Updated: 2020/08/02 20:46:28 by abarbour         ###   ########.fr       */
+/*   Updated: 2020/08/03 22:58:19 by abarbour         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,7 @@ int	main(int argc, char **argv, char **envp)
 	line = NULL;
 	(void)argc;
 	env_allo = env_start(envp);
+	tree_env(env_allo);
 	g_exit_code = 0;
 	write(1,"kembyalet$",11);
 	catch_signals(0);

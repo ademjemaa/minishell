@@ -6,7 +6,7 @@
 /*   By: abarbour <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/25 00:08:49 by abarbour          #+#    #+#             */
-/*   Updated: 2020/08/02 22:41:05 by adjemaa          ###   ########.fr       */
+/*   Updated: 2020/08/03 22:56:36 by abarbour         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -118,5 +118,6 @@ int				equal_pos(char *var);
 void			update_env(char *var, char **envp, int i);
 void			add_env(char *var, char ***envp);
 int				str_array_len(char **envp);
+void			tree_env(char **envp);
 
 #endif
