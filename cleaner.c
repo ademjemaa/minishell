@@ -6,7 +6,7 @@
 /*   By: adjemaa <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/25 18:49:51 by adjemaa           #+#    #+#             */
-/*   Updated: 2020/07/25 23:26:42 by adjemaa          ###   ########.fr       */
+/*   Updated: 2020/08/03 21:47:25 by adjemaa          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,6 +85,8 @@ char	*cleaned(char *str)
 	i = 0;
 	total = find_len(str);
 	tmp = malloc(sizeof(char) * total);
+	if (tmp == NULL)
+		return (NULL);
 	tmp = copy_clean(tmp, str);
 	tmp = rearrange(tmp);
 	free(str);

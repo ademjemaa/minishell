@@ -6,7 +6,7 @@
 /*   By: adjemaa <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/17 01:48:21 by adjemaa           #+#    #+#             */
-/*   Updated: 2020/07/25 23:19:10 by adjemaa          ###   ########.fr       */
+/*   Updated: 2020/08/03 21:47:36 by adjemaa          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,8 @@ char	*change_code(char *tmp, char *args, int j)
 	char	*str;
 
 	str = malloc(sizeof(char) * j + ft_strlen(tmp) + 1);
+	if (str == NULL)
+		return (NULL);
 	i = 0;
 	while (i < j - 1)
 	{

@@ -6,7 +6,7 @@
 /*   By: adjemaa <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/27 18:00:48 by adjemaa           #+#    #+#             */
-/*   Updated: 2020/07/28 09:50:05 by adjemaa          ###   ########.fr       */
+/*   Updated: 2020/08/03 21:46:40 by adjemaa          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,8 @@ char	*rearrange(char *str)
 
 	init_struct(&c);
 	tmp = malloc(sizeof(char) * size_counter(str));
+	if (tmp == NULL)
+		return (NULL);
 	tmp[size_counter(str) - 1] = 0;
 	while (c.i < size_counter(str))
 	{
@@ -89,7 +91,7 @@ void	find_env(char **args, char **envp)
 			{
 				if (args[i][j] == '\\')
 					j = j + 2;
-				if (args[i][j] == '$')
+				else if (args[i][j] == '$')
 				{
 					args[i] = swap_case(args[i], envp, j + 1);
 					j = 0;

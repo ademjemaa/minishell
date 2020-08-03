@@ -6,7 +6,7 @@
 /*   By: adjemaa <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/27 17:05:56 by adjemaa           #+#    #+#             */
-/*   Updated: 2020/07/25 23:25:52 by adjemaa          ###   ########.fr       */
+/*   Updated: 2020/08/03 21:46:19 by adjemaa          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,6 +93,8 @@ char	*exact_env(char *str)
 
 	i = 0;
 	tmp = malloc(sizeof(char *) * env_len(str));
+	if (tmp == NULL)
+		return (NULL);
 	while (str[i] && ((str[i] >= 'a' && str[i] <= 'z') || (str[i] >= 'A' &&
 			str[i] <= 'Z') || (str[i] >= '0' && str[i] <= '9') ||
 			str[i] == '_'))

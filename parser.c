@@ -6,7 +6,7 @@
 /*   By: abarbour <abarbour@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/13 15:52:17 by abarbour          #+#    #+#             */
-/*   Updated: 2020/08/02 22:42:18 by adjemaa          ###   ########.fr       */
+/*   Updated: 2020/08/03 21:45:51 by adjemaa          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,7 +73,6 @@ char	*path_parser(char *line, char **envp, t_cmd *tmp)
 		if (stat(&stri[i + 1], &sb) == 0)
 			return (stri);
 	}
-	printf("stri %s wou i %d\n", &stri[i], i);
 	if (check_name(line, tmp))
 		return (stri);
 	free(stri);

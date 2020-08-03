@@ -6,7 +6,7 @@
 /*   By: adjemaa <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/27 18:01:22 by adjemaa           #+#    #+#             */
-/*   Updated: 2020/08/02 21:34:41 by adjemaa          ###   ########.fr       */
+/*   Updated: 2020/08/03 21:47:16 by adjemaa          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,6 +76,8 @@ char	*build_arg(char *str, int *j)
 
 	i = 0;
 	tmp = (char *)malloc(sizeof(char) * (malloc_size(str) + 2));
+	if (tmp == NULL)
+		return (NULL);
 	if (str[0] == '>' || str[0] == '<')
 		return (file_prot(str, tmp, j));
 	while (str[i])
@@ -101,6 +103,8 @@ char	**first_split(char *line)
 	j = 0;
 	total = total_argus(line);
 	args = (char **)malloc(sizeof(char *) * (total));
+	if (args == NULL)
+		return (NULL);
 	args[total] = NULL;
 	while (i < total - 1)
 	{

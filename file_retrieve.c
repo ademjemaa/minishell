@@ -6,7 +6,7 @@
 /*   By: adjemaa <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/02 18:38:18 by adjemaa           #+#    #+#             */
-/*   Updated: 2020/07/25 23:29:10 by adjemaa          ###   ########.fr       */
+/*   Updated: 2020/08/03 21:47:46 by adjemaa          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -121,6 +121,8 @@ char	*retrieve(char *str, char **envp)
 
 	init_struct(&c);
 	tmp = malloc(sizeof(char *) * file_len(str, envp));
+	if (tmp == NULL)
+		return (NULL);
 	tmp[file_len(str, envp)] = 0;
 	while (str[c.i])
 	{
@@ -132,11 +134,7 @@ char	*retrieve(char *str, char **envp)
 		else if (str[c.i] == '$' && c.one == 0)
 			change_status(&c, str, envp, tmp);
 		else
-		{
-			tmp[c.j] = str[c.i];
-			c.j++;
-			c.i++;
-		}
+			tmp[c.j++] = str[c.i++];
 	}
 	tmp[c.j] = 0;
 	return (tmp);

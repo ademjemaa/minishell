@@ -6,7 +6,7 @@
 /*   By: adjemaa <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/23 23:14:11 by adjemaa           #+#    #+#             */
-/*   Updated: 2020/08/02 21:01:58 by adjemaa          ###   ########.fr       */
+/*   Updated: 2020/08/03 21:45:33 by adjemaa          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,8 @@ char	*str_find(char *line, t_cmd *stru)
 	else if (line[i] == 0)
 		stru->sep = 0;
 	str = malloc(sizeof(char) * (i + 1));
+	if (str == NULL)
+		return (NULL);
 	str[i] = 0;
 	j = -1;
 	while (++j < i)

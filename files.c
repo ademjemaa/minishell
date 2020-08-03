@@ -6,7 +6,7 @@
 /*   By: adjemaa <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/23 23:07:55 by adjemaa           #+#    #+#             */
-/*   Updated: 2020/08/01 17:59:33 by abarbour         ###   ########.fr       */
+/*   Updated: 2020/08/03 21:47:52 by adjemaa          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,8 @@ char		**total_args(char **args, char *str)
 		i++;
 	}
 	fill = (char **)malloc(sizeof(char *) * total);
+	if (fill == NULL)
+		return (NULL);
 	fill[total - 1] = NULL;
 	if (total > 1)
 	{
@@ -103,6 +105,8 @@ t_filelst	*find_filelst(char **args, char **envp)
 	i = -1;
 	j = 0;
 	files = (t_filelst *)malloc(sizeof(t_filelst) * file_counter(args));
+	if (files == NULL)
+		return (NULL);
 	files[file_counter(args) - 1].file = NULL;
 	while (args[++i] != NULL)
 	{
