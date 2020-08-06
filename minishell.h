@@ -6,7 +6,7 @@
 /*   By: abarbour <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/25 00:08:49 by abarbour          #+#    #+#             */
-/*   Updated: 2020/08/03 22:56:36 by abarbour         ###   ########.fr       */
+/*   Updated: 2020/08/06 22:43:46 by abarbour         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,6 +82,7 @@ void			find_env(char **args, char **envp);
 char			**find_path(char **args, t_cmd *tmp, char **envp);
 char			*path_parser(char *line, char **envp, t_cmd *tmp);
 void			exec(t_cmd **tab, char ***envp);
+void			dup_and_close(int in, int out);
 int				check_name(char *line, t_cmd *tmp);
 int				fix_quotes(t_check *check, char *str);
 void			quote_limits(char *str, int *i, int *j);
@@ -94,6 +95,8 @@ char			*ret_handler(char *line, char **envp, struct stat *sb);
 int				ft_strcmp(char *s1, char *s2);
 int				nargs_count(char **args);
 void			concat_args(t_cmd *cmd);
+void			concat_sbs_args(t_cmd *cmd, char **new_args, int *i, int *j);
+char			*proc_arg(char **args, int i);
 void			print_structure(t_cmd *tmp);
 int				narg_len_dq(char	*arg);
 int				narg_len_sq(char	*arg);
@@ -106,6 +109,7 @@ char			*change_str(char *envp, char *str);
 void			catch_signals();
 int				rd_files(t_cmd *cmd, int in);
 int				exec_built_in(int in, int out, t_cmd *tab, char ***envp);
+int				is_env_built_in_cmd(t_cmd **tab, int *i);
 int				ft_echo(char *path, char **args, char **envp);
 int				ft_pwd(char *path, char **args, char **envp);
 int				ft_env(char *path, char **args, char **env);

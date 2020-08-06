@@ -6,7 +6,7 @@
 /*   By: abarbour <abarbour@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/13 15:52:17 by abarbour          #+#    #+#             */
-/*   Updated: 2020/08/03 21:45:51 by adjemaa          ###   ########.fr       */
+/*   Updated: 2020/08/04 23:01:51 by abarbour         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,34 +77,6 @@ char	*path_parser(char *line, char **envp, t_cmd *tmp)
 		return (stri);
 	free(stri);
 	return (ret_handler(line, envp, &sb));
-}
-
-void	print_structure(t_cmd *tmp)
-{
-	int i;
-
-	i = 0;
-	printf("structure : \n");
-	printf("prog == %d\n", tmp->prog);
-	if (tmp->path)
-		printf("path == %s!!\n", tmp->path);
-	if (tmp->file)
-		printf("file == %s!!\n",  tmp->file);
-	if (tmp->args)
-	{
-		while (tmp->args[i] != NULL)
-		{
-			printf("args == !!%s!!\n", tmp->args[i]);
-			i++;
-		}
-	}
-	i = 0;
-	 while (tmp->files[i].file != NULL)
-	{
-		printf("files == %s\n", tmp->files[i].file);
-		i++;
-	}
-	printf("sep == %d\nred == %d\nbuild == %d\n", tmp->sep, tmp->red, tmp->built);
 }
 
 t_cmd	*params(char *line, char **envp)

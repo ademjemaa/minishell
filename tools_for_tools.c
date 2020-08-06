@@ -6,7 +6,7 @@
 /*   By: adjemaa <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/26 23:20:26 by adjemaa           #+#    #+#             */
-/*   Updated: 2020/08/02 22:43:02 by adjemaa          ###   ########.fr       */
+/*   Updated: 2020/08/04 23:02:23 by abarbour         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,4 +95,33 @@ void	envp_slash(char *str, char *tmp, t_check *c, char *envp)
 			>= 'A' && str[c->i] <= 'Z') || (str[c->i] >= '0' &&
 			str[c->i] <= '9') || str[c->i] == '_'))
 		c->i++;
+}
+
+void	print_structure(t_cmd *tmp)
+{
+	int i;
+
+	i = 0;
+	printf("structure : \n");
+	printf("prog == %d\n", tmp->prog);
+	if (tmp->path)
+		printf("path == %s!!\n", tmp->path);
+	if (tmp->file)
+		printf("file == %s!!\n", tmp->file);
+	if (tmp->args)
+	{
+		while (tmp->args[i] != NULL)
+		{
+			printf("args == !!%s!!\n", tmp->args[i]);
+			i++;
+		}
+	}
+	i = 0;
+	while (tmp->files[i].file != NULL)
+	{
+		printf("files == %s\n", tmp->files[i].file);
+		i++;
+	}
+	printf("sep == %d\nred == %d\nbuild == %d\n",
+			tmp->sep, tmp->red, tmp->built);
 }

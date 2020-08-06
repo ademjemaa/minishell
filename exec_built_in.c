@@ -6,7 +6,7 @@
 /*   By: abarbour <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/25 00:26:53 by abarbour          #+#    #+#             */
-/*   Updated: 2020/08/01 20:29:05 by abarbour         ###   ########.fr       */
+/*   Updated: 2020/08/04 22:05:33 by abarbour         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ int		exec_built_in(int in, int out, t_cmd *cmd, char ***envp)
 {
 	int pid;
 
-	if ((pid = fork ()) == 0)
+	if ((pid = fork()) == 0)
 	{
 		if (out == -1 || in == -1)
 			exit(1);

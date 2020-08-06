@@ -6,7 +6,7 @@
 /*   By: abarbour <abarbour@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/16 21:20:12 by abarbour          #+#    #+#             */
-/*   Updated: 2020/08/02 22:51:33 by abarbour         ###   ########.fr       */
+/*   Updated: 2020/08/06 22:27:22 by abarbour         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,20 +26,11 @@ int		exec_prog(int in, int out, t_cmd *cmd, char ***envp)
 {
 	int pid;
 
-	if ((pid = fork ()) == 0)
+	if ((pid = fork()) == 0)
 	{
 		if (out == -1 || in == -1)
 			exit(1);
-		if (in != 0)
-		{
-			dup2(in, 0);
-			close(in);
-		}
-		if (out != 1)
-		{
-			dup2(out, 1);
-			close(out);
-		}
+		dup_and_close(in, out);
 		if (!(cmd->path))
 		{
 			ft_putstr_error(strerror(2));
@@ -70,20 +61,22 @@ int		perform_redirects(t_cmd *tab, int input_fd, int *pip, char ***envp)
 		if (tab->built)
 			old_pid = exec_built_in(in, out, tab, envp);
 		else
-	   		old_pid = exec_prog(in, out, tab, envp);
+			old_pid = exec_prog(in, out, tab, envp);
 	}
 	else
+	{
 		if (tab->built)
 			old_pid = exec_built_in(in, out, tab, envp);
 		else
-	   		old_pid = exec_prog(input_fd, pip[1], tab, envp);
+			old_pid = exec_prog(input_fd, pip[1], tab, envp);
+	}
 	return (old_pid);
 }
 
 int		exec_pipe(t_cmd **tab, int *i, char ***envp)
 {
-	int 	input_fd;
-	int 	pip[2];
+	int		input_fd;
+	int		pip[2];
 	int		old_pid;
 	char	c;
 
@@ -99,8 +92,8 @@ int		exec_pipe(t_cmd **tab, int *i, char ***envp)
 	pipe(pip);
 	old_pid = perform_redirects(tab[*i], input_fd, pip, envp);
 	close(pip[1]);
-	while (read(pip[0],&c,1) > 0)
-		write(1,&c,1);
+	while (read(pip[0], &c, 1) > 0)
+		write(1, &c, 1);
 	(*i)++;
 	return (old_pid);
 }
@@ -108,8 +101,6 @@ int		exec_pipe(t_cmd **tab, int *i, char ***envp)
 void	exec(t_cmd **tab, char ***envp)
 {
 	int		i;
-	char	c;
-	int	 	pip[2];
 	int		old_pid;
 	int		status;
 
@@ -117,29 +108,19 @@ void	exec(t_cmd **tab, char ***envp)
 	while (tab[i])
 	{
 		concat_args(tab[i]);
-		if (tab[i]->path && tab[i]->sep != 4 &&
-		(!ft_strncmp(tab[i]->path, "cd", 3)
-		|| !ft_strncmp(tab[i]->path, "export", 7)
-		|| !ft_strncmp(tab[i]->path, "unset", 6)))
+		if (is_env_built_in_cmd(tab, &i) &&
+			dispatch_built_in(tab[i]->path, tab[i]->args, envp, 0) == -1)
 		{
-			printf("exec in the main process %d\n", tab[i]->sep);
-			if (dispatch_built_in(tab[i]->path, tab[i]->args, envp, 0) == -1)
-			{
-				g_exit_code = 1;
-				if (errno)
-					ft_putstr_error(strerror(errno));
-			}
-			i++;
+			g_exit_code = 1;
+			if (errno)
+				ft_putstr_error(strerror(errno));
 		}
 		else
 		{
-			printf("exec in the child process\n");
 			old_pid = exec_pipe(tab, &i, envp);
 			waitpid(old_pid, &status, 0);
-			if (WIFSIGNALED(status))
-				g_exit_code = 128 + WTERMSIG(status);
-			else
-				g_exit_code = WEXITSTATUS(status);
+			g_exit_code = WIFSIGNALED(status) ? 128 + WTERMSIG(status)
+				: WEXITSTATUS(status);
 		}
 	}
 }

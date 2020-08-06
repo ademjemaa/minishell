@@ -6,7 +6,7 @@
 /*   By: abarbour <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/17 21:14:06 by abarbour          #+#    #+#             */
-/*   Updated: 2020/07/25 00:15:02 by abarbour         ###   ########.fr       */
+/*   Updated: 2020/08/04 23:03:21 by abarbour         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ void	int_handler(int signum)
 	g_exit_code = 1;
 }
 
-void	catch_signals()
+void	catch_signals(void)
 {
 	signal(SIGINT, &int_handler);
 }

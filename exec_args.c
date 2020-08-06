@@ -6,13 +6,13 @@
 /*   By: abarbour <abarbour@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/16 21:20:08 by abarbour          #+#    #+#             */
-/*   Updated: 2020/07/25 21:50:51 by abarbour         ###   ########.fr       */
+/*   Updated: 2020/08/04 22:33:47 by abarbour         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-char	*remove_dq(char	*arg)
+char	*remove_dq(char *arg)
 {
 	char	*str;
 	int		j;
@@ -35,7 +35,7 @@ char	*remove_dq(char	*arg)
 	return (str);
 }
 
-char	*remove_nq(char	*arg)
+char	*remove_nq(char *arg)
 {
 	char	*str;
 	int		j;
@@ -52,14 +52,14 @@ char	*remove_nq(char	*arg)
 		if (arg[i])
 			str[j++] = arg[i];
 		else
-			break;
+			break ;
 		i++;
 	}
 	str[j] = '\0';
 	return (str);
 }
 
-char	*remove_sq(char	*arg)
+char	*remove_sq(char *arg)
 {
 	char	*str;
 	int		j;
@@ -102,28 +102,13 @@ void	concat_args(t_cmd *cmd)
 
 	i = 1;
 	j = 1;
-	if (!(new_args = (char **)malloc(sizeof(char*) * (nargs_count(cmd->args) + 2))))
-		return;
+	if (!(new_args = (char **)malloc(sizeof(char*)
+	* (nargs_count(cmd->args) + 2))))
+		return ;
 	while (cmd->args[i])
-	{
-		new_args[j] = NULL;
-		while (cmd->args[i] && (cmd->args[i][ft_strlen(cmd->args[i]) - 1] != ' '
-			|| cmd->args[i][ft_strlen(cmd->args[i]) - 2] == '\\'))
-		{
-			new_args[j] = ft_strjoinfree(new_args[j], proc_arg(cmd->args, i), 0);
-			i++;
-		}
-		if (cmd->args[i])
-		{
-			cmd->args[i][ft_strlen(cmd->args[i]) - 1] = '\0';
-			new_args[j] = ft_strjoinfree(new_args[j], proc_arg(cmd->args, i), 0);
-			i++;
-		}
-		j++;
-	}
+		concat_sbs_args(cmd, new_args, &i, &j);
 	new_args[0] = cmd->args[0];
 	new_args[j] = NULL;
 	free(cmd->args);
 	cmd->args = new_args;
 }
-
