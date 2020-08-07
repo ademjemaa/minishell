@@ -6,7 +6,7 @@
 /*   By: abarbour <abarbour@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/13 15:47:50 by abarbour          #+#    #+#             */
-/*   Updated: 2020/08/06 23:01:27 by abarbour         ###   ########.fr       */
+/*   Updated: 2020/08/07 22:06:10 by abarbour         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ void	begin_parse_exec(t_cmd ***tab, char ***env_allo, char **line)
 	*tab = parser(*line, *env_allo);
 	exec(*tab, env_allo);
 	free_cmds(*tab);
-	write(1, "kembyalet$", 11);
+	write(1, "kembyalet$ ", 12);
 	free(*line);
 }
 
@@ -27,7 +27,7 @@ void	init_minishell(char ***env_allo, char **envp, char **line, int argc)
 	*env_allo = env_start(envp);
 	tree_env(*env_allo);
 	g_exit_code = 0;
-	write(1, "kembyalet$", 11);
+	write(1, "kembyalet$ ", 12);
 	catch_signals(0);
 }
 
@@ -53,7 +53,7 @@ int		main(int argc, char **argv, char **envp)
 		}
 		else
 		{
-			write(1, "\n", 1);
+			write(1, "exit\n", 5);
 			break ;
 		}
 	}

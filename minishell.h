@@ -6,7 +6,7 @@
 /*   By: abarbour <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/25 00:08:49 by abarbour          #+#    #+#             */
-/*   Updated: 2020/08/06 22:43:46 by abarbour         ###   ########.fr       */
+/*   Updated: 2020/08/07 22:37:55 by abarbour         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,7 @@
 # include "libft/libft.h"
 # include <sys/errno.h>
 # include <sys/param.h>
+# include <sys/wait.h>
 # include <string.h>
 
 typedef struct	s_filelst
