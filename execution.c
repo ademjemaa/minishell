@@ -6,7 +6,7 @@
 /*   By: abarbour <abarbour@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/16 21:20:12 by abarbour          #+#    #+#             */
-/*   Updated: 2020/08/06 22:27:22 by abarbour         ###   ########.fr       */
+/*   Updated: 2020/08/08 19:58:53 by abarbour         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -117,10 +117,12 @@ void	exec(t_cmd **tab, char ***envp)
 		}
 		else
 		{
+			g_childs = 1;
 			old_pid = exec_pipe(tab, &i, envp);
 			waitpid(old_pid, &status, 0);
 			g_exit_code = WIFSIGNALED(status) ? 128 + WTERMSIG(status)
 				: WEXITSTATUS(status);
+			g_childs = 0;
 		}
 	}
 }

@@ -6,7 +6,7 @@
 /*   By: abarbour <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/25 00:08:49 by abarbour          #+#    #+#             */
-/*   Updated: 2020/08/08 17:12:31 by abarbour         ###   ########.fr       */
+/*   Updated: 2020/08/08 19:57:17 by abarbour         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,6 +55,7 @@ typedef struct	s_cmd
 }				t_cmd;
 
 int				g_exit_code;
+int				g_childs;
 
 int				backslash(char *str, char *tmp, int *i, int cond);
 int				arg_handler(char *str, char *tmp, int *i);
