@@ -6,7 +6,7 @@
 /*   By: abarbour <abarbour@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/16 21:20:12 by abarbour          #+#    #+#             */
-/*   Updated: 2020/08/08 19:58:53 by abarbour         ###   ########.fr       */
+/*   Updated: 2020/08/08 20:48:10 by abarbour         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -108,21 +108,17 @@ void	exec(t_cmd **tab, char ***envp)
 	while (tab[i])
 	{
 		concat_args(tab[i]);
-		if (is_env_built_in_cmd(tab, &i) &&
-			dispatch_built_in(tab[i]->path, tab[i]->args, envp, 0) == -1)
+		if (is_env_built_in_cmd(tab, i))
 		{
-			g_exit_code = 1;
-			if (errno)
-				ft_putstr_error(strerror(errno));
+			if (dispatch_built_in(tab[i]->path, tab[i]->args, envp, 0) == -1)
+			{
+				g_exit_code = 1;
+				if (errno)
+					ft_putstr_error(strerror(errno));
+			}
+			i++;
 		}
 		else
-		{
-			g_childs = 1;
-			old_pid = exec_pipe(tab, &i, envp);
-			waitpid(old_pid, &status, 0);
-			g_exit_code = WIFSIGNALED(status) ? 128 + WTERMSIG(status)
-				: WEXITSTATUS(status);
-			g_childs = 0;
-		}
+			begin_pipe(tab, envp, &i);
 	}
 }

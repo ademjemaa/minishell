@@ -6,7 +6,7 @@
 /*   By: abarbour <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/22 23:20:05 by abarbour          #+#    #+#             */
-/*   Updated: 2020/08/06 22:43:49 by abarbour         ###   ########.fr       */
+/*   Updated: 2020/08/08 20:39:21 by abarbour         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,16 +73,13 @@ void	ft_putstr_error(char *str)
 	write(2, "\n", 1);
 }
 
-int		is_env_built_in_cmd(t_cmd **tab, int *i)
+int		is_env_built_in_cmd(t_cmd **tab, int i)
 {
-	if (tab[*i]->path && tab[*i]->sep != 4 &&
-		(!ft_strncmp(tab[*i]->path, "cd", 3)
-		|| !ft_strncmp(tab[*i]->path, "export", 7)
-		|| !ft_strncmp(tab[*i]->path, "unset", 6)))
-	{
-		(*i)++;
+	if (tab[i]->path && tab[i]->sep != 4 &&
+		(!ft_strncmp(tab[i]->path, "cd", 3)
+		|| !ft_strncmp(tab[i]->path, "export", 7)
+		|| !ft_strncmp(tab[i]->path, "unset", 6)))
 		return (1);
-	}
 	return (0);
 }
 

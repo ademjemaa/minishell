@@ -6,7 +6,7 @@
 /*   By: abarbour <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/25 00:08:49 by abarbour          #+#    #+#             */
-/*   Updated: 2020/08/08 20:05:52 by abarbour         ###   ########.fr       */
+/*   Updated: 2020/08/08 20:47:09 by abarbour         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -111,7 +111,8 @@ char			*change_str(char *envp, char *str);
 void			catch_signals();
 int				rd_files(t_cmd *cmd, int in);
 int				exec_built_in(int in, int out, t_cmd *tab, char ***envp);
-int				is_env_built_in_cmd(t_cmd **tab, int *i);
+int				exec_pipe(t_cmd **tab, int *i, char ***envp);
+int				is_env_built_in_cmd(t_cmd **tab, int i);
 int				ft_echo(char *path, char **args, char **envp);
 int				ft_pwd(char *path, char **args, char **envp);
 int				ft_env(char *path, char **args, char **env);
@@ -126,5 +127,6 @@ void			add_env(char *var, char ***envp);
 char			*free_env(char **env, int i);
 int				str_array_len(char **envp);
 void			tree_env(char **envp);
+void			begin_pipe(t_cmd **tab, char ***envp, int *i);
 
 #endif

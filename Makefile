@@ -6,13 +6,13 @@
 #    By: adjemaa <marvin@42.fr>                     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/11/06 21:13:47 by adjemaa           #+#    #+#              #
-#    Updated: 2020/08/03 22:57:07 by abarbour         ###   ########.fr        #
+#    Updated: 2020/08/08 20:45:42 by abarbour         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 CC = gcc
 
-FLAGS = -Wall -Wextra -Werror
+FLAGS = -Wall -Wextra -Werror -fsanitize=address
 
 NAME = minishell
 
@@ -26,6 +26,7 @@ SRCS =	minishell.c\
 		exec_args.c\
 		exec_utils.c\
 		exec_utils2.c\
+		exec_utils3.c\
 		quotes2.c\
 		tools.c\
 		tools_for_tools.c\
