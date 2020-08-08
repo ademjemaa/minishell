@@ -6,7 +6,7 @@
 /*   By: abarbour <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/26 21:14:08 by abarbour          #+#    #+#             */
-/*   Updated: 2020/08/08 17:20:02 by abarbour         ###   ########.fr       */
+/*   Updated: 2020/08/08 20:10:59 by abarbour         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,7 @@ int		str_array_len(char **envp)
 		i++;
 	return (i);
 }
+
 void	add_env(char *var, char ***envp)
 {
 	int		i;

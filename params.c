@@ -6,7 +6,7 @@
 /*   By: adjemaa <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/23 23:14:11 by adjemaa           #+#    #+#             */
-/*   Updated: 2020/08/03 21:45:33 by adjemaa          ###   ########.fr       */
+/*   Updated: 2020/08/08 20:04:52 by abarbour         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,19 +43,13 @@ char	*args_parser(char *str, char **envp, t_cmd *stru)
 	char	*tmp;
 
 	tmp = str_find(str, stru);
-	printf("command string found\n");
 	tmp = cleaned(tmp);
-	printf("cleaning done, new string = #%s\n", tmp);
 	args = first_split(tmp);
 	stru->files = NULL;
 	stru->file = NULL;
 	stru->files = find_filelst(args, envp);
-	printf("files done\n");
 	stru->args = find_path(args, stru, envp);
-	printf("path || args done\n");
 	find_env(stru->args, envp);
-	printf("env done\n");
-	printf("tmp == %s\n", tmp);
 	return (tmp);
 }
 
@@ -65,7 +59,6 @@ int		sep_parser(char *str, t_cmd *tmp)
 
 	i = 0;
 	tmp->red = -1;
-	printf("str = %s\n", str);
 	while (str[i] != 0 && str[i] != '|' && str[i] != ';')
 		i++;
 	while (str[i] != 0 && str[i] != '|' && str[i] != ';')

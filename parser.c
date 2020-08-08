@@ -6,7 +6,7 @@
 /*   By: abarbour <abarbour@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/13 15:52:17 by abarbour          #+#    #+#             */
-/*   Updated: 2020/08/04 23:01:51 by abarbour         ###   ########.fr       */
+/*   Updated: 2020/08/08 20:05:07 by abarbour         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,7 +91,6 @@ t_cmd	*params(char *line, char **envp)
 	str = args_parser(line, envp, tmp);
 	tmp->sep = sep_parser(line, tmp);
 	tmp->red = red_type(str);
-	print_structure(tmp);
 	free(str);
 	return (tmp);
 }

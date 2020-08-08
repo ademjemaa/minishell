@@ -6,7 +6,7 @@
 /*   By: abarbour <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/01 20:01:55 by abarbour          #+#    #+#             */
-/*   Updated: 2020/08/01 21:33:51 by abarbour         ###   ########.fr       */
+/*   Updated: 2020/08/08 20:12:55 by abarbour         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,7 +63,7 @@ void	remove_var_env(char *var, char ***envp)
 		if (!ft_strncmp(var, (*envp)[i], ft_strlen(var)))
 		{
 			unset_env_var(var, envp, i);
-			return;
+			return ;
 		}
 		i++;
 	}

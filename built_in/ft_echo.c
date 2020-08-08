@@ -6,7 +6,7 @@
 /*   By: abarbour <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/25 18:04:45 by abarbour          #+#    #+#             */
-/*   Updated: 2020/07/26 23:53:12 by abarbour         ###   ########.fr       */
+/*   Updated: 2020/08/08 20:09:30 by abarbour         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,5 +37,5 @@ int		ft_echo(char *path, char **args, char **envp)
 	}
 	if (nl)
 		write(1, "\n", 1);
-	return(0);
+	return (0);
 }

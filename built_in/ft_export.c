@@ -6,7 +6,7 @@
 /*   By: abarbour <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/25 19:30:41 by abarbour          #+#    #+#             */
-/*   Updated: 2020/08/01 20:32:47 by abarbour         ###   ########.fr       */
+/*   Updated: 2020/08/08 20:14:07 by abarbour         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,10 +35,10 @@ int		equal_pos(char *var)
 	int		i;
 
 	i = 0;
-	while(var[i])
+	while (var[i])
 	{
 		if (var[i] == '=')
-			break;
+			break ;
 		i++;
 	}
 	return (i);
@@ -54,7 +54,7 @@ void	add_var_to_env(char *var, char ***envp)
 		if (!ft_strncmp(var, (*envp)[i], equal_pos(var)))
 		{
 			update_env(var, *envp, i);
-			return;
+			return ;
 		}
 		i++;
 	}
@@ -87,6 +87,7 @@ void	print_export_envs(char **envp)
 		i++;
 	}
 }
+
 int		ft_export(char *path, char **args, char ***envp, int p)
 {
 	int		i;
@@ -113,5 +114,5 @@ int		ft_export(char *path, char **args, char ***envp, int p)
 	}
 	if (i == 1)
 		print_export_envs(*envp);
-	return (exit_code);	
+	return (exit_code);
 }
