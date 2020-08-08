@@ -6,7 +6,7 @@
 /*   By: abarbour <abarbour@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/13 15:47:50 by abarbour          #+#    #+#             */
-/*   Updated: 2020/08/07 22:06:10 by abarbour         ###   ########.fr       */
+/*   Updated: 2020/08/08 17:22:05 by abarbour         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,12 @@ void	init_minishell(char ***env_allo, char **envp, char **line, int argc)
 	g_exit_code = 0;
 	write(1, "kembyalet$ ", 12);
 	catch_signals(0);
+}
+
+int		exit_minishell(char **env_allo)
+{
+	free_env(env_allo, str_array_len(env_allo));
+	return (g_exit_code);
 }
 
 int		main(int argc, char **argv, char **envp)
@@ -57,5 +63,5 @@ int		main(int argc, char **argv, char **envp)
 			break ;
 		}
 	}
-	return (g_exit_code);
+	return (exit_minishell(env_allo));
 }

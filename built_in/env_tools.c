@@ -6,7 +6,7 @@
 /*   By: abarbour <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/26 21:14:08 by abarbour          #+#    #+#             */
-/*   Updated: 2020/07/31 20:20:38 by abarbour         ###   ########.fr       */
+/*   Updated: 2020/08/08 17:20:02 by abarbour         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,7 +70,7 @@ char	*free_env(char **env, int i)
 	while (j < i)
 	{
 		free(env[j]);
-		i++;
+		j++;
 	}
 	free(env);
 	return (NULL);

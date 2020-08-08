@@ -6,7 +6,7 @@
 /*   By: abarbour <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/25 00:08:49 by abarbour          #+#    #+#             */
-/*   Updated: 2020/08/07 22:37:55 by abarbour         ###   ########.fr       */
+/*   Updated: 2020/08/08 17:12:31 by abarbour         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,7 @@
 # include <sys/param.h>
 # include <sys/wait.h>
 # include <string.h>
+# include <signal.h>
 
 typedef struct	s_filelst
 {
@@ -122,6 +123,7 @@ int				dispatch_built_in(char *path, char **args, char ***envp, int p);
 int				equal_pos(char *var);
 void			update_env(char *var, char **envp, int i);
 void			add_env(char *var, char ***envp);
+char			*free_env(char **env, int i);
 int				str_array_len(char **envp);
 void			tree_env(char **envp);
 
