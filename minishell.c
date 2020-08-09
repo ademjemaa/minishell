@@ -6,7 +6,7 @@
 /*   By: abarbour <abarbour@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/13 15:47:50 by abarbour          #+#    #+#             */
-/*   Updated: 2020/08/09 18:07:34 by abarbour         ###   ########.fr       */
+/*   Updated: 2020/08/09 19:10:37 by abarbour         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,7 @@ int		main(int argc, char **argv, char **envp)
 		}
 		else
 		{
-			write(1, "exit\n", 5);
+			write(2, "exit\n", 5);
 			break ;
 		}
 	}

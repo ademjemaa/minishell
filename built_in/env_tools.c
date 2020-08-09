@@ -6,7 +6,7 @@
 /*   By: abarbour <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/26 21:14:08 by abarbour          #+#    #+#             */
-/*   Updated: 2020/08/08 20:10:59 by abarbour         ###   ########.fr       */
+/*   Updated: 2020/08/09 21:51:04 by abarbour         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,6 @@ void	update_env(char *var, char **envp, int i)
 {
 	char	*new;
 
-	printf("export update pointer = %p\n", envp);
 	if (equal_pos(var) == ft_strlen(var))
 		return ;
 	if (!(new = ft_strdup(var)))
