@@ -6,7 +6,7 @@
 /*   By: adjemaa <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/26 23:20:26 by adjemaa           #+#    #+#             */
-/*   Updated: 2020/08/09 11:59:53 by adjemaa          ###   ########.fr       */
+/*   Updated: 2020/08/09 17:25:42 by adjemaa          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,7 +93,7 @@ void	copy_quotes(char *str, char *tmp, t_check *c)
 
 void	envp_slash(char *str, char *tmp, t_check *c, char *envp)
 {
-	while (str[c->i++] && str[c->i] != '$')
+	while (str[c->i] && str[c->i] != '$')
 	{
 		if (str[c->i] == '\\')
 		{
@@ -103,7 +103,9 @@ void	envp_slash(char *str, char *tmp, t_check *c, char *envp)
 		}
 		tmp[c->env] = str[c->i];
 		c->env++;
+		c->i++;
 	}
+	c->i++;
 	while (envp != NULL && envp[c->j])
 		tmp[c->env++] = envp[c->j++];
 	while (str[c->i] && ((str[c->i] >= 'a' && str[c->i] <= 'z') || (str[c->i]

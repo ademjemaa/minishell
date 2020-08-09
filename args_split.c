@@ -6,7 +6,7 @@
 /*   By: adjemaa <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/27 18:01:22 by adjemaa           #+#    #+#             */
-/*   Updated: 2020/08/09 13:07:56 by adjemaa          ###   ########.fr       */
+/*   Updated: 2020/08/09 17:27:11 by adjemaa          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -107,7 +107,6 @@ char	**first_split(char *line)
 			j++;
 		str = build_arg((line + j), &j, i, args);
 		args[i] = str;
-		printf("args == %s\n", args[i]);
 		i++;
 	}
 	args[i] = NULL;

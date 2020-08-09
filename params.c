@@ -6,7 +6,7 @@
 /*   By: adjemaa <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/23 23:14:11 by adjemaa           #+#    #+#             */
-/*   Updated: 2020/08/09 13:10:55 by adjemaa          ###   ########.fr       */
+/*   Updated: 2020/08/09 17:26:38 by adjemaa          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,8 +48,8 @@ char	*args_parser(char *str, char **envp, t_cmd *stru)
 	stru->files = NULL;
 	stru->file = NULL;
 	stru->files = find_filelst(args, envp);
+	find_env(args, envp);
 	stru->args = find_path(args, stru, envp);
-	find_env(stru->args, envp);
 	return (tmp);
 }
 
