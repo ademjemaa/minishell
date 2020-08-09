@@ -6,7 +6,7 @@
 /*   By: abarbour <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/17 21:14:06 by abarbour          #+#    #+#             */
-/*   Updated: 2020/08/08 20:02:30 by abarbour         ###   ########.fr       */
+/*   Updated: 2020/08/09 18:07:47 by abarbour         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,9 +15,9 @@
 void	int_handler(int signum)
 {
 	if (g_childs == 0)
-		write(1, "\nkembyalet$ ", 13);
+		write(2, "\nkembyalet$ ", 13);
 	else
-		write(1, "\n", 1);
+		write(2, "\n", 1);
 	g_exit_code = 1;
 }
 
