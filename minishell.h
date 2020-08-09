@@ -6,7 +6,7 @@
 /*   By: abarbour <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/25 00:08:49 by abarbour          #+#    #+#             */
-/*   Updated: 2020/08/09 14:26:49 by adjemaa          ###   ########.fr       */
+/*   Updated: 2020/08/09 21:43:51 by abarbour         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -132,5 +132,6 @@ void			begin_pipe(t_cmd **tab, char ***envp, int *i);
 char			*create_cmd_name(char *line, int nb_c);
 int				nb_remove_dq(char *line, int *i);
 int				nb_remove_sq(char *line, int *i);
+void			add_var_to_env(char *var, char ***envp);
 
 #endif
