@@ -6,11 +6,26 @@
 /*   By: adjemaa <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/26 23:20:26 by adjemaa           #+#    #+#             */
-/*   Updated: 2020/08/08 20:05:30 by abarbour         ###   ########.fr       */
+/*   Updated: 2020/08/09 11:59:53 by adjemaa          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+
+int		check_cmd(char **args, int j)
+{
+	int i;
+
+	i = 0;
+	while (i < j)
+	{
+		if (args[i][0] == '>' || args[i][0] == '<')
+			i++;
+		else
+			return (0);
+	}
+	return (1);
+}
 
 void	init_tmp(t_cmd *tmp)
 {

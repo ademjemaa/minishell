@@ -6,7 +6,7 @@
 /*   By: adjemaa <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/27 18:01:22 by adjemaa           #+#    #+#             */
-/*   Updated: 2020/08/03 21:47:16 by adjemaa          ###   ########.fr       */
+/*   Updated: 2020/08/09 13:07:56 by adjemaa          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,33 +14,31 @@
 
 int		total_argus(char *line)
 {
-	int i;
-	int total;
+	t_check c;
 
-	total = 1;
-	i = 0;
-	while (line[i])
+	init_struct(&c);
+	while (line[c.i])
 	{
-		while (line[i] == ' ')
-			i++;
-		if (line[i])
-			total++;
-		if (line[i] == '>' || line[i] == '<')
-			i = line_return(&line[i]) + i;
-		if (line[i] == '\'' || line[i] == '\"')
-			quotes_cal(line, &i);
+		while (line[c.i] == ' ')
+			c.i++;
+		if (line[c.i])
+			c.env++;
+		if (line[c.i] == '>' || line[c.i] == '<' || c.j++ == 0)
+			c.i = line_return(&line[c.i]) + c.i;
+		if ((line[c.i] == '\'' || line[c.i] == '\"') && c.j)
+			quotes_cal(line, &(c.i));
 		else
 		{
-			while (line[i] != ' ' && line[i] != '\'' && line[i] != '\"' &&
-					line[i] && line[i] != '>' && line[i] != '<')
-				if (line[i++] == '\\')
-					i++;
+			while (line[c.i] != ' ' && line[c.i] != '\'' && line[c.i] != '\"' &&
+					line[c.i] && line[c.i] != '>' && line[c.i] != '<')
+				if (line[c.i++] == '\\')
+					c.i++;
 		}
 	}
-	return (total);
+	return (c.env + 1);
 }
 
-int		malloc_size(char *str)
+int		malloc_size(char *str, int cur, char **args)
 {
 	int		i;
 	char	c;
@@ -51,7 +49,7 @@ int		malloc_size(char *str)
 	{
 		if (str[i] == '\\')
 			i = i + 2;
-		if (str[i] == '>' || str[i] == '<')
+		if (str[i] == '>' || str[i] == '<' || check_cmd(args, cur))
 			return (line_return(&str[i]) + 1);
 		if (c == '\'' || c == '\"')
 		{
@@ -59,26 +57,23 @@ int		malloc_size(char *str)
 				return (i + 2);
 		}
 		else if (str[i] == ' ')
-		{
-			i++;
-			return (i + 1);
-		}
+			return (i + 2);
 		else
 			i++;
 	}
 	return (i + 1);
 }
 
-char	*build_arg(char *str, int *j)
+char	*build_arg(char *str, int *j, int cur, char **args)
 {
 	int		i;
 	char	*tmp;
 
 	i = 0;
-	tmp = (char *)malloc(sizeof(char) * (malloc_size(str) + 2));
+	tmp = (char *)malloc(sizeof(char) * (malloc_size(str, cur, args)));
 	if (tmp == NULL)
 		return (NULL);
-	if (str[0] == '>' || str[0] == '<')
+	if (str[0] == '>' || str[0] == '<' || check_cmd(args, cur))
 		return (file_prot(str, tmp, j));
 	while (str[i])
 	{
@@ -110,8 +105,9 @@ char	**first_split(char *line)
 	{
 		while (line[j] == ' ')
 			j++;
-		str = build_arg((line + j), &j);
+		str = build_arg((line + j), &j, i, args);
 		args[i] = str;
+		printf("args == %s\n", args[i]);
 		i++;
 	}
 	args[i] = NULL;

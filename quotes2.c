@@ -6,7 +6,7 @@
 /*   By: adjemaa <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/07 21:30:15 by adjemaa           #+#    #+#             */
-/*   Updated: 2020/07/25 23:29:08 by adjemaa          ###   ########.fr       */
+/*   Updated: 2020/08/09 12:49:09 by adjemaa          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,24 +75,20 @@ char	*file_prot(char *str, char *tmp, int *j)
 
 int		line_return(char *str)
 {
-	int i;
-	int one;
-	int two;
+	t_check	c;
 
-	i = 0;
-	one = 0;
-	two = 0;
-	while (str[i])
+	init_struct(&c);
+	while (str[c.i])
 	{
-		while (str[i] == '\\')
-			i = i + 2;
-		if (str[i] == '\'' && two == 0)
-			one = !one;
-		else if (str[i] == '\"' && one == 0)
-			two = !two;
-		if (str[i] == ' ' && !two && !one)
+		while (str[c.i] == '\\')
+			c.i = c.i + 2;
+		if (str[c.i] == '\'' && c.two == 0)
+			c.one = !(c.one);
+		else if (str[c.i] == '\"' && c.one == 0)
+			(c.two) = !(c.two);
+		if (str[c.i] == ' ' && !(c.two) && !(c.one))
 			break ;
-		i++;
+		c.i++;
 	}
-	return (i);
+	return (c.i);
 }

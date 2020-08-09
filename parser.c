@@ -6,7 +6,7 @@
 /*   By: abarbour <abarbour@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/13 15:52:17 by abarbour          #+#    #+#             */
-/*   Updated: 2020/08/08 20:05:07 by abarbour         ###   ########.fr       */
+/*   Updated: 2020/08/09 14:58:56 by adjemaa          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,26 +31,51 @@ int		counter(char *line)
 char	*cmd_name(char *line)
 {
 	int		i;
-	int		j;
+	int		nb_c;
 	char	*str;
 
-	j = 0;
-	if (line == NULL)
-		return (NULL);
-	while (line[j] == ' ' && line[j])
-		j++;
-	i = j;
-	while (line[i] && line[i] != ' ')
-		i++;
-	str = malloc(sizeof(char) * (i - j + 1));
-	if (str == NULL)
-		return (NULL);
-	str[i - j] = '\0';
 	i = 0;
-	while (line[j] != ' ' && line[j])
-		str[i++] = line[j++];
-	str[i] = 0;
-	return (str);
+	nb_c = 0;
+	while (line[i])
+	{
+		if (line[i] == '\'')
+			nb_c += nb_remove_sq(line, &i);
+		if (line[i] == '\"')
+			nb_c += nb_remove_dq(line, &i);
+		else if (line[i])
+		{
+			nb_c++;
+			i++;
+		}
+	}
+	return (create_cmd_name(line, nb_c));
+}
+
+void	print_structure(t_cmd *tmp)
+{
+	int i;
+
+	i = 0;
+	printf("structure : \n");
+	if (tmp->path)
+		printf("path == %s!!\n", tmp->path);
+	if (tmp->file)
+		printf("file == %s!!\n",  tmp->file);
+	if (tmp->args)
+	{
+		while (tmp->args[i] != NULL)
+		{
+			printf("args == !!%s!!\n", tmp->args[i]);
+		i++;
+   		 }
+	}
+	i = 0;
+	 while (tmp->files[i].file != NULL)
+	{
+		printf("files == %s\n", tmp->files[i].file);
+		i++;
+	}
+	printf("sep == %d\nred == %d\nbuild == %d\n", tmp->sep, tmp->red, tmp->built);
 }
 
 char	*path_parser(char *line, char **envp, t_cmd *tmp)
@@ -91,6 +116,7 @@ t_cmd	*params(char *line, char **envp)
 	str = args_parser(line, envp, tmp);
 	tmp->sep = sep_parser(line, tmp);
 	tmp->red = red_type(str);
+	print_structure(tmp);
 	free(str);
 	return (tmp);
 }

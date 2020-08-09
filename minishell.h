@@ -6,7 +6,7 @@
 /*   By: abarbour <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/25 00:08:49 by abarbour          #+#    #+#             */
-/*   Updated: 2020/08/08 20:47:09 by abarbour         ###   ########.fr       */
+/*   Updated: 2020/08/09 14:26:49 by adjemaa          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,6 +75,7 @@ char			*retrieve(char *str, char **envp);
 void			free_all(char **args);
 t_cmd			**parser(char *line, char **envp);
 int				final_size(char *str, char *envp);
+int				check_cmd(char **args, int j);
 t_filelst		*find_filelst(char **args, char **envp);
 void			copy_slash(char *tmp, char *str, t_check *c);
 void			init_struct(t_check *c);
@@ -128,5 +129,8 @@ char			*free_env(char **env, int i);
 int				str_array_len(char **envp);
 void			tree_env(char **envp);
 void			begin_pipe(t_cmd **tab, char ***envp, int *i);
+char			*create_cmd_name(char *line, int nb_c);
+int				nb_remove_dq(char *line, int *i);
+int				nb_remove_sq(char *line, int *i);
 
 #endif
