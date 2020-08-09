@@ -6,7 +6,7 @@
 /*   By: adjemaa <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/27 17:05:56 by adjemaa           #+#    #+#             */
-/*   Updated: 2020/08/09 13:17:02 by adjemaa          ###   ########.fr       */
+/*   Updated: 2020/08/09 21:44:00 by adjemaa          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,12 +73,13 @@ int		quote_status(t_check *c, char *str)
 		c->two = !(c->two);
 	else if (str[0] == '\'' && str[1] != '\'' && !(c->two))
 		c->one = !(c->one);
-	else if (str[0] == '\"' && str[1] == '\"' && !(c->one) && !(c->env))
+	else if (str[0] == '\"' && str[1] == '\"' && !(c->one) &&
+			!(c->env) && str[2] != ' ')
 	{
 		c->i = c->i + 2;
 		return (0);
 	}
-	else if (str[0] == '\'' && str[1] == '\'' && !(c->two))
+	else if (str[0] == '\'' && str[1] == '\'' && !(c->two) && str[2] != ' ')
 	{
 		c->i = c->i + 2;
 		return (0);
