@@ -6,7 +6,7 @@
 /*   By: abarbour <abarbour@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/13 15:52:17 by abarbour          #+#    #+#             */
-/*   Updated: 2020/08/09 14:58:56 by adjemaa          ###   ########.fr       */
+/*   Updated: 2020/08/09 18:09:52 by adjemaa          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -114,7 +114,6 @@ t_cmd	*params(char *line, char **envp)
 		return (NULL);
 	init_tmp(tmp);
 	str = args_parser(line, envp, tmp);
-	tmp->sep = sep_parser(line, tmp);
 	tmp->red = red_type(str);
 	print_structure(tmp);
 	free(str);
@@ -139,7 +138,8 @@ t_cmd	**parser(char *line, char **envp)
 		tab[i] = params(&line[j], envp);
 		i++;
 		while (line[j] && line[j] != '|' && line[j] != ';')
-			j++;
+			if (line[j++] == '\\')
+				j++;
 		if (line[j])
 			j++;
 	}

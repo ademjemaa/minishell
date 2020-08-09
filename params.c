@@ -6,7 +6,7 @@
 /*   By: adjemaa <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/23 23:14:11 by adjemaa           #+#    #+#             */
-/*   Updated: 2020/08/09 17:26:38 by adjemaa          ###   ########.fr       */
+/*   Updated: 2020/08/09 18:06:02 by adjemaa          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,11 @@ char	*str_find(char *line, t_cmd *stru)
 
 	i = 0;
 	while (!(line[i] == '|' || line[i] == ';' || line[i] == '\0'))
+	{
+		if (line[i] == '\\')
+			i++;
 		i++;
+	}
 	if (line[i] == ';')
 		stru->sep = 5;
 	else if (line[i] == '|')
