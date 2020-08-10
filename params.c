@@ -6,7 +6,7 @@
 /*   By: adjemaa <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/23 23:14:11 by adjemaa           #+#    #+#             */
-/*   Updated: 2020/08/09 22:56:34 by adjemaa          ###   ########.fr       */
+/*   Updated: 2020/08/10 22:23:18 by adjemaa          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ char	*args_parser(char *str, char **envp, t_cmd *stru)
 
 	tmp = str_find(str, stru);
 	tmp = cleaned(tmp);
-	printf("tmp cleaned == %s#\n", tmp);
+	//printf("tmp cleaned == %s#\n", tmp);
 	args = first_split(tmp);
 	stru->files = NULL;
 	stru->file = NULL;
