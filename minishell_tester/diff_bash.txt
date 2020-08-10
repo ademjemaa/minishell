@@ -1,0 +1,1 @@
+declare -x _testvar10="lala10"

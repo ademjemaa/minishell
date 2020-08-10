@@ -6,7 +6,7 @@
 /*   By: abarbour <abarbour@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/16 21:20:12 by abarbour          #+#    #+#             */
-/*   Updated: 2020/08/10 22:31:48 by abarbour         ###   ########.fr       */
+/*   Updated: 2020/08/10 23:03:24 by abarbour         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,6 +81,7 @@ int		exec_pipe(t_cmd **tab, int *i, char ***envp)
 	char	c;
 
 	input_fd = 0;
+	concat_args(tab[*i]);
 	while (tab[*i] && tab[*i]->sep == 4)
 	{
 		pipe(pip);
@@ -88,6 +89,7 @@ int		exec_pipe(t_cmd **tab, int *i, char ***envp)
 		close(pip[1]);
 		input_fd = pip[0];
 		(*i)++;
+		concat_args(tab[*i]);
 	}
 	pipe(pip);
 	old_pid = perform_redirects(tab[*i], input_fd, pip, envp);
@@ -107,10 +109,10 @@ void	exec(t_cmd ***tab, char ***envp, char *line)
 	i = 0;
 	while ((*tab)[i])
 	{
-		if (((*tab)[i])->red != -1)
-			concat_args((*tab)[i]);
 		if (is_env_built_in_cmd(*tab, i))
 		{
+			if (((*tab)[i])->red != -1)
+				concat_args((*tab)[i]);
 			if (dispatch_built_in(((*tab)[i])->path,
 				((*tab)[i])->args, envp, 0) == -1)
 			{

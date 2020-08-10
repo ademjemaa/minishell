@@ -6,7 +6,7 @@
 /*   By: abarbour <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/25 19:30:41 by abarbour          #+#    #+#             */
-/*   Updated: 2020/08/08 20:14:07 by abarbour         ###   ########.fr       */
+/*   Updated: 2020/08/10 23:45:02 by abarbour         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ int		valid_var_name_export(char *var)
 {
 	int		i;
 
-	if (var && !ft_isalpha(var[0]))
+	if (var && !ft_isalpha(var[0]) && var[0] != '_')
 		return (0);
 	i = 1;
 	while (var[i])
@@ -83,7 +83,9 @@ void	print_export_envs(char **envp)
 			}
 			j++;
 		}
-		write(1, "\"\n", 2);
+		if (eq == 1)
+			write(1, "\"", 2);
+		write(1, "\n", 1);
 		i++;
 	}
 }
