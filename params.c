@@ -48,7 +48,6 @@ char	*args_parser(char *str, char **envp, t_cmd *stru)
 
 	tmp = str_find(str, stru);
 	tmp = cleaned(tmp);
-	//printf("tmp cleaned == %s#\n", tmp);
 	args = first_split(tmp);
 	stru->files = NULL;
 	stru->file = NULL;

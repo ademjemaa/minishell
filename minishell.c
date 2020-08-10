@@ -17,7 +17,7 @@ void	begin_parse_exec(t_cmd ***tab, char ***env_allo, char **line)
 	*tab = parser(*line, *env_allo);
 	exec(tab, env_allo, *line);
 	free_cmds(*tab);
-	write(2, "kembyalet$ ", 12);
+	write(1, "kembyalet$ ", 12);
 	free(*line);
 }
 
@@ -28,7 +28,7 @@ void	init_minishell(char ***env_allo, char **envp, char **line, int argc)
 	tree_env(*env_allo);
 	g_exit_code = 0;
 	g_childs = 0;
-	write(2, "kembyalet$ ", 12);
+	write(1, "kembyalet$ ", 12);
 	catch_signals(0);
 }
 
@@ -60,7 +60,7 @@ int		main(int argc, char **argv, char **envp)
 		}
 		else
 		{
-			write(2, "exit\n", 5);
+			write(1, "exit\n", 5);
 			break ;
 		}
 	}

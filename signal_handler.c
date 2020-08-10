@@ -15,9 +15,9 @@
 void	int_handler(int signum)
 {
 	if (g_childs == 0)
-		write(2, "\nkembyalet$ ", 13);
+		write(1, "\nkembyalet$ ", 13);
 	else
-		write(2, "\n", 1);
+		write(1, "\n", 1);
 	g_exit_code = 1;
 }
 

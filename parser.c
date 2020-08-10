@@ -51,33 +51,6 @@ char	*cmd_name(char *line)
 	return (create_cmd_name(line, nb_c));
 }
 
-void	print_structure(t_cmd *tmp)
-{
-	int i;
-
-	i = 0;
-	printf("structure : \n");
-	if (tmp->path)
-		printf("path == %s!!\n", tmp->path);
-	if (tmp->file)
-		printf("file == %s!!\n",  tmp->file);
-	if (tmp->args)
-	{
-		while (tmp->args[i] != NULL)
-		{
-			printf("args == !!%s!!\n", tmp->args[i]);
-		i++;
-   		 }
-	}
-	i = 0;
-	 while (tmp->files[i].file != NULL)
-	{
-		printf("files == %s\n", tmp->files[i].file);
-		i++;
-	}
-	printf("sep == %d\nred == %d\nbuild == %d\n", tmp->sep, tmp->red, tmp->built);
-}
-
 char	*path_parser(char *line, char **envp, t_cmd *tmp)
 {
 	char			*stri;
@@ -115,7 +88,6 @@ t_cmd	*params(char *line, char **envp)
 	init_tmp(tmp);
 	str = args_parser(line, envp, tmp);
 	tmp->red = red_type(str);
-	//print_structure(tmp);
 	free(str);
 	return (tmp);
 }
