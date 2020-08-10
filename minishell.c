@@ -6,19 +6,21 @@
 /*   By: abarbour <abarbour@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/13 15:47:50 by abarbour          #+#    #+#             */
-/*   Updated: 2020/08/09 22:28:57 by abarbour         ###   ########.fr       */
+/*   Updated: 2020/08/11 00:29:30 by abarbour         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void	begin_parse_exec(t_cmd ***tab, char ***env_allo, char **line)
+int		begin_parse_exec(t_cmd ***tab, char ***env_allo, char *line)
 {
-	*tab = parser(*line, *env_allo);
-	exec(tab, env_allo, *line);
+	*tab = parser(line, *env_allo);
+	exec(tab, env_allo, line);
 	free_cmds(*tab);
 	write(1, "kembyalet$ ", 12);
-	free(*line);
+	if (!ft_strncmp(line, "exit", 5))
+		return (0);
+	return (1);
 }
 
 void	init_minishell(char ***env_allo, char **envp, char **line, int argc)
@@ -51,12 +53,12 @@ int		main(int argc, char **argv, char **envp)
 		ret = get_next_line(0, &line);
 		if (line && ret > 0)
 		{
-			if (!ft_strncmp(line, "exit", 5))
+			if (!begin_parse_exec(&tab, &env_allo, line))
 			{
 				free(line);
 				break ;
 			}
-			begin_parse_exec(&tab, &env_allo, &line);
+			free(line);
 		}
 		else
 		{

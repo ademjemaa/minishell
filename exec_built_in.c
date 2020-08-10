@@ -6,7 +6,7 @@
 /*   By: abarbour <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/25 00:26:53 by abarbour          #+#    #+#             */
-/*   Updated: 2020/08/04 22:05:33 by abarbour         ###   ########.fr       */
+/*   Updated: 2020/08/11 00:31:53 by abarbour         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,8 @@ int		dispatch_built_in(char *path, char **args, char ***envp, int p)
 		return (ft_unset(path, args, envp, p));
 	else if (!ft_strncmp(path, "env", 4))
 		return (ft_env(path, args, *envp));
+	else if (!ft_strncmp(path, "exit", 5))
+		return (ft_exit(path, args, envp));
 	return (-1);
 }
 
