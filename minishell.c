@@ -6,7 +6,7 @@
 /*   By: abarbour <abarbour@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/13 15:47:50 by abarbour          #+#    #+#             */
-/*   Updated: 2020/08/10 22:22:19 by adjemaa          ###   ########.fr       */
+/*   Updated: 2020/08/09 22:28:57 by abarbour         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 void	begin_parse_exec(t_cmd ***tab, char ***env_allo, char **line)
 {
 	*tab = parser(*line, *env_allo);
-	exec(*tab, env_allo);
+	exec(tab, env_allo, *line);
 	free_cmds(*tab);
 	write(2, "kembyalet$ ", 12);
 	free(*line);

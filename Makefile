@@ -6,13 +6,13 @@
 #    By: adjemaa <marvin@42.fr>                     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/11/06 21:13:47 by adjemaa           #+#    #+#              #
-#    Updated: 2020/08/09 18:13:04 by adjemaa          ###   ########.fr        #
+#    Updated: 2020/08/09 22:56:33 by abarbour         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 CC = gcc
 
-FLAGS = -Wall -Wextra -Werror
+FLAGS = -Wall -Wextra -Werror -fsanitize=address
 
 NAME = minishell
 

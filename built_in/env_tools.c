@@ -6,7 +6,7 @@
 /*   By: abarbour <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/26 21:14:08 by abarbour          #+#    #+#             */
-/*   Updated: 2020/08/09 21:51:04 by abarbour         ###   ########.fr       */
+/*   Updated: 2020/08/10 20:51:29 by abarbour         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,6 +58,17 @@ void	update_env(char *var, char **envp, int i)
 		return ;
 	if (!(new = ft_strdup(var)))
 		return ;
+	if (i == -1)
+	{
+		i = 0;
+		while (envp[i] && ft_strncmp(var, envp[i], equal_pos(var)))
+			i++;
+		if (!envp[i])
+		{
+			free(new);
+			return ;
+		}
+	}
 	free(envp[i]);
 	envp[i] = new;
 }

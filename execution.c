@@ -6,7 +6,7 @@
 /*   By: abarbour <abarbour@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/16 21:20:12 by abarbour          #+#    #+#             */
-/*   Updated: 2020/08/10 22:22:12 by adjemaa          ###   ########.fr       */
+/*   Updated: 2020/08/10 22:31:48 by abarbour         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,20 +98,21 @@ int		exec_pipe(t_cmd **tab, int *i, char ***envp)
 	return (old_pid);
 }
 
-void	exec(t_cmd **tab, char ***envp)
+void	exec(t_cmd ***tab, char ***envp, char *line)
 {
 	int		i;
 	int		old_pid;
 	int		status;
 
 	i = 0;
-	while (tab[i])
+	while ((*tab)[i])
 	{
-		if (tab[i]->red != -1)
-			concat_args(tab[i]);
-		if (is_env_built_in_cmd(tab, i))
+		if (((*tab)[i])->red != -1)
+			concat_args((*tab)[i]);
+		if (is_env_built_in_cmd(*tab, i))
 		{
-			if (dispatch_built_in(tab[i]->path, tab[i]->args, envp, 0) == -1)
+			if (dispatch_built_in(((*tab)[i])->path,
+				((*tab)[i])->args, envp, 0) == -1)
 			{
 				g_exit_code = 1;
 				if (errno)
@@ -120,6 +121,8 @@ void	exec(t_cmd **tab, char ***envp)
 			i++;
 		}
 		else
-			begin_pipe(tab, envp, &i);
+			begin_pipe(*tab, envp, &i);
+		free_cmds(*tab);
+		*tab = parser(line, *envp);
 	}
 }

@@ -6,7 +6,7 @@
 /*   By: abarbour <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/25 00:08:49 by abarbour          #+#    #+#             */
-/*   Updated: 2020/08/09 21:43:51 by abarbour         ###   ########.fr       */
+/*   Updated: 2020/08/09 22:29:21 by abarbour         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,7 +85,7 @@ char			*args_parser(char *str, char **envp, t_cmd *stru);
 void			find_env(char **args, char **envp);
 char			**find_path(char **args, t_cmd *tmp, char **envp);
 char			*path_parser(char *line, char **envp, t_cmd *tmp);
-void			exec(t_cmd **tab, char ***envp);
+void			exec(t_cmd ***tab, char ***envp, char *line);
 void			dup_and_close(int in, int out);
 int				check_name(char *line, t_cmd *tmp);
 int				fix_quotes(t_check *check, char *str);

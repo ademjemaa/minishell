@@ -6,16 +6,15 @@
 /*   By: abarbour <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/25 23:05:00 by abarbour          #+#    #+#             */
-/*   Updated: 2020/08/09 21:49:42 by abarbour         ###   ########.fr       */
+/*   Updated: 2020/08/10 22:29:37 by abarbour         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
 
-int		ft_cd(char *path, char **args, char **envp)
+int		cd_change_env(char *str, char **envp)
 {
 	char	*buf;
-	int		i;
 
 	if (!(buf = malloc(MAXPATHLEN + 1)))
 		return (-1);
@@ -25,18 +24,19 @@ int		ft_cd(char *path, char **args, char **envp)
 		free(buf);
 		return (-1);
 	}
-	buf = ft_strjoin("OLDPWD=", buf);
-	add_var_to_env(buf, &envp);
-	i = -1;
+	buf = ft_strjoinfree(str, buf, 2);
+	update_env(buf, envp, -1);
+	free(buf);
+	return (0);
+}
+
+int		ft_cd(char *path, char **args, char **envp)
+{
+	if (cd_change_env("OLDPWD=", envp) == -1)
+		return (-1);
 	if (chdir(args[1]))
 		return (-1);
-	if (!getcwd(buf, MAXPATHLEN))
-	{
-		free(buf);
+	if (cd_change_env("PWD=", envp) == -1)
 		return (-1);
-	}
-	buf = ft_strjoinfree("PWD=", buf, 2);
-	add_var_to_env(buf, &envp);
-	free(buf);
 	return (0);
 }
