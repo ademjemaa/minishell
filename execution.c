@@ -6,7 +6,7 @@
 /*   By: abarbour <abarbour@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/16 21:20:12 by abarbour          #+#    #+#             */
-/*   Updated: 2020/08/10 23:03:24 by abarbour         ###   ########.fr       */
+/*   Updated: 2020/08/11 18:00:42 by abarbour         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -113,8 +113,7 @@ void	exec(t_cmd ***tab, char ***envp, char *line)
 		{
 			if (((*tab)[i])->red != -1)
 				concat_args((*tab)[i]);
-			if (dispatch_built_in(((*tab)[i])->path,
-				((*tab)[i])->args, envp, 0) == -1)
+			if (dispatch_built_in((*tab)[i], envp, 0) == -1)
 			{
 				g_exit_code = 1;
 				if (errno)

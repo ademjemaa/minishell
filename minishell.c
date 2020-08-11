@@ -6,7 +6,7 @@
 /*   By: abarbour <abarbour@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/13 15:47:50 by abarbour          #+#    #+#             */
-/*   Updated: 2020/08/11 00:29:30 by abarbour         ###   ########.fr       */
+/*   Updated: 2020/08/11 18:33:49 by abarbour         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,12 +14,12 @@
 
 int		begin_parse_exec(t_cmd ***tab, char ***env_allo, char *line)
 {
+	if (!ft_strncmp(line, "exit", 5))
+		return (0);
 	*tab = parser(line, *env_allo);
 	exec(tab, env_allo, line);
 	free_cmds(*tab);
 	write(1, "kembyalet$ ", 12);
-	if (!ft_strncmp(line, "exit", 5))
-		return (0);
 	return (1);
 }
 
