@@ -17,6 +17,7 @@ int		begin_parse_exec(t_cmd ***tab, char ***env_allo, char *line)
 	if (!ft_strncmp(line, "exit", 5))
 		return (0);
 	*tab = parser(line, *env_allo);
+	g_exit_code = 0;
 	exec(tab, env_allo, line);
 	free_cmds(*tab);
 	write(1, "kembyalet$ ", 12);

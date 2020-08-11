@@ -18,6 +18,8 @@ int		ft_exit(char *path, char **args, char ***envp)
 	unsigned char	code;
 
 	j = 0;
+	if (!args[1])
+		exit(0);
 	while (args[1][j] && ft_isdigit(args[1][j]))
 		j++;
 	if (args[1][j])
