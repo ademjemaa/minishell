@@ -6,7 +6,7 @@
 /*   By: abarbour <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/11 00:32:11 by abarbour          #+#    #+#             */
-/*   Updated: 2020/08/11 19:02:09 by abarbour         ###   ########.fr       */
+/*   Updated: 2020/08/23 20:56:58 by adjemaa          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 int		ft_exit(char *path, char **args, char ***envp)
 {
-	int		j;
+	int				j;
 	unsigned char	code;
 
 	j = 0;
