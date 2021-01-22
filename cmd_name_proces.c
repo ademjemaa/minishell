@@ -36,7 +36,7 @@ int		nb_remove_dq(char *line, int *i)
 	(*i)++;
 	while (line[*i] && line[*i] != '\"')
 	{
-		if (line[*i] == '\\' && (line[*i + 1] == '\\' /*|| line[*i + 1] == '$'*/
+		if (line[*i] == '\\' && (line[*i + 1] == '\\' || line[*i + 1] == '$'
 			|| line[*i + 1] == '\"'))
 			(*i)++;
 		if (line[*i + 1])
