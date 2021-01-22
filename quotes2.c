@@ -24,10 +24,7 @@ void	copy_slash(char *tmp, char *str, t_check *c)
 
 int		check_red(char *str, int sign)
 {
-	if (str[0] && ((str[0] >= 'a' && str[0] <= 'z') || (str[0] >= 'A'
-		&& str[0] <= 'Z') || (str[0] >= '0' && str[0] <= '9') || str[0] == '_'
-		|| str[0] == '$' || str[0] == '\\' || str[0] == '\'' ||
-		str[0] == '\"'))
+	if (str[0])
 		return (sign);
 	else
 		return (-1);
