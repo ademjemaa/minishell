@@ -87,20 +87,23 @@ void	find_env(char **args, char **envp)
 		j = 0;
 		if (args[i][0] != '\'')
 		{
-			while (args[i][j])
+			while (args[i][++j] && args[i][j] != '\'');
+			j++;
+		}
+		while (args[i][j])
+		{
+			if (args[i][j] == '\\')
+				j = j + 2;
+			else if (args[i][j] == '$')
 			{
-				if (args[i][j] == '\\')
-					j = j + 2;
-				else if (args[i][j] == '$')
-				{
-					args[i] = swap_case(args[i], envp, j + 1);
-					j = 0;
-				}
-				else
-					j++;
+				args[i] = swap_case(args[i], envp, j + 1);
+				j = 0;
 			}
+			else
+				j++;
 		}
 	}
+	printf("asdasdas %s\n", args[0]);
 }
 
 int		red_type(char *str)

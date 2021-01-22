@@ -53,6 +53,7 @@ char	*args_parser(char *str, char **envp, t_cmd *stru)
 	stru->file = NULL;
 	stru->files = find_filelst(args, envp);
 	find_env(args, envp);
+	printf("stru %s\n", args[0]);
 	stru->args = find_path(args, stru, envp);
 	return (tmp);
 }
@@ -85,6 +86,7 @@ int		check_name(char *line, t_cmd *tmp)
 	ret = 0;
 	tmp->built = 0;
 	str = cmd_name(line);
+	printf("strss %s\n", str);
 	if (str != NULL)
 	{
 		if (!ft_strcmp(str, "echo") || !ft_strcmp(str, "cd") ||
