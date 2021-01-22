@@ -85,7 +85,7 @@ void	find_env(char **args, char **envp)
 	while (args[++i] != NULL)
 	{
 		j = 0;
-		if (args[i][0] != '\'')
+		if (args[i][j] == '\'')
 		{
 			while (args[i][++j] && args[i][j] != '\'');
 			j++;
@@ -94,7 +94,7 @@ void	find_env(char **args, char **envp)
 		{
 			if (args[i][j] == '\\')
 				j = j + 2;
-			else if (args[i][j] == '$')
+			else if (args[i][j] == '$' && args[i][j + 1] != '\"')
 			{
 				args[i] = swap_case(args[i], envp, j + 1);
 				j = 0;
@@ -103,7 +103,6 @@ void	find_env(char **args, char **envp)
 				j++;
 		}
 	}
-	printf("asdasdas %s\n", args[0]);
 }
 
 int		red_type(char *str)
