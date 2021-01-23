@@ -6,7 +6,11 @@
 #    By: adjemaa <marvin@42.fr>                     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/11/06 21:13:47 by adjemaa           #+#    #+#              #
+<<<<<<< HEAD
 #    Updated: 2021/01/23 13:22:30 by abarbour         ###   ########.fr        #
+=======
+#    Updated: 2021/01/23 13:16:50 by adjemaa          ###   ########.fr        #
+>>>>>>> a93232a50df18aed7492ad4733e555c27a11b90d
 #                                                                              #
 # **************************************************************************** #
 
@@ -38,6 +42,7 @@ SRCS =	minishell.c\
 		get_next_line/get_next_line.c \
 		get_next_line/get_next_line_utils.c\
 		env_changer.c\
+		extra_tools.c\
 		signal_handler.c\
 		exec_built_in.c\
 		built_in/ft_echo.c\

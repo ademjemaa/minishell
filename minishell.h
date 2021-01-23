@@ -6,7 +6,11 @@
 /*   By: abarbour <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/25 00:08:49 by abarbour          #+#    #+#             */
+<<<<<<< HEAD
 /*   Updated: 2021/01/23 13:27:38 by abarbour         ###   ########.fr       */
+=======
+/*   Updated: 2021/01/23 13:17:29 by adjemaa          ###   ########.fr       */
+>>>>>>> a93232a50df18aed7492ad4733e555c27a11b90d
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -134,6 +138,10 @@ char			*create_cmd_name(char *line, int nb_c);
 int				nb_remove_dq(char *line, int *i);
 int				nb_remove_sq(char *line, int *i);
 void			add_var_to_env(char *var, char ***envp);
+<<<<<<< HEAD
 char			*trait_after_export(char **str);
+=======
+void			looper_env(char **args, int *i, int *j, char **envp);
+>>>>>>> a93232a50df18aed7492ad4733e555c27a11b90d
 
 #endif
