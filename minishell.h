@@ -6,7 +6,7 @@
 /*   By: abarbour <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/25 00:08:49 by abarbour          #+#    #+#             */
-/*   Updated: 2020/08/11 18:40:27 by abarbour         ###   ########.fr       */
+/*   Updated: 2021/01/23 13:17:29 by adjemaa          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -134,5 +134,6 @@ char			*create_cmd_name(char *line, int nb_c);
 int				nb_remove_dq(char *line, int *i);
 int				nb_remove_sq(char *line, int *i);
 void			add_var_to_env(char *var, char ***envp);
+void			looper_env(char **args, int *i, int *j, char **envp);
 
 #endif

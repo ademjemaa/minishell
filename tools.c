@@ -6,7 +6,7 @@
 /*   By: adjemaa <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/27 18:00:48 by adjemaa           #+#    #+#             */
-/*   Updated: 2020/08/09 17:32:14 by adjemaa          ###   ########.fr       */
+/*   Updated: 2021/01/23 13:17:18 by adjemaa          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,24 +84,7 @@ void	find_env(char **args, char **envp)
 		return ;
 	while (args[++i] != NULL)
 	{
-		j = 0;
-		if (args[i][j] == '\'')
-		{
-			while (args[i][++j] && args[i][j] != '\'');
-			j++;
-		}
-		while (args[i][j])
-		{
-			if (args[i][j] == '\\')
-				j = j + 2;
-			else if (args[i][j] == '$' && args[i][j + 1] != '\"')
-			{
-				args[i] = swap_case(args[i], envp, j + 1);
-				j = 0;
-			}
-			else
-				j++;
-		}
+		looper_env(args, &i, &j, envp);
 	}
 }
 
