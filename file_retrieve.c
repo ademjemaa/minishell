@@ -6,7 +6,7 @@
 /*   By: adjemaa <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/02 18:38:18 by adjemaa           #+#    #+#             */
-/*   Updated: 2020/08/03 21:47:46 by adjemaa          ###   ########.fr       */
+/*   Updated: 2021/01/23 14:51:49 by adjemaa          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,8 +32,9 @@ void	change_status(t_check *check, char *str, char **envp, char *new)
 				b++;
 			while (envp[t][++b] != 0)
 				new[check->j++] = envp[t][b];
-			check->i = check->i + env_len(&str[check->i + 1]);
 		}
+		check->i = envp[t] ? check->i + env_len(&str[check->i + 1]) :
+			check->i + ft_strlen(tmp);
 		free(tmp);
 		check->i++;
 	}
@@ -126,6 +127,7 @@ char	*retrieve(char *str, char **envp)
 	tmp[file_len(str, envp)] = 0;
 	while (str[c.i])
 	{
+		printf(" stri == %s\n", &str[c.i]);
 		if (str[c.i] == '\\' && c.one == 0)
 			copy_slash(tmp, str, &c);
 		else if ((str[c.i] == '\'' && c.two == 0) ||
