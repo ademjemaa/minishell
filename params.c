@@ -6,7 +6,7 @@
 /*   By: adjemaa <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/23 23:14:11 by adjemaa           #+#    #+#             */
-/*   Updated: 2021/01/23 16:14:14 by adjemaa          ###   ########.fr       */
+/*   Updated: 2021/01/23 16:19:06 by adjemaa          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,8 @@
 
 void	sep_quotes(t_check *c, char *line)
 {
-	while (!(((line[c->i] == '|' || line[c->i] == ';') && c->env == 0) || line[c->i] == '\0'))
+	while (!(((line[c->i] == '|' || line[c->i] == ';') && c->env == 0) ||
+		line[c->i] == '\0'))
 	{
 		if (line[c->i] == '\'' && c->two == 0)
 		{
@@ -61,9 +62,6 @@ char	*args_parser(char *str, char **envp, t_cmd *stru)
 {
 	char	**args;
 	char	*tmp;
-	int i;
-
-	i = 0;
 
 	tmp = str_find(str, stru);
 	tmp = cleaned(tmp);

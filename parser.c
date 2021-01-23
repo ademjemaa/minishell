@@ -6,7 +6,7 @@
 /*   By: abarbour <abarbour@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/13 15:52:17 by abarbour          #+#    #+#             */
-/*   Updated: 2021/01/23 16:13:42 by adjemaa          ###   ########.fr       */
+/*   Updated: 2021/01/23 16:18:22 by adjemaa          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 int		counter(char *line)
 {
-	int total;
+	int		total;
 	t_check c;
 
 	total = 1;
