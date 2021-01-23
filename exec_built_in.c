@@ -6,7 +6,7 @@
 /*   By: abarbour <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/25 00:26:53 by abarbour          #+#    #+#             */
-/*   Updated: 2020/08/11 18:39:15 by abarbour         ###   ########.fr       */
+/*   Updated: 2021/01/23 17:21:42 by abarbour         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ int		dispatch_built_in(t_cmd *cmd, char ***envp, int p)
 	if (!ft_strncmp(cmd->path, "echo", 5))
 		return (ft_echo(cmd->path, cmd->args, *envp));
 	else if (!ft_strncmp(cmd->path, "cd", 3))
-		return (btin_ret(ft_cd(cmd->path, cmd->args, *envp), oout, p));
+		return (btin_ret(ft_cd(cmd->path, cmd->args, envp), oout, p));
 	else if (!ft_strncmp(cmd->path, "pwd", 4))
 		return (ft_pwd(cmd->path, cmd->args, *envp));
 	else if (!ft_strncmp(cmd->path, "export", 7))

@@ -6,7 +6,7 @@
 /*   By: abarbour <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/25 00:08:49 by abarbour          #+#    #+#             */
-/*   Updated: 2021/01/23 16:07:56 by adjemaa          ###   ########.fr       */
+/*   Updated: 2021/01/23 17:20:46 by abarbour         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -117,7 +117,7 @@ int				is_env_built_in_cmd(t_cmd **tab, int i);
 int				ft_echo(char *path, char **args, char **envp);
 int				ft_pwd(char *path, char **args, char **envp);
 int				ft_env(char *path, char **args, char **env);
-int				ft_cd(char *path, char **args, char **envp);
+int				ft_cd(char *path, char **args, char ***envp);
 int				ft_exit(char *path, char **args, char ***envp);
 int				ft_export(char *path, char **args, char ***envp, int p);
 int				ft_unset(char *path, char **args, char ***envp, int p);
@@ -137,5 +137,6 @@ void			add_var_to_env(char *var, char ***envp);
 char			*trait_after_export(char **str);
 void			looper_env(char **args, int *i, int *j, char **envp);
 void			sep_quotes(t_check *c, char *line);
+void			add_var_to_env(char *var, char ***envp);
 
 #endif
