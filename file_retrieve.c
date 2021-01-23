@@ -6,7 +6,7 @@
 /*   By: adjemaa <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/02 18:38:18 by adjemaa           #+#    #+#             */
-/*   Updated: 2021/01/23 14:51:49 by adjemaa          ###   ########.fr       */
+/*   Updated: 2021/01/23 14:54:46 by adjemaa          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -127,7 +127,6 @@ char	*retrieve(char *str, char **envp)
 	tmp[file_len(str, envp)] = 0;
 	while (str[c.i])
 	{
-		printf(" stri == %s\n", &str[c.i]);
 		if (str[c.i] == '\\' && c.one == 0)
 			copy_slash(tmp, str, &c);
 		else if ((str[c.i] == '\'' && c.two == 0) ||
