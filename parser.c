@@ -6,7 +6,7 @@
 /*   By: abarbour <abarbour@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/13 15:52:17 by abarbour          #+#    #+#             */
-/*   Updated: 2020/08/10 23:03:13 by abarbour         ###   ########.fr       */
+/*   Updated: 2021/01/23 16:13:42 by adjemaa          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,15 +15,17 @@
 int		counter(char *line)
 {
 	int total;
-	int i;
+	t_check c;
 
 	total = 1;
-	i = 0;
-	while (line[i])
+	init_struct(&c);
+	while (line[c.i])
 	{
-		if (line[i] == '|' || line[i] == ';')
+		sep_quotes(&c, &line[c.i]);
+		if (line[c.i] == ';' || line[c.i] == '|')
 			total++;
-		i++;
+		if (line[c.i] != 0)
+			c.i++;
 	}
 	return (total);
 }
@@ -68,7 +70,7 @@ char	*path_parser(char *line, char **envp, t_cmd *tmp)
 	if (stri[i] == '/')
 	{
 		tmp->prog = 1;
-		if (stat(&stri[i + 1], &sb) == 0)
+		if (stat(&stri[i], &sb) == 0)
 			return (stri);
 	}
 	if (check_name(line, tmp))
@@ -96,25 +98,21 @@ t_cmd	**parser(char *line, char **envp)
 {
 	int		total;
 	t_cmd	**tab;
-	int		i;
-	int		j;
+	t_check c;
 
-	i = 0;
 	total = counter(line);
-	j = 0;
+	init_struct(&c);
 	tab = (t_cmd**)malloc(sizeof(t_cmd**) * (total + 1));
 	if (tab == NULL)
 		return (NULL);
-	while (line[j])
+	while (line[c.i])
 	{
-		tab[i] = params(&line[j], envp);
-		i++;
-		while (line[j] && line[j] != '|' && line[j] != ';')
-			if (line[j++] == '\\')
-				j++;
-		if (line[j])
-			j++;
+		tab[c.j] = params(&line[c.i], envp);
+		c.j++;
+		sep_quotes(&c, line);
+		if (line[c.i])
+			c.i++;
 	}
-	tab[i] = NULL;
+	tab[c.j] = NULL;
 	return (tab);
 }

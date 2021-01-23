@@ -6,38 +6,54 @@
 /*   By: adjemaa <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/23 23:14:11 by adjemaa           #+#    #+#             */
-/*   Updated: 2021/01/23 13:49:37 by adjemaa          ###   ########.fr       */
+/*   Updated: 2021/01/23 16:14:14 by adjemaa          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
+void	sep_quotes(t_check *c, char *line)
+{
+	while (!(((line[c->i] == '|' || line[c->i] == ';') && c->env == 0) || line[c->i] == '\0'))
+	{
+		if (line[c->i] == '\'' && c->two == 0)
+		{
+			c->one = !(c->one);
+			c->env = !(c->env);
+		}
+		else if (line[c->i] == '\"' && c->one == 0)
+		{
+			c->two = !(c->two);
+			c->env = !(c->env);
+		}
+		if (line[c->i] == '\\')
+			c->i++;
+		c->i++;
+	}
+}
+
 char	*str_find(char *line, t_cmd *stru)
 {
-	int		i;
-	int		j;
+	t_check	c;
 	char	*str;
 
-	i = 0;
-	while (!(line[i] == '|' || line[i] == ';' || line[i] == '\0'))
-	{
-		if (line[i] == '\\')
-			i++;
-		i++;
-	}
-	if (line[i] == ';')
+	init_struct(&c);
+	sep_quotes(&c, line);
+	if (line[c.i] == ';')
 		stru->sep = 5;
-	else if (line[i] == '|')
+	else if (line[c.i] == '|')
 		stru->sep = 4;
-	else if (line[i] == 0)
+	else if (line[c.i] == 0)
 		stru->sep = 0;
-	str = malloc(sizeof(char) * (i + 1));
+	str = malloc(sizeof(char) * (c.i + 1));
 	if (str == NULL)
 		return (NULL);
-	str[i] = 0;
-	j = -1;
-	while (++j < i)
-		str[j] = line[j];
+	str[c.i] = 0;
+	while (c.j < c.i)
+	{
+		str[c.j] = line[c.j];
+		c.j++;
+	}
 	return (str);
 }
 
@@ -45,6 +61,9 @@ char	*args_parser(char *str, char **envp, t_cmd *stru)
 {
 	char	**args;
 	char	*tmp;
+	int i;
+
+	i = 0;
 
 	tmp = str_find(str, stru);
 	tmp = cleaned(tmp);
@@ -55,26 +74,6 @@ char	*args_parser(char *str, char **envp, t_cmd *stru)
 	find_env(args, envp);
 	stru->args = find_path(args, stru, envp);
 	return (tmp);
-}
-
-int		sep_parser(char *str, t_cmd *tmp)
-{
-	int i;
-
-	i = 0;
-	tmp->red = -1;
-	while (str[i] != 0 && str[i] != '|' && str[i] != ';')
-		i++;
-	while (str[i] != 0 && str[i] != '|' && str[i] != ';')
-		i++;
-	if (str[i] == ';')
-		return (5);
-	else if (str[i] == '|')
-		return (4);
-	else if (str[i] == 0)
-		return (0);
-	else
-		return (-1);
 }
 
 int		check_name(char *line, t_cmd *tmp)
