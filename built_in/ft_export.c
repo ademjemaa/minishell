@@ -6,7 +6,7 @@
 /*   By: abarbour <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/25 19:30:41 by abarbour          #+#    #+#             */
-/*   Updated: 2020/08/10 23:45:02 by abarbour         ###   ########.fr       */
+/*   Updated: 2021/01/23 13:30:11 by abarbour         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -102,7 +102,7 @@ int		ft_export(char *path, char **args, char ***envp, int p)
 		if (valid_var_name_export(args[i]))
 		{
 			if (!p)
-				add_var_to_env(args[i], envp);
+				add_var_to_env(trait_after_export(&(args[i])), envp);
 		}
 		else
 		{

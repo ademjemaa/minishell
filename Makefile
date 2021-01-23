@@ -6,7 +6,7 @@
 #    By: adjemaa <marvin@42.fr>                     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/11/06 21:13:47 by adjemaa           #+#    #+#              #
-#    Updated: 2020/08/11 18:39:04 by abarbour         ###   ########.fr        #
+#    Updated: 2021/01/23 13:22:30 by abarbour         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -48,6 +48,7 @@ SRCS =	minishell.c\
 		built_in/ft_unset.c\
 		built_in/env_tools.c\
 		built_in/ft_env.c\
+		built_in/export_tools.c\
 		built_in/env_tree.c
 
 SRC =		libft/ft_memset.c\
