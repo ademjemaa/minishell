@@ -6,7 +6,7 @@
 /*   By: abarbour <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/18 16:33:15 by abarbour          #+#    #+#             */
-/*   Updated: 2020/01/21 16:03:13 by abarbour         ###   ########.fr       */
+/*   Updated: 2021/01/28 11:56:22 by adjemaa          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ char	*get_line(char *stack)
 	while (stack[i] && stack[i] != '\n')
 		i++;
 	if (stack[i] == '\n')
-		line = ft_substr(stack, 0, i);
+		line = ft_substrr(stack, 0, i, 0);
 	else
 		line = ft_strdup(stack);
 	return (line);
@@ -57,7 +57,7 @@ char	*get_new_stack(char *stack)
 	if (stack[i] == '\n')
 	{
 		if (stack[i + 1])
-			return (ft_substr(stack, i + 1, ft_strlen(stack) - (i + 1)));
+			return (ft_substrr(stack, i + 1, ft_strlen(stack) - (i + 1), 0));
 		else
 			return (ft_strdup(""));
 	}

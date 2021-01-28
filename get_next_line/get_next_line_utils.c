@@ -6,7 +6,7 @@
 /*   By: abarbour <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/18 16:33:53 by abarbour          #+#    #+#             */
-/*   Updated: 2019/11/19 17:06:52 by abarbour         ###   ########.fr       */
+/*   Updated: 2021/01/28 11:36:07 by adjemaa          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,30 +49,24 @@ char	*ft_strjoin(char const *s1, char const *s2)
 	return (dest);
 }
 
-char	*ft_substr(char const *s, unsigned int start, size_t len)
+char	*ft_substrr(char *s, unsigned int start, size_t len, int crit)
 {
-	char	*str;
-	size_t	size;
-	size_t	i;
+	char	*temp;
+	int		i;
 
-	if (!s)
-		return (NULL);
-	size = ft_strlen(s);
-	if (start > size - 1)
-		return (ft_strdup(""));
-	size = size - start;
-	if (size > len)
-		size = len;
-	if (!(str = (char *)malloc(size + 1)))
-		return (NULL);
 	i = 0;
-	while (s[i + start] && i < len)
+	if ((temp = malloc((len + 1) * sizeof(char))) == NULL)
+		return (NULL);
+	temp[len] = '\0';
+	while (len--)
 	{
-		str[i] = s[i + start];
+		temp[i] = s[start];
 		i++;
+		start++;
 	}
-	str[i] = '\0';
-	return (str);
+	if (crit == 1)
+		free(s);
+	return (temp);
 }
 
 char	*ft_strdup(const char *s1)
