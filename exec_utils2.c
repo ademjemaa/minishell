@@ -6,7 +6,7 @@
 /*   By: abarbour <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/22 23:20:05 by abarbour          #+#    #+#             */
-/*   Updated: 2020/08/11 18:36:43 by abarbour         ###   ########.fr       */
+/*   Updated: 2021/02/05 12:48:40 by abarbour         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,34 +32,6 @@ void	concat_sbs_args(t_cmd *cmd, char **new_args, int *i, int *j)
 	(*j)++;
 }
 
-int		rd_files(t_cmd *cmd, int in)
-{
-	int		i;
-	int		fd;
-
-	i = -1;
-	fd = -2;
-	while (cmd->files[++i].file)
-	{
-		if (cmd->files[i].red == 1)
-			fd = open(cmd->files[i].file, O_RDONLY);
-		else
-		{
-			while (cmd->files[i].file && cmd->files[i].red != 1)
-				i++;
-			i--;
-		}
-		if (fd == -1)
-		{
-			ft_putstr_error(strerror(errno));
-			return (-1);
-		}
-		if (cmd->files[i + 1].file)
-			close(fd);
-	}
-	return (fd == -2 ? in : fd);
-}
-
 void	ft_putstr_error(char *str)
 {
 	int	i;
@@ -79,7 +51,8 @@ int		is_env_built_in_cmd(t_cmd **tab, int i)
 		(!ft_strncmp(tab[i]->path, "cd", 3)
 		|| !ft_strncmp(tab[i]->path, "export", 7)
 		|| !ft_strncmp(tab[i]->path, "exit", 5)
-		|| !ft_strncmp(tab[i]->path, "unset", 6)))
+		|| !ft_strncmp(tab[i]->path, "unset", 6)
+		|| !ft_strncmp(tab[i]->path, "echo", 5)))
 		return (1);
 	return (0);
 }

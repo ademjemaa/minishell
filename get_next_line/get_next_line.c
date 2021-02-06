@@ -6,11 +6,12 @@
 /*   By: abarbour <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/18 16:33:15 by abarbour          #+#    #+#             */
-/*   Updated: 2021/01/28 11:56:22 by adjemaa          ###   ########.fr       */
+/*   Updated: 2021/02/02 17:07:12 by adjemaa          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
+#include <stdio.h>
 
 int		has_nl(char *s)
 {
@@ -59,7 +60,7 @@ char	*get_new_stack(char *stack)
 		if (stack[i + 1])
 			return (ft_substrr(stack, i + 1, ft_strlen(stack) - (i + 1), 0));
 		else
-			return (ft_strdup(""));
+			return (NULL);
 	}
 	return (NULL);
 }

@@ -6,7 +6,7 @@
 /*   By: abarbour <abarbour@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/16 21:20:08 by abarbour          #+#    #+#             */
-/*   Updated: 2020/08/04 22:33:47 by abarbour         ###   ########.fr       */
+/*   Updated: 2021/02/02 17:13:39 by abarbour         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,13 +98,20 @@ void	concat_args(t_cmd *cmd)
 {
 	int		i;
 	int		j;
+	int		k;
 	char	**new_args;
 
 	i = 1;
 	j = 1;
+	if (!cmd)
+		return ;
 	if (!(new_args = (char **)malloc(sizeof(char*)
 	* (nargs_count(cmd->args) + 2))))
 		return ;
+	cmd->total = nargs_count(cmd->args) + 1;
+	k = -1;
+	while (++k < cmd->total)
+		new_args[k] = NULL;
 	while (cmd->args[i])
 		concat_sbs_args(cmd, new_args, &i, &j);
 	new_args[0] = cmd->args[0];

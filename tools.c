@@ -6,7 +6,7 @@
 /*   By: adjemaa <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/27 18:00:48 by adjemaa           #+#    #+#             */
-/*   Updated: 2020/08/09 17:32:14 by adjemaa          ###   ########.fr       */
+/*   Updated: 2021/01/30 16:13:24 by adjemaa          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,37 +69,37 @@ char	*change_str(char *envp, char *str)
 		c.env++;
 		c.i++;
 	}
-	tmp[c.env] = 0;
 	free(str);
+	tmp[c.env] = 0;
 	return (tmp);
 }
 
 void	find_env(char **args, char **envp)
 {
-	int i;
-	int j;
+	t_check c;
 
-	i = -1;
+	init_struct(&c);
 	if (args == NULL)
 		return ;
-	while (args[++i] != NULL)
+	while (args[c.i] != NULL)
 	{
-		j = 0;
-		if (args[i][0] != '\'')
+		c.j = -1;
+		if (args[c.i][0] != '\'')
 		{
-			while (args[i][j])
+			while (args[c.i][++c.j])
 			{
-				if (args[i][j] == '\\')
-					j = j + 2;
-				else if (args[i][j] == '$')
+				single_q_status(args[c.i], &c);
+				if (args[c.i][c.j] == '\\')
+					c.j = c.j + 1;
+				else if (args[c.i][c.j] == '$' && args[c.i][c.j + 1]
+					&& args[c.i][c.j + 1] != '\"' && c.one == 0)
 				{
-					args[i] = swap_case(args[i], envp, j + 1);
-					j = 0;
+					args[c.i] = swap_case(args[c.i], envp, c.j + 1);
+					c.j = -1;
 				}
-				else
-					j++;
 			}
 		}
+		c.i++;
 	}
 }
 

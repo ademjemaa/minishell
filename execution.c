@@ -6,7 +6,7 @@
 /*   By: abarbour <abarbour@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/16 21:20:12 by abarbour          #+#    #+#             */
-/*   Updated: 2021/01/28 12:02:01 by adjemaa          ###   ########.fr       */
+/*   Updated: 2021/02/05 13:19:24 by abarbour         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,6 +55,8 @@ int		perform_redirects(t_cmd *tab, int input_fd, int *pip, char ***envp)
 
 	in = input_fd;
 	out = pip[1];
+	if (!tab)
+		return (0);
 	if (tab->red == 3 || tab->red == 2 || tab->red == 1)
 	{
 		rd_cr_files(tab, &in, &out);
@@ -96,15 +98,15 @@ int		exec_pipe(t_cmd **tab, int *i, char ***envp)
 	close(pip[1]);
 	while (read(pip[0], &c, 1) > 0)
 		write(1, &c, 1);
-	(*i)++;
+	if (tab[*i])
+		(*i)++;
 	return (old_pid);
 }
 
 void	exec(t_cmd ***tab, char ***envp, char *line)
 {
 	int		i;
-	int		old_pid;
-	int		status;
+	int		j;
 
 	i = 0;
 	while ((*tab)[i])
@@ -113,10 +115,11 @@ void	exec(t_cmd ***tab, char ***envp, char *line)
 		{
 			if (((*tab)[i])->red != -1)
 				concat_args((*tab)[i]);
-			if (dispatch_built_in((*tab)[i], envp, 0) == -1)
+			if ((j = dispatch_built_in((*tab)[i], envp, 0)) == -1
+					|| j == -2)
 			{
 				g_exit_code = 1;
-				if (errno)
+				if (errno && j != -2)
 					ft_putstr_error(strerror(errno));
 			}
 			i++;
@@ -124,6 +127,7 @@ void	exec(t_cmd ***tab, char ***envp, char *line)
 		else
 			begin_pipe(*tab, envp, &i);
 		free_cmds(*tab);
+		*tab = NULL;
 		*tab = parser(line, *envp);
 	}
 }

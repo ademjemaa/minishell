@@ -6,7 +6,7 @@
 /*   By: abarbour <abarbour@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/18 19:59:38 by abarbour          #+#    #+#             */
-/*   Updated: 2020/08/04 22:37:43 by abarbour         ###   ########.fr       */
+/*   Updated: 2021/02/05 13:10:56 by abarbour         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,29 +89,29 @@ int		nargs_count(char **args)
 	return (j);
 }
 
-void	rd_cr_files(t_cmd *cmd, int *in, int *out)
+void	rd_cr_files(t_cmd *c, int *in, int *out)
 {
 	int		i;
 
 	i = -1;
-	while (cmd->files[++i].file)
+	while (c->files[++i].file)
 	{
 		if (*in != 0)
-			close(cmd->files[i].red == 1 ? *in : *out);
-		if (cmd->files[i].red == 3 || cmd->files[i].red == 2)
-			*out = open(cmd->files[i].file, (cmd->files[i].red == 2 ?
-			513 : 1537), S_IRUSR | S_IWUSR | S_IRGRP | S_IROTH);
+			close(c->files[i].red == 1 ? *in : *out);
+		if (c->files[i].red == 3 || c->files[i].red == 2)
+			*out = open(c->files[i].file, O_CREAT | O_WRONLY | (c->files[i].red
+			== 2 ? O_APPEND : O_TRUNC), S_IRUSR | S_IWUSR | S_IRGRP | S_IROTH);
 		else
-			*in = open(cmd->files[i].file, O_RDONLY);
+			*in = open(c->files[i].file, O_RDONLY);
 		if (*out == -1 || *in == -1)
 		{
 			ft_putstr_error(strerror(errno));
 			break ;
 		}
-		if (cmd->files[i + 1].file && cmd->files[i + 1].red == 1)
+		if (c->files[i + 1].file && c->files[i + 1].red == 1 && *in != 0)
 			close(*in);
-		if (cmd->files[i + 1].file &&
-			(cmd->files[i + 1].red == 2 || cmd->files[i].red == 2))
+		if (c->files[i + 1].file &&
+			(c->files[i + 1].red == 2 || c->files[i].red == 2))
 			close(*out);
 	}
 }

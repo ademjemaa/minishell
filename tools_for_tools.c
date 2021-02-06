@@ -6,7 +6,7 @@
 /*   By: adjemaa <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/26 23:20:26 by adjemaa           #+#    #+#             */
-/*   Updated: 2020/08/09 17:32:09 by adjemaa          ###   ########.fr       */
+/*   Updated: 2021/01/28 15:05:33 by adjemaa          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,9 @@ int		check_cmd(char **args, int j)
 void	init_tmp(t_cmd *tmp)
 {
 	tmp->sep = 0;
+	tmp->path = NULL;
+	tmp->file = NULL;
+	tmp->args = NULL;
 	tmp->red = 0;
 	tmp->prog = 0;
 	tmp->built = 0;
@@ -62,33 +65,33 @@ void	quote_limits(char *str, int *j, int *i)
 		*j = *j + 1;
 }
 
-void	copy_quotes(char *str, char *tmp, t_check *c)
+void	copy_quotes(char *s, char *tmp, t_check *c)
 {
-	while (str[c->j] == '\\' && str[c->j + 1])
+	while (s[c->j] == '\\' && s[c->j + 1])
 	{
-		tmp[(c->i)++] = str[(c->j)++];
-		tmp[(c->i)++] = str[(c->j)++];
+		tmp[(c->i)++] = s[(c->j)++];
+		tmp[(c->i)++] = s[(c->j)++];
 	}
-	if (str[c->j] == '\'' && c->two == 0)
+	if (s[c->j] == '\'' && c->two == 0)
 		c->one = !c->one;
-	if (str[c->j] == '\"' && c->one == 0)
+	if (s[c->j] == '\"' && c->one == 0)
 		c->two = !c->two;
-	if (((str[c->j + 1] == '>' && str[c->j] != '>') || (str[c->j + 1] ==
-		'<')) && str[c->j] != ' ' && c->one == 0 && c->two == 0)
+	if ((s[c->j] && s[c->i]) && (((s[c->j + 1] == '>' && s[c->j] != '>') ||
+		(s[c->j + 1] == '<')) && s[c->j] != ' ' && c->one == 0 && c->two == 0))
 	{
-		tmp[c->i] = str[c->j];
+		tmp[c->i] = s[c->j];
 		c->i++;
 		tmp[c->i] = ' ';
 	}
-	else if ((str[c->j] == ' ') && (str[c->j - 1] == '>' || str[c->j - 1] ==
-			'<') && c->one == 0 && c->two == 0)
+	else if ((s[c->j] == ' ') && c->j != 0 && (s[c->j - 1] == '>' ||
+			s[c->j - 1] == '<') && c->one == 0 && c->two == 0)
 	{
-		while (str[c->j] == ' ')
+		while (s[c->j] == ' ')
 			c->j++;
-		tmp[c->i] = str[c->j];
+		tmp[c->i] = s[c->j];
 	}
 	else
-		tmp[c->i] = str[c->j];
+		tmp[c->i] = s[c->j];
 }
 
 void	envp_slash(char *str, char *tmp, t_check *c, char *envp)

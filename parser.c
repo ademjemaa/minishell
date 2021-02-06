@@ -6,7 +6,7 @@
 /*   By: abarbour <abarbour@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/13 15:52:17 by abarbour          #+#    #+#             */
-/*   Updated: 2020/08/10 23:03:13 by abarbour         ###   ########.fr       */
+/*   Updated: 2021/02/06 16:57:33 by abarbour         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ int		counter(char *line)
 	i = 0;
 	while (line[i])
 	{
-		if (line[i] == '|' || line[i] == ';')
+		if ((line[i] == '|' || line[i] == ';') && (line[i + 1] != '\0'))
 			total++;
 		i++;
 	}
@@ -48,7 +48,8 @@ char	*cmd_name(char *line)
 			i++;
 		}
 	}
-	return (create_cmd_name(line, nb_c));
+	line = create_cmd_name(line, nb_c);
+	return (line);
 }
 
 char	*path_parser(char *line, char **envp, t_cmd *tmp)
@@ -57,10 +58,9 @@ char	*path_parser(char *line, char **envp, t_cmd *tmp)
 	struct stat		sb;
 	int				i;
 
-	tmp->built = 0;
 	i = 0;
-	tmp->prog = 0;
-	stri = cmd_name(line);
+	stri = find_env_cmd(line, envp, stri);
+	stri = cmd_name(stri);
 	if (stri == NULL)
 		return (NULL);
 	while (stri[i] && stri[i] != '/')
@@ -68,13 +68,12 @@ char	*path_parser(char *line, char **envp, t_cmd *tmp)
 	if (stri[i] == '/')
 	{
 		tmp->prog = 1;
-		if (stat(&stri[i + 1], &sb) == 0)
+		if (stat(stri, &sb) == 0)
 			return (stri);
 	}
-	if (check_name(line, tmp))
+	if (check_name(stri, tmp))
 		return (stri);
-	free(stri);
-	return (ret_handler(line, envp, &sb));
+	return (ret_handler(stri, envp, &sb));
 }
 
 t_cmd	*params(char *line, char **envp)

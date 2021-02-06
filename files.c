@@ -6,17 +6,19 @@
 /*   By: adjemaa <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/23 23:07:55 by adjemaa           #+#    #+#             */
-/*   Updated: 2020/08/09 17:26:58 by adjemaa          ###   ########.fr       */
+/*   Updated: 2021/02/02 16:27:55 by adjemaa          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void		free_all(char **args)
+void		free_all(char **args, char *str, int cond)
 {
 	int i;
 
 	i = 0;
+	if (cond == 1 && str)
+		free(str);
 	while (args[i] != NULL)
 	{
 		free(args[i]);
@@ -75,7 +77,8 @@ char		**find_path(char **args, t_cmd *tmp, char **envp)
 		}
 		i++;
 	}
-	free_all(args);
+	free_all(args, NULL, 0);
+	tmp->total = j;
 	fill[j] = NULL;
 	return (fill);
 }

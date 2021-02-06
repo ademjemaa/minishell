@@ -6,7 +6,7 @@
 /*   By: adjemaa <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/09 13:25:35 by adjemaa           #+#    #+#             */
-/*   Updated: 2020/08/09 14:58:52 by adjemaa          ###   ########.fr       */
+/*   Updated: 2021/01/30 16:02:07 by adjemaa          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,6 +88,8 @@ char	*create_cmd_name(char *line, int nb_c)
 		if (!fill_dq_sq(line, str, &i, &j) && line[i])
 			str[j++] = line[i++];
 	}
+	free(line);
 	str[j] = '\0';
-	return (str);
+	line = str;
+	return (line);
 }

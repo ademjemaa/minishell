@@ -6,7 +6,7 @@
 /*   By: abarbour <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/25 00:08:49 by abarbour          #+#    #+#             */
-/*   Updated: 2021/01/28 11:33:08 by adjemaa          ###   ########.fr       */
+/*   Updated: 2021/02/05 12:48:52 by abarbour         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,6 +52,7 @@ typedef struct	s_cmd
 	t_filelst	*files;
 	int			red;
 	int			built;
+	int			total;
 }				t_cmd;
 
 int				g_exit_code;
@@ -66,13 +67,14 @@ int				find_filered(char *str);
 int				env_len(char *str);
 char			**first_split(char *line);
 char			*file_prot(char *str, char *tmp, int *j);
+char			*no_path(char *str);
 int				line_return(char *str);
 int				quote_status(t_check *c, char *str);
 char			*cleaned(char *str);
 int				get_next_line(int fd, char **line);
 char			*rearrange(char *str);
 char			*retrieve(char *str, char **envp);
-void			free_all(char **args);
+void			free_all(char **args, char *str, int cond);
 t_cmd			**parser(char *line, char **envp);
 int				final_size(char *str, char *envp);
 int				check_cmd(char **args, int j);
@@ -87,10 +89,10 @@ char			**find_path(char **args, t_cmd *tmp, char **envp);
 char			*path_parser(char *line, char **envp, t_cmd *tmp);
 void			exec(t_cmd ***tab, char ***envp, char *line);
 void			dup_and_close(int in, int out);
-int				check_name(char *line, t_cmd *tmp);
+int				check_name(char *str, t_cmd *tmp);
 int				fix_quotes(t_check *check, char *str);
 void			quote_limits(char *str, int *i, int *j);
-void			copy_quotes(char *str, char *tmp, t_check *c);
+void			copy_quotes(char *s, char *tmp, t_check *c);
 char			*cmd_name(char *linep);
 int				red_type(char *str);
 void			init_tmp(t_cmd *tmp);
@@ -110,7 +112,6 @@ int				narg_len_nq(char *arg);
 char			*swap_case(char *args, char **envp, int j);
 char			*change_str(char *envp, char *str);
 void			catch_signals();
-int				rd_files(t_cmd *cmd, int in);
 int				exec_built_in(int in, int out, t_cmd *tab, char ***envp);
 int				exec_pipe(t_cmd **tab, int *i, char ***envp);
 int				is_env_built_in_cmd(t_cmd **tab, int i);
@@ -125,11 +126,13 @@ char			**env_start(char **envp);
 int				dispatch_built_in(t_cmd *cmd, char ***envp, int p);
 int				equal_pos(char *var);
 void			update_env(char *var, char **envp, int i);
+void			single_q_status(char *str, t_check *c);
 void			add_env(char *var, char ***envp);
 char			*free_env(char **env, int i);
 int				str_array_len(char **envp);
 void			tree_env(char **envp);
 void			begin_pipe(t_cmd **tab, char ***envp, int *i);
+char			*find_env_cmd(char *str, char **envp, char *stri);
 char			*create_cmd_name(char *line, int nb_c);
 int				nb_remove_dq(char *line, int *i);
 int				nb_remove_sq(char *line, int *i);

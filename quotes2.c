@@ -6,7 +6,7 @@
 /*   By: adjemaa <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/07 21:30:15 by adjemaa           #+#    #+#             */
-/*   Updated: 2020/08/09 12:49:09 by adjemaa          ###   ########.fr       */
+/*   Updated: 2021/01/28 16:42:43 by abarbour         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,15 +54,15 @@ char	*file_prot(char *str, char *tmp, int *j)
 	int one;
 	int two;
 
-	one = 0;
-	two = 0;
+	one = str[0] == '\'' ? 1 : 0;
+	two = str[0] == '\"' ? 1 : 0;
 	i = 0;
 	while (str[i])
 	{
 		tmp[i] = str[i];
-		if (str[i] == '\'' && two == 0 && str[i - 1] != '\\')
+		if (str[i] == '\'' && two == 0 && i != 0 && str[i - 1] != '\\')
 			one = !one;
-		if (str[i] == '\"' && one == 0 && str[i - 1] != '\\')
+		if (str[i] == '\"' && one == 0 && i != 0 && str[i - 1] != '\\')
 			two = !two;
 		if (str[i] == ' ' && str[i - 1] != '\\' && one == 0 && two == 0)
 			break ;

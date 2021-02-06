@@ -6,7 +6,7 @@
 /*   By: adjemaa <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/17 00:11:06 by adjemaa           #+#    #+#             */
-/*   Updated: 2020/08/09 13:12:56 by adjemaa          ###   ########.fr       */
+/*   Updated: 2021/02/02 16:45:02 by adjemaa          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,23 +21,22 @@ char	*ret_handler(char *line, char **envp, struct stat *sb)
 	i = 0;
 	while (ft_strncmp(envp[i], "PATH=", 5))
 		i++;
+	if (envp[i] == NULL)
+		return (no_path(line));
 	str = ft_split(envp[i], ':');
 	i = -1;
 	while (str[++i] != NULL)
 	{
 		if (str[i][ft_strlen(str[i]) - 1] != '/')
 			str[i] = ft_strjoinfree(str[i], "/", 1);
-		str[i] = ft_strjoinfree(str[i], cmd_name(line), 3);
+		str[i] = ft_strjoinfree(str[i], line, 1);
 	}
 	i = -1;
 	while (str[++i] != NULL)
 		if (stat(str[i], sb) == 0)
 			break ;
-	if (str[i] != NULL)
-		ret = ft_strdup(str[i]);
-	else
-		ret = NULL;
-	free_all(str);
+	ret = str[i] ? ft_strdup(str[i]) : NULL;
+	free_all(str, line, 1);
 	return (ret);
 }
 
@@ -81,9 +80,8 @@ int		backslash(char *str, char *tmp, int *i, int cond)
 		if (c == str[*i] && *i != 0)
 		{
 			tmp[*i] = str[*i];
-			*i = *i + 1;
-			if (str[*i] == ' ')
-				tmp[(*i)++] = ' ';
+			if (str[*i + 1] == ' ')
+				tmp[++(*i)] = ' ';
 			return (1);
 		}
 		else

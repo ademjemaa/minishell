@@ -6,11 +6,18 @@
 /*   By: abarbour <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/08 20:41:45 by abarbour          #+#    #+#             */
-/*   Updated: 2020/08/08 20:46:39 by abarbour         ###   ########.fr       */
+/*   Updated: 2021/02/02 16:30:35 by adjemaa          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+
+char	*no_path(char *str)
+{
+	free(str);
+	str = NULL;
+	return (NULL);
+}
 
 void	begin_pipe(t_cmd **tab, char ***envp, int *i)
 {

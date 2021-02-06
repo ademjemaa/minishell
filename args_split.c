@@ -6,7 +6,7 @@
 /*   By: adjemaa <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/27 18:01:22 by adjemaa           #+#    #+#             */
-/*   Updated: 2021/01/28 12:04:06 by adjemaa          ###   ########.fr       */
+/*   Updated: 2021/01/30 16:30:24 by adjemaa          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ int		total_argus(char *line)
 	return (c.env + 1);
 }
 
-int		malloc_size(char *str, int cur, char **args)
+int		ft_malloc_size(char *str, int cur, char **args)
 {
 	int		i;
 	char	c;
@@ -50,13 +50,15 @@ int		malloc_size(char *str, int cur, char **args)
 		if (str[i] == '\\')
 			i = i + 2;
 		if (str[i] == '>' || str[i] == '<' || check_cmd(args, cur))
+		{
 			return (line_return(&str[i]) + 1);
+		}
 		if (c == '\'' || c == '\"')
 		{
 			if (str[++i] == c)
-				return (i + 2);
+				return (str[i + 1] == ' ' ? i + 3 : i + 2);
 		}
-		else if (str[i] == ' ')
+		else if (str[i] == ' ' || (str[i + 1] == '\'') || str[i + 1] == '\"')
 			return (i + 2);
 		else
 			i++;
@@ -70,7 +72,7 @@ char	*build_arg(char *str, int *j, int cur, char **args)
 	char	*tmp;
 
 	i = 0;
-	tmp = (char *)malloc(sizeof(char) * (malloc_size(str, cur, args)));
+	tmp = (char *)malloc(sizeof(char) * (ft_malloc_size(str, cur, args)));
 	if (tmp == NULL)
 		return (NULL);
 	if (str[0] == '>' || str[0] == '<' || check_cmd(args, cur))
@@ -79,8 +81,11 @@ char	*build_arg(char *str, int *j, int cur, char **args)
 	{
 		if (arg_handler(str, tmp, &i) == 1)
 			break ;
-		i++;
+		if (str[i])
+			i++;
 	}
+	if (str[0] == '\'' || str[0] == '\"')
+		i++;
 	tmp[i] = 0;
 	*j = i + *j;
 	return (tmp);

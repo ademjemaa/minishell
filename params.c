@@ -6,7 +6,7 @@
 /*   By: adjemaa <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/23 23:14:11 by adjemaa           #+#    #+#             */
-/*   Updated: 2020/08/10 22:23:18 by adjemaa          ###   ########.fr       */
+/*   Updated: 2021/01/30 16:29:25 by adjemaa          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,14 +77,12 @@ int		sep_parser(char *str, t_cmd *tmp)
 		return (-1);
 }
 
-int		check_name(char *line, t_cmd *tmp)
+int		check_name(char *str, t_cmd *tmp)
 {
 	int		ret;
-	char	*str;
 
 	ret = 0;
 	tmp->built = 0;
-	str = cmd_name(line);
 	if (str != NULL)
 	{
 		if (!ft_strcmp(str, "echo") || !ft_strcmp(str, "cd") ||
@@ -97,6 +95,5 @@ int		check_name(char *line, t_cmd *tmp)
 	}
 	else
 		tmp->built = 0;
-	free(str);
 	return (ret);
 }

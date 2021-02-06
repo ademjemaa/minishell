@@ -6,20 +6,21 @@
 /*   By: abarbour <abarbour@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/26 20:05:41 by abarbour          #+#    #+#             */
-/*   Updated: 2020/07/04 22:12:09 by abarbour         ###   ########.fr       */
+/*   Updated: 2021/01/30 16:27:49 by adjemaa          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void	free_args(char **args)
+void	free_args(char **args, int total)
 {
 	int		i;
 
 	i = 0;
-	while (args[i])
+	while (i < total)
 	{
-		free(args[i]);
+		if (args[i])
+			free(args[i]);
 		i++;
 	}
 }
@@ -45,7 +46,7 @@ void	free_cmds(t_cmd **tab)
 	{
 		free(tab[i]->path);
 		free(tab[i]->file);
-		free_args(tab[i]->args);
+		free_args(tab[i]->args, tab[i]->total);
 		free(tab[i]->args);
 		free_files(tab[i]->files);
 		free(tab[i]->files);
