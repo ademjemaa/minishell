@@ -74,7 +74,7 @@ char	*swap_case(char *args, char **envp, int j)
 	int		c;
 
 	c = 0;
-	if (args[j] == '?')
+	if (args[j] == '?' && args[j] && args[j] != ' ')
 	{
 		tmp = ft_itoa(g_exit_code);
 		tmp = ft_strjoinfree(tmp, &args[j + 1], 1);
