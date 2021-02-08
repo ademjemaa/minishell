@@ -126,6 +126,7 @@ void	exec(t_cmd ***tab, char ***envp, char *line)
 		}
 		else
 			begin_pipe(*tab, envp, &i);
+		waitpid(-1, NULL, 0);
 		free_cmds(*tab);
 		*tab = NULL;
 		*tab = parser(line, *envp);
