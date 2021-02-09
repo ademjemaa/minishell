@@ -31,3 +31,10 @@ void	begin_pipe(t_cmd **tab, char ***envp, int *i)
 		: WEXITSTATUS(status);
 	g_childs = 0;
 }
+
+void	reparse(t_cmd ***tab, char ***envp, char *line)
+{
+	free_cmds(*tab);
+	*tab = NULL;
+	*tab = parser(line, *envp);
+}
