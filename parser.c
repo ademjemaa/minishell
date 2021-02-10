@@ -14,18 +14,23 @@
 
 int		counter(char *line)
 {
-	int total;
-	int i;
+	t_check c;
 
-	total = 1;
-	i = 0;
-	while (line[i])
+	init_struct(&c);
+	while (line[c.i])
 	{
-		if ((line[i] == '|' || line[i] == ';') && (line[i + 1] != '\0'))
-			total++;
-		i++;
+		while (line[c.i] == '\\' && c.one == 0)
+			c.i = c.i + 2;
+		if (line[c.i] == '\'' && c.two == 0)
+			c.one = !c.one;
+		if (line[c.i] == '\"' && c.one == 0)
+			c.two = !c.two;
+		if ((line[c.i] == '|' || line[c.i] == ';') &&
+			line[c.i + 1] != '\0' && c.one == 0 && c.two == 0)
+			c.env++;
+		c.i++;
 	}
-	return (total);
+	return (++c.env);
 }
 
 char	*cmd_name(char *line)
@@ -108,9 +113,7 @@ t_cmd	**parser(char *line, char **envp)
 	{
 		tab[i] = params(&line[j], envp);
 		i++;
-		while (line[j] && line[j] != '|' && line[j] != ';')
-			if (line[j++] == '\\')
-				j++;
+		j = j + cmd_length(&line[j]);
 		if (line[j])
 			j++;
 	}

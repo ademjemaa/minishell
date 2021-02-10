@@ -79,9 +79,7 @@ void	find_env(char **args, char **envp)
 	t_check c;
 
 	init_struct(&c);
-	if (args == NULL)
-		return ;
-	while (args[c.i] != NULL)
+	while (args && args[c.i] != NULL)
 	{
 		c.j = -1;
 		if (args[c.i][0] != '\'')
@@ -92,7 +90,8 @@ void	find_env(char **args, char **envp)
 				if (args[c.i][c.j] == '\\')
 					c.j = c.j + 1;
 				else if (args[c.i][c.j] == '$' && args[c.i][c.j + 1]
-					&& args[c.i][c.j + 1] != '\"' && c.one == 0 && args[c.i][c.j + 1] != ' ')
+					&& args[c.i][c.j + 1] != '\"' && c.one == 0 &&
+					args[c.i][c.j + 1] != ' ')
 				{
 					args[c.i] = swap_case(args[c.i], envp, c.j + 1);
 					c.j = -1;

@@ -137,5 +137,7 @@ char			*create_cmd_name(char *line, int nb_c);
 int				nb_remove_dq(char *line, int *i);
 int				nb_remove_sq(char *line, int *i);
 void			add_var_to_env(char *var, char ***envp);
+void			reparse(t_cmd ***tab, char ***envp, char *line);
+int				cmd_length(char *line);
 
 #endif

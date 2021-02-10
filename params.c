@@ -19,12 +19,7 @@ char	*str_find(char *line, t_cmd *stru)
 	char	*str;
 
 	i = 0;
-	while (!(line[i] == '|' || line[i] == ';' || line[i] == '\0'))
-	{
-		if (line[i] == '\\')
-			i++;
-		i++;
-	}
+	i = cmd_length(line);
 	if (line[i] == ';')
 		stru->sep = 5;
 	else if (line[i] == '|')
