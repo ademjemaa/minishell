@@ -12,6 +12,27 @@
 
 #include "minishell.h"
 
+int		cmd_length(char *line)
+{
+	t_check c;
+
+	init_struct(&c);
+	while (line[c.i])
+	{
+		while (line[c.i] == '\\' && c.one == 0)
+			c.i = c.i + 2;
+		if (line[c.i] == '\'' && c.two == 0)
+			c.one = !c.one;
+		if (line[c.i] == '\"' && c.one == 0)
+			c.two = !c.two;
+		if ((line[c.i] == '|' || line[c.i] == ';') &&
+			line[c.i + 1] != '\0' && c.one == 0 && c.two == 0)
+			return (c.i);
+		c.i++;
+	}
+	return (c.i);
+}
+
 void	int_handler(int signum)
 {
 	if (g_childs == 0)
