@@ -97,9 +97,7 @@ char	*exact_env(char *str)
 	tmp = malloc(sizeof(char *) * env_len(str));
 	if (tmp == NULL)
 		return (NULL);
-	while (str[i] && ((str[i] >= 'a' && str[i] <= 'z') || (str[i] >= 'A' &&
-			str[i] <= 'Z') || (str[i] >= '0' && str[i] <= '9') ||
-			str[i] == '_'))
+	while (str[i] && env_chars(str[i], 1))
 	{
 		tmp[i] = str[i];
 		i++;
