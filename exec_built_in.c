@@ -27,7 +27,7 @@ int		return_built_in(t_cmd *cmd, char ***envp, int oout, int p)
 	if (!ft_strncmp(cmd->path, "echo", 5))
 		return (btin_ret(ft_echo(cmd->path, cmd->args, *envp), oout, p));
 	else if (!ft_strncmp(cmd->path, "cd", 3))
-		return (btin_ret(ft_cd(cmd->path, cmd->args, *envp), oout, p));
+		return (btin_ret(ft_cd(cmd->path, cmd->args, envp), oout, p));
 	else if (!ft_strncmp(cmd->path, "pwd", 4))
 		return (btin_ret(ft_pwd(cmd->path, cmd->args, *envp), oout, p));
 	else if (!ft_strncmp(cmd->path, "export", 7))

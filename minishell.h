@@ -118,7 +118,7 @@ int				is_env_built_in_cmd(t_cmd **tab, int i);
 int				ft_echo(char *path, char **args, char **envp);
 int				ft_pwd(char *path, char **args, char **envp);
 int				ft_env(char *path, char **args, char **env);
-int				ft_cd(char *path, char **args, char **envp);
+int				ft_cd(char *path, char **args, char ***envp);
 int				ft_exit(char *path, char **args, char ***envp);
 int				ft_export(char *path, char **args, char ***envp, int p);
 int				ft_unset(char *path, char **args, char ***envp, int p);
