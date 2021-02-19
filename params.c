@@ -49,7 +49,6 @@ char	*args_parser(char *str, char **envp, t_cmd *stru)
 	stru->files = find_filelst(args, envp);
 	find_env(args, envp);
 	stru->args = find_path(args, stru, envp);
-	int i = 0;
 	return (tmp);
 }
 

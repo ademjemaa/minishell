@@ -16,7 +16,6 @@ int		size_counter(char *str)
 {
 	int		i;
 	int		j;
-	char	c;
 
 	i = 0;
 	j = 0;

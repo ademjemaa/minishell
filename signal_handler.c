@@ -15,13 +15,12 @@
 int		env_chars(char str, int cond)
 {
 	if (cond == 0 && ((str > 64 && str < 91) || str == '_' ||
-                (str > 96 && str < 123) || (str > 47 && str < 58) || str == '?'))
-                return (1);
-        if (cond == 1 && ((str > 64 && str < 91) || str == '_' ||
-                (str > 96 && str < 123) || (str > 47 && str < 58)))
-                return (1);
-        return (0);
-
+		(str > 96 && str < 123) || (str > 47 && str < 58) || str == '?'))
+		return (1);
+	if (cond == 1 && ((str > 64 && str < 91) || str == '_' ||
+		(str > 96 && str < 123) || (str > 47 && str < 58)))
+		return (1);
+	return (0);
 }
 
 int		cmd_length(char *line)

@@ -112,9 +112,9 @@ void	envp_slash(char *str, char *tmp, t_check *c, char *envp)
 	while (envp != NULL && envp[c->j])
 		tmp[c->env++] = envp[c->j++];
 	if (!(str[c->i] >= '0' && str[c->i] <= '9'))
-		while (str[c->i] && ((str[c->i] >= 'a' && str[c->i] <= 'z') || (str[c->i]
-				>= 'A' && str[c->i] <= 'Z') || (str[c->i] >= '0' &&
-				str[c->i] <= '9') || str[c->i] == '_'))
+		while (str[c->i] && ((str[c->i] >= 'a' && str[c->i] <= 'z') ||
+		(str[c->i] >= 'A' && str[c->i] <= 'Z') || (str[c->i] >= '0' &&
+		str[c->i] <= '9') || str[c->i] == '_'))
 			c->i++;
 	else
 		c->i++;

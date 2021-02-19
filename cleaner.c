@@ -75,11 +75,9 @@ char	*copy_clean(char *tmp, char *str)
 
 char	*cleaned(char *str)
 {
-	int		i;
 	int		total;
 	char	*tmp;
 
-	i = 0;
 	total = find_len(str);
 	tmp = malloc(sizeof(char) * total);
 	if (tmp == NULL)

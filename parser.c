@@ -27,12 +27,12 @@ int		counter(char *line)
 			c.two = !c.two;
 		if ((line[c.i] == '|' || line[c.i] == ';') &&
 			line[c.i + 1] != '\0' && c.one == 0 && c.two == 0)
-			{
-				while (line[c.i + 1] == ' ')
-					c.i++;
-				if (line[c.i + 1])
-					c.env++;
-			}
+		{
+			while (line[c.i + 1] == ' ')
+				c.i++;
+			if (line[c.i + 1])
+				c.env++;
+		}
 		c.i++;
 	}
 	return (++c.env);
@@ -42,7 +42,6 @@ char	*cmd_name(char *line)
 {
 	int		i;
 	int		nb_c;
-	char	*str;
 
 	i = 0;
 	nb_c = 0;
@@ -69,6 +68,7 @@ char	*path_parser(char *line, char **envp, t_cmd *tmp)
 	int				i;
 
 	i = 0;
+	stri = NULL;
 	stri = find_env_cmd(line, envp, stri);
 	stri = cmd_name(stri);
 	if (stri == NULL)
