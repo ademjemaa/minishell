@@ -86,7 +86,7 @@ char	*swap_case(char *args, char **envp, int j)
 		while (envp[c] != NULL && ft_strncmp(envp[c],
 				tmp, envp_len(envp[c], tmp)))
 			c++;
-		if (((int)ft_strlen(tmp)) != 0)
+		if (((int)ft_strlen(tmp)) != 0 || (args[j] >= '0' && args[j] <= '9'))
 			args = change_str(envp[c], args);
 		free(tmp);
 	}

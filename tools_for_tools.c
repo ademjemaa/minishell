@@ -76,19 +76,19 @@ void	copy_quotes(char *s, char *tmp, t_check *c)
 		c->one = !c->one;
 	if (s[c->j] == '\"' && c->one == 0)
 		c->two = !c->two;
-	if ((s[c->j] && s[c->i]) && (((s[c->j + 1] == '>' && s[c->j] != '>') ||
-		(s[c->j + 1] == '<')) && s[c->j] != ' ' && c->one == 0 && c->two == 0))
-	{
-		tmp[c->i] = s[c->j];
-		c->i++;
-		tmp[c->i] = ' ';
-	}
-	else if ((s[c->j] == ' ') && c->j != 0 && (s[c->j - 1] == '>' ||
+	if ((s[c->j] == ' ') && c->j != 0 && (s[c->j - 1] == '>' ||
 			s[c->j - 1] == '<') && c->one == 0 && c->two == 0)
 	{
 		while (s[c->j] == ' ')
 			c->j++;
 		tmp[c->i] = s[c->j];
+	}
+	if ((s[c->j]) && (((s[c->j + 1] == '>' && s[c->j] != '>') ||
+		(s[c->j + 1] == '<')) && s[c->j] != ' ' && c->one == 0 && c->two == 0))
+	{
+		tmp[c->i] = s[c->j];
+		c->i++;
+		tmp[c->i] = ' ';
 	}
 	else
 		tmp[c->i] = s[c->j];
@@ -111,8 +111,11 @@ void	envp_slash(char *str, char *tmp, t_check *c, char *envp)
 	c->i++;
 	while (envp != NULL && envp[c->j])
 		tmp[c->env++] = envp[c->j++];
-	while (str[c->i] && ((str[c->i] >= 'a' && str[c->i] <= 'z') || (str[c->i]
-			>= 'A' && str[c->i] <= 'Z') || (str[c->i] >= '0' &&
-			str[c->i] <= '9') || str[c->i] == '_'))
-		c->i++;
+	if (!(str[c->i] >= '0' && str[c->i] <= '9'))
+		while (str[c->i] && ((str[c->i] >= 'a' && str[c->i] <= 'z') || (str[c->i]
+				>= 'A' && str[c->i] <= 'Z') || (str[c->i] >= '0' &&
+				str[c->i] <= '9') || str[c->i] == '_'))
+			c->i++;
+	else
+	 c->i++;
 }

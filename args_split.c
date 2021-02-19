@@ -47,7 +47,7 @@ int		ft_malloc_size(char *str, int cur, char **args)
 	c = str[i];
 	while (str[i])
 	{
-		if (str[i] == '\\')
+		if (str[i] == '\\')	
 			i = i + 2;
 		if (str[i] == '>' || str[i] == '<' || check_cmd(args, cur))
 		{

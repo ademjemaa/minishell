@@ -93,7 +93,7 @@ int		file_len(char *str, char **envp)
 
 	total = 1;
 	init_struct(&c);
-	while (str[c.i] && str[c.i] != ' ')
+	while (str[c.i] && str[c.i] != ' ' && str[c.i] != '>' && str[c.i] != '<')
 	{
 		if (str[c.i] == '\\' && c.one == 0)
 		{

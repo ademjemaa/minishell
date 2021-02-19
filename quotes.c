@@ -43,15 +43,15 @@ int		final_size(char *str, char *envp)
 	while (envp != NULL && envp[++j])
 		total++;
 	i++;
-	while (str[i] && ((str[i] >= 'a' && str[i] <= 'z') || (str[i] >= 'A' &&
-			str[i] <= 'Z') || (str[i] >= '0' && str[i] <= '9') ||
-			str[i] == '_'))
+	if (!(str[i] >= '0' && str[i] <= '9'))
+		while (str[i] && ((str[i] >= 'a' && str[i] <= 'z') || (str[i] >= 'A' &&
+				str[i] <= 'Z') || (str[i] >= '0' && str[i] <= '9') ||
+				str[i] == '_'))
+			i++;
+	else
 		i++;
-	while (str[i])
-	{
+	while (str[++i])
 		total++;
-		i++;
-	}
 	return (total);
 }
 
@@ -60,6 +60,8 @@ int		env_len(char *str)
 	int i;
 
 	i = 1;
+	if (str[0] >= '0' && str[0] <= '9')
+		return (1);
 	while (str[i] && ((str[i] >= 'a' && str[i] <= 'z') || (str[i] >= 'A' &&
 			str[i] <= 'Z') || (str[i] >= '0' && str[i] <= '9') ||
 			str[i] == '_'))
@@ -97,10 +99,15 @@ char	*exact_env(char *str)
 	tmp = malloc(sizeof(char *) * env_len(str));
 	if (tmp == NULL)
 		return (NULL);
-	while (str[i] && env_chars(str[i], 1))
-	{
+	if (str[0] >= '0' && str[0] <= '9')
 		tmp[i] = str[i];
-		i++;
+	else
+	{
+		while (str[i] && env_chars(str[i], 1))
+		{
+			tmp[i] = str[i];
+			i++;
+		}
 	}
 	tmp[i] = 0;
 	return (tmp);
