@@ -21,15 +21,7 @@ int		env_chars(char str, int cond)
                 (str > 96 && str < 123) || (str > 47 && str < 58)))
                 return (1);
         return (0);
-/*	if (cond == 0 && ((str > 64 && str < 91) || str == '_' ||
-		(str > 96 && str < 123) || (str > 47 && str < 58) || str == '?'))
-		return (1);
-	if (cond == 1 && ((str > 64 && str < 91) || str == '_' ||
-		(str > 96 && str < 123) || str == '?'))
-	if (cond > 1 && ((str > 64 && str < 91) || str == '_' ||
-		(str > 96 && str < 123) || (str > 47 && str < 58)))
-		return (1);
-	return (0);*/
+
 }
 
 int		cmd_length(char *line)
@@ -45,8 +37,7 @@ int		cmd_length(char *line)
 			c.one = !c.one;
 		if (line[c.i] == '\"' && c.one == 0)
 			c.two = !c.two;
-		if ((line[c.i] == '|' || line[c.i] == ';') &&
-			line[c.i + 1] != '\0' && c.one == 0 && c.two == 0)
+		if ((line[c.i] == '|' || line[c.i] == ';') && c.one == 0 && c.two == 0)
 			return (c.i);
 		c.i++;
 	}

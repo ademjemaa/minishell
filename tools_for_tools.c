@@ -117,5 +117,5 @@ void	envp_slash(char *str, char *tmp, t_check *c, char *envp)
 				str[c->i] <= '9') || str[c->i] == '_'))
 			c->i++;
 	else
-	 c->i++;
+		c->i++;
 }

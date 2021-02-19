@@ -27,7 +27,12 @@ int		counter(char *line)
 			c.two = !c.two;
 		if ((line[c.i] == '|' || line[c.i] == ';') &&
 			line[c.i + 1] != '\0' && c.one == 0 && c.two == 0)
-			c.env++;
+			{
+				while (line[c.i + 1] == ' ')
+					c.i++;
+				if (line[c.i + 1])
+					c.env++;
+			}
 		c.i++;
 	}
 	return (++c.env);
@@ -100,23 +105,23 @@ t_cmd	**parser(char *line, char **envp)
 {
 	int		total;
 	t_cmd	**tab;
-	int		i;
-	int		j;
+	t_check c;
 
-	i = 0;
+	init_struct(&c);
 	total = counter(line);
-	j = 0;
 	tab = (t_cmd**)malloc(sizeof(t_cmd**) * (total + 1));
 	if (tab == NULL)
 		return (NULL);
-	while (line[j])
+	while (line[c.j])
 	{
-		tab[i] = params(&line[j], envp);
-		i++;
-		j = j + cmd_length(&line[j]);
-		if (line[j])
-			j++;
+		tab[c.i] = params(&line[c.j], envp);
+		c.i++;
+		c.j = c.j + cmd_length(&line[c.j]);
+		if (line[c.j])
+			c.j++;
+		while (line[c.j] == ' ')
+			c.j++;
 	}
-	tab[i] = NULL;
+	tab[c.i] = NULL;
 	return (tab);
 }
