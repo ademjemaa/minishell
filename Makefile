@@ -31,6 +31,7 @@ SRCS =	minishell.c\
 		quotes2.c\
 		tools.c\
 		tools_for_tools.c\
+		extra_tools.c\
 		files.c\
 		ft_tools.c\
 		free_cmds.c\

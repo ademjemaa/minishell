@@ -140,5 +140,6 @@ void			add_var_to_env(char *var, char ***envp);
 void			reparse(t_cmd ***tab, char ***envp, char *line);
 int				cmd_length(char *line);
 int				env_chars(char str, int cond);
+void			find_spaces(t_cmd *stru);
 
 #endif
