@@ -15,8 +15,9 @@
 void	concat_sbs_args(t_cmd *cmd, char **new_args, int *i, int *j)
 {
 	new_args[*j] = NULL;
-	while (cmd->args[*i] && (cmd->args[*i][ft_strlen(cmd->args[*i]) - 1] != ' '
-		|| cmd->args[*i][ft_strlen(cmd->args[*i]) - 2] == '\\'))
+	while (cmd->args[*i] && cmd->args[*i][0] &&
+		(cmd->args[*i][ft_strlen(cmd->args[*i]) - 1] != ' ' ||
+		 cmd->args[*i][ft_strlen(cmd->args[*i]) - 2] == '\\'))
 	{
 		new_args[*j] = ft_strjoinfree(new_args[*j],
 				proc_arg(cmd->args, *i), 0);
@@ -24,7 +25,8 @@ void	concat_sbs_args(t_cmd *cmd, char **new_args, int *i, int *j)
 	}
 	if (cmd->args[*i])
 	{
-		cmd->args[*i][ft_strlen(cmd->args[*i]) - 1] = '\0';
+		if (cmd->args[*i][0])
+			cmd->args[*i][ft_strlen(cmd->args[*i]) - 1] = '\0';
 		new_args[*j] = ft_strjoinfree(new_args[*j],
 				proc_arg(cmd->args, *i), 0);
 		(*i)++;
