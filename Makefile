@@ -6,7 +6,7 @@
 #    By: adjemaa <marvin@42.fr>                     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/11/06 21:13:47 by adjemaa           #+#    #+#              #
-#    Updated: 2021/02/03 12:03:41 by adjemaa          ###   ########.fr        #
+#    Updated: 2021/02/22 13:42:20 by adjemaa          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -88,8 +88,11 @@ OBJECT = $(SRCS:.c=.o)
 
 OBJECT_B = $(SRC:.c=.o)
 
+.c.o :
+	$(CC) $(FLAGS) -c $< -o $(<:.c=.o)
+
 $(NAME): ${OBJECT} ${OBJECT_B}
-	@$(CC) $(FLAGS) -o $(NAME) ${OBJECT} ${OBJECT_B}
+	$(CC) $(FLAGS) -o $(NAME) ${OBJECT} ${OBJECT_B}
 
 all: $(NAME)
 
