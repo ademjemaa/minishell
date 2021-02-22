@@ -82,7 +82,8 @@ int		nargs_count(char **args)
 		while (args[i] && (args[i][0] == '"' || args[i][0] == '\'')
 			&& args[i][ft_strlen(args[i]) - 1] != ' ')
 			i++;
-		j++;
+		if (args[i] && args[i][0])
+			j++;
 		if (args[i])
 			i++;
 	}

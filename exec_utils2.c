@@ -26,12 +26,16 @@ void	concat_sbs_args(t_cmd *cmd, char **new_args, int *i, int *j)
 	if (cmd->args[*i])
 	{
 		if (cmd->args[*i][0])
+		{
 			cmd->args[*i][ft_strlen(cmd->args[*i]) - 1] = '\0';
-		new_args[*j] = ft_strjoinfree(new_args[*j],
+			new_args[*j] = ft_strjoinfree(new_args[*j],
 				proc_arg(cmd->args, *i), 0);
+		}else
+			free(cmd->args[*i]);
 		(*i)++;
 	}
-	(*j)++;
+	if (new_args[*j])
+		(*j)++;
 }
 
 void	ft_putstr_error(char *str)

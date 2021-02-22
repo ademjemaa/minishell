@@ -35,7 +35,7 @@ int		return_built_in(t_cmd *cmd, char ***envp, int oout, int p)
 	else if (!ft_strncmp(cmd->path, "unset", 6))
 		return (btin_ret(ft_unset(cmd->args, envp, p), oout, p));
 	else if (!ft_strncmp(cmd->path, "env", 4))
-		return (btin_ret(ft_env(cmd->args, *envp), oout, p));
+		return (btin_ret(ft_env(*envp), oout, p));
 	else if (!ft_strncmp(cmd->path, "exit", 5))
 		return (btin_ret(ft_exit(cmd->args), oout, p));
 	return (-1);
