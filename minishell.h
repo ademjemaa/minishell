@@ -124,7 +124,7 @@ int				ft_export(char **args, char ***envp, int p);
 int				ft_unset(char **args, char ***envp, int p);
 char			**env_start(char **envp);
 int				dispatch_built_in(t_cmd *cmd, char ***envp, int p);
-unsigned int			equal_pos(char *var);
+unsigned int	equal_pos(char *var);
 void			update_env(char *var, char **envp, int i);
 void			single_q_status(char *str, t_check *c);
 void			add_env(char *var, char ***envp);

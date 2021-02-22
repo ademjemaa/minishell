@@ -12,7 +12,8 @@
 
 #include "minishell.h"
 
-int		begin_parse_exec(t_cmd ***tab, char ***env_allo, char *line, char **argv)
+int		begin_parse_exec(t_cmd ***tab, char ***env_allo, char *line,
+char **argv)
 {
 	(void)argv;
 	if (!ft_strncmp(line, "exit", 5))
@@ -21,7 +22,7 @@ int		begin_parse_exec(t_cmd ***tab, char ***env_allo, char *line, char **argv)
 	g_exit_code = 0;
 	exec(tab, env_allo, line);
 	free_cmds(*tab);
-	write(1, "kembyalet$ ", 12);
+//	write(1, "kembyalet$ ", 12);
 	return (1);
 }
 
@@ -33,7 +34,7 @@ void	init_minishell(char ***env_allo, char **envp, char **line, int argc)
 	tree_env(*env_allo);
 	g_exit_code = 0;
 	g_childs = 0;
-	write(1, "kembyalet$ ", 12);
+//	write(1, "kembyalet$ ", 12);
 	catch_signals(0);
 }
 
