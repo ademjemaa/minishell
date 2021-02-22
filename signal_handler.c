@@ -45,20 +45,21 @@ int		cmd_length(char *line)
 
 void	int_handler(int signum)
 {
+	signum = signum;
 	if (g_childs == 0)
 		write(1, "\nkembyalet$ ", 13);
 	else
 		write(1, "\n", 1);
 	g_exit_code = 1;
 }
-
+/*
 void	quit_handler(int signum)
 {
 	return ;
-}
+}*/
 
 void	catch_signals(void)
 {
 	signal(SIGINT, &int_handler);
-	signal(SIGQUIT, &quit_handler);
+	signal(SIGQUIT, NULL);
 }

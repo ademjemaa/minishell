@@ -30,9 +30,9 @@ int		valid_var_name_export(char *var)
 	return (1);
 }
 
-int		equal_pos(char *var)
+unsigned int		equal_pos(char *var)
 {
-	int		i;
+	unsigned int	i;
 
 	i = 0;
 	while (var[i])
@@ -90,7 +90,7 @@ void	print_export_envs(char **envp)
 	}
 }
 
-int		ft_export(char *path, char **args, char ***envp, int p)
+int		ft_export(char **args, char ***envp, int p)
 {
 	int		i;
 	int		exit_code;

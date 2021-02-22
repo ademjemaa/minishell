@@ -26,7 +26,7 @@ int		theres_eq(char *str)
 	return (0);
 }
 
-int		ft_env(char *path, char **args, char **env)
+int		ft_env(char **env)
 {
 	int		i;
 

@@ -61,7 +61,7 @@ int		cd_change_envpwd(char *str, char ***envp)
 	return (0);
 }
 
-int		ft_cd(char *path, char **args, char ***envp)
+int		ft_cd(char **args, char ***envp)
 {
 	if (cd_change_envpwd("OLDPWD=", envp) == -1)
 		return (-1);

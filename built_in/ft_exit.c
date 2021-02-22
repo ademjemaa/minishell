@@ -12,7 +12,7 @@
 
 #include "../minishell.h"
 
-int		ft_exit(char *path, char **args, char ***envp)
+int		ft_exit(char **args)
 {
 	int				j;
 	unsigned char	code;

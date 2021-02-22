@@ -12,7 +12,7 @@
 
 #include "../minishell.h"
 
-int		ft_echo(char *path, char **args, char **envp)
+int		ft_echo(char **args)
 {
 	int		i;
 	int		j;

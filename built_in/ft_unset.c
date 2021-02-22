@@ -28,7 +28,7 @@ int		valid_var_name_unset(char *var)
 	return (1);
 }
 
-void	unset_env_var(char *var, char ***envp, int pos)
+void	unset_env_var(char ***envp, int pos)
 {
 	int		i;
 	char	**new_envp;
@@ -62,14 +62,14 @@ void	remove_var_env(char *var, char ***envp)
 	{
 		if (!ft_strncmp(var, (*envp)[i], ft_strlen(var)))
 		{
-			unset_env_var(var, envp, i);
+			unset_env_var(envp, i);
 			return ;
 		}
 		i++;
 	}
 }
 
-int		ft_unset(char *path, char **args, char ***envp, int p)
+int		ft_unset(char **args, char ***envp, int p)
 {
 	int		i;
 	int		exit_code;

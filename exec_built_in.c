@@ -25,19 +25,19 @@ int		btin_ret(int ret, int old_out, int p)
 int		return_built_in(t_cmd *cmd, char ***envp, int oout, int p)
 {
 	if (!ft_strncmp(cmd->path, "echo", 5))
-		return (btin_ret(ft_echo(cmd->path, cmd->args, *envp), oout, p));
+		return (btin_ret(ft_echo(cmd->args), oout, p));
 	else if (!ft_strncmp(cmd->path, "cd", 3))
-		return (btin_ret(ft_cd(cmd->path, cmd->args, envp), oout, p));
+		return (btin_ret(ft_cd(cmd->args, envp), oout, p));
 	else if (!ft_strncmp(cmd->path, "pwd", 4))
-		return (btin_ret(ft_pwd(cmd->path, cmd->args, *envp), oout, p));
+		return (btin_ret(ft_pwd(), oout, p));
 	else if (!ft_strncmp(cmd->path, "export", 7))
-		return (btin_ret(ft_export(cmd->path, cmd->args, envp, p), oout, p));
+		return (btin_ret(ft_export(cmd->args, envp, p), oout, p));
 	else if (!ft_strncmp(cmd->path, "unset", 6))
-		return (btin_ret(ft_unset(cmd->path, cmd->args, envp, p), oout, p));
+		return (btin_ret(ft_unset(cmd->args, envp, p), oout, p));
 	else if (!ft_strncmp(cmd->path, "env", 4))
-		return (btin_ret(ft_env(cmd->path, cmd->args, *envp), oout, p));
+		return (btin_ret(ft_env(cmd->args, *envp), oout, p));
 	else if (!ft_strncmp(cmd->path, "exit", 5))
-		return (btin_ret(ft_exit(cmd->path, cmd->args, envp), oout, p));
+		return (btin_ret(ft_exit(cmd->args), oout, p));
 	return (-1);
 }
 
