@@ -6,14 +6,15 @@
 /*   By: abarbour <abarbour@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/13 15:47:50 by abarbour          #+#    #+#             */
-/*   Updated: 2021/02/02 16:04:33 by abarbour         ###   ########.fr       */
+/*   Updated: 2021/02/22 13:45:49 by adjemaa          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-int		begin_parse_exec(t_cmd ***tab, char ***env_allo, char *line)
+int		begin_parse_exec(t_cmd ***tab, char ***env_allo, char *line, char **argv)
 {
+	(void)argv;
 	if (!ft_strncmp(line, "exit", 5))
 		return (0);
 	*tab = parser(line, *env_allo);
@@ -26,6 +27,7 @@ int		begin_parse_exec(t_cmd ***tab, char ***env_allo, char *line)
 
 void	init_minishell(char ***env_allo, char **envp, char **line, int argc)
 {
+	(void)argc;
 	*line = NULL;
 	*env_allo = env_start(envp);
 	tree_env(*env_allo);
@@ -54,7 +56,7 @@ int		main(int argc, char **argv, char **envp)
 		ret = get_next_line(0, &line);
 		if (line && ret > 0)
 		{
-			if (!begin_parse_exec(&tab, &env_allo, line))
+			if (!begin_parse_exec(&tab, &env_allo, line, argv))
 			{
 				free(line);
 				break ;
