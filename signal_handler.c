@@ -52,11 +52,12 @@ void	int_handler(int signum)
 		write(1, "\n", 1);
 	g_exit_code = 1;
 }
-/*
+
 void	quit_handler(int signum)
 {
+	signum = signum;
 	return ;
-}*/
+}
 
 void	catch_signals(void)
 {

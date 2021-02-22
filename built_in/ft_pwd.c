@@ -12,7 +12,7 @@
 
 #include "../minishell.h"
 
-int		ft_pwd()
+int		ft_pwd(void)
 {
 	char	*buf;
 	int		i;
@@ -31,4 +31,5 @@ int		ft_pwd()
 	write(1, "\n", 1);
 	free(buf);
 	exit(0);
+	return (0);
 }

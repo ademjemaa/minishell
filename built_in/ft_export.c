@@ -12,7 +12,7 @@
 
 #include "../minishell.h"
 
-int		valid_var_name_export(char *var)
+int				valid_var_name_export(char *var)
 {
 	int		i;
 
@@ -30,7 +30,7 @@ int		valid_var_name_export(char *var)
 	return (1);
 }
 
-unsigned int		equal_pos(char *var)
+unsigned int	equal_pos(char *var)
 {
 	unsigned int	i;
 
@@ -44,7 +44,7 @@ unsigned int		equal_pos(char *var)
 	return (i);
 }
 
-void	add_var_to_env(char *var, char ***envp)
+void			add_var_to_env(char *var, char ***envp)
 {
 	int		i;
 
@@ -61,7 +61,7 @@ void	add_var_to_env(char *var, char ***envp)
 	add_env(var, envp);
 }
 
-void	print_export_envs(char **envp)
+void			print_export_envs(char **envp)
 {
 	int		i;
 	int		j;
@@ -90,7 +90,7 @@ void	print_export_envs(char **envp)
 	}
 }
 
-int		ft_export(char **args, char ***envp, int p)
+int				ft_export(char **args, char ***envp, int p)
 {
 	int		i;
 	int		exit_code;
