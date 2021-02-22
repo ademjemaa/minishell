@@ -6,7 +6,7 @@
 /*   By: adjemaa <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/27 17:05:56 by adjemaa           #+#    #+#             */
-/*   Updated: 2020/08/09 23:00:48 by adjemaa          ###   ########.fr       */
+/*   Updated: 2021/02/22 13:35:54 by adjemaa          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,14 +35,13 @@ int		final_size(char *str, char *envp)
 	int total;
 	int j;
 
-	i = -1;
+	i = 0;
 	j = -1;
 	total = 1;
-	while (str[++i] != '$')
+	while (str[i++] != '$')
 		total++;
 	while (envp != NULL && envp[++j])
 		total++;
-	i++;
 	if (!(str[i] >= '0' && str[i] <= '9'))
 		while (str[i] && ((str[i] >= 'a' && str[i] <= 'z') || (str[i] >= 'A' &&
 				str[i] <= 'Z') || (str[i] >= '0' && str[i] <= '9') ||
@@ -50,8 +49,11 @@ int		final_size(char *str, char *envp)
 			i++;
 	else
 		i++;
-	while (str[++i])
+	while (str[i])
+	{
 		total++;
+		i++;
+	}
 	return (total);
 }
 
